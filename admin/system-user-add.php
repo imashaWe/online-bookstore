@@ -1,5 +1,4 @@
 <?php
-require_once('header.php');
 require("db.php");
 
 $error;
@@ -30,7 +29,7 @@ if (isset($_POST['submit'])) {
         $sql = "INSERT INTO system_user(fname,lname,email,password,role_id) VALUES('{$fname}','{$lname}','{$email}','{$password}',{$role_id})";
         $res = $conn->query($sql);
         if ($res) {
-            header("location:index.php");
+            header("location:system-users.php");
             die();
         } else {
             $error = "Database error";
@@ -41,6 +40,7 @@ if (isset($_POST['submit'])) {
 
 
 ?>
+<?php require_once('header.php'); ?>
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Users</h1>
@@ -103,6 +103,4 @@ if (isset($_POST['submit'])) {
 
     </div>
 </main>
-<?php
-require_once('footer.php');
-?>
+<?php require_once('footer.php'); ?>
