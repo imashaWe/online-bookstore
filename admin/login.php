@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
         $password = md5($password);
         $sql = "SELECT system_user.id,role_id,fname,lname,name AS role FROM system_user 
                 INNER JOIN system_user_role ON system_user_role.id = system_user.role_id
-                WHERE email = '{$email}' AND password ='{$password}'";
+                WHERE email = '{$email}' AND password ='{$password}' AND is_delete = 0";
 
         $res = $conn->query($sql);
         if ($res->num_rows) {

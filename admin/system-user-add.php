@@ -25,15 +25,22 @@ if (isset($_POST['submit'])) {
         $error = "Please enter password";
 
     } else {
-        $password = md5($password);
-        $sql = "INSERT INTO system_user(fname,lname,email,password,role_id) 
-                VALUES('{$fname}','{$lname}','{$email}','{$password}',{$role_id})";
+        // To check whether the email exists.
+        $sql = "SELECT id FROM system_user WHERE email = '{$email}'";
         $res = $conn->query($sql);
-        if ($res) {
-            header("location:system-users.php");
-            die();
+        if ($res->num_rows) {
+            $error = "This email already exists";
         } else {
-            $error = "Database error";
+            $password = md5($password);
+            $sql = "INSERT INTO system_user(fname,lname,email,password,role_id) 
+                VALUES('{$fname}','{$lname}','{$email}','{$password}',{$role_id})";
+            $res = $conn->query($sql);
+            if ($res) {
+                header("location:system-users.php");
+                die();
+            } else {
+                $error = "Database error";
+            }
         }
 
     }
@@ -44,7 +51,7 @@ if (isset($_POST['submit'])) {
 <?php require_once('header.php'); ?>
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Users</h1>
+        <h1 class="mt-4">Add New User</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">System Users</li>
             <li class="breadcrumb-item active">Add New User</li>
@@ -82,7 +89,11 @@ if (isset($_POST['submit'])) {
                                 </div>
                                 <div class="col">
                                     <label class="form-label">Password</label>
-                                    <input type="text" class="form-control" name="password">
+                                    <input type="text"
+                                           class="form-control"
+                                           name="password"
+                                           value="<?=substr(md5(time()),0,8)?>"
+                                    >
                                 </div>
                                 <div class="col">
                                     <label class="form-label">User Role</label>
