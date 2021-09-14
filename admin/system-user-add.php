@@ -26,7 +26,8 @@ if (isset($_POST['submit'])) {
 
     } else {
         $password = md5($password);
-        $sql = "INSERT INTO system_user(fname,lname,email,password,role_id) VALUES('{$fname}','{$lname}','{$email}','{$password}',{$role_id})";
+        $sql = "INSERT INTO system_user(fname,lname,email,password,role_id) 
+                VALUES('{$fname}','{$lname}','{$email}','{$password}',{$role_id})";
         $res = $conn->query($sql);
         if ($res) {
             header("location:system-users.php");
