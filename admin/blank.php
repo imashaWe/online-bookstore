@@ -1,6 +1,4 @@
-<?php
-require_once('header.php');
-?>
+<?php require_once('header.php'); ?>
     <main>
         <div class="container-fluid px-4">
             <h1 class="mt-4">Dashboard</h1>
@@ -12,6 +10,4 @@ require_once('header.php');
 
         </div>
     </main>
-<?php
-require_once('footer.php');
-?>
+<?php require_once('footer.php'); ?>
