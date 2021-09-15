@@ -13,17 +13,22 @@ if (isset($_POST['submit'])) {
     } elseif (empty($phone_no)) {
         $error = "Please enter phone number0";
     } else {
-        $sql = "INSERT INTO book_publisher(name,email,phone_no) 
-                VALUES('{$name}','{$email}','{$phone_no}')";
-        echo $sql;
+        $sql = "SELECT id FROM book_publisher WHERE email = '{$email}'";
         $res = $conn->query($sql);
-        if ($res) {
-            echo "Successs";
+        if ($res->num_rows) {
+            $error = "This email already exists";
         } else {
-            $error = "Database error";
+            $sql = "INSERT INTO book_publisher(name,email,phone_no) 
+                VALUES('{$name}','{$email}','{$phone_no}')";
+            $res = $conn->query($sql);
+            if ($res) {
+                header("location: book-publisher.php");
+                die();
+            } else {
+                $error = "Database error";
+            }
         }
     }
-
 }
 ?>
 <?php require_once('header.php'); ?>
