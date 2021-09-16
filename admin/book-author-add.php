@@ -17,6 +17,7 @@ if (isset($_POST['submit'])) {
 
         $sql = "INSERT INTO book_author(fname,lname,email,phone) VALUES ('{$fname}','{$lname}','{$email}','{$phone}')";
         $res = $conn->query($sql);
+        echo $sql;
         if ($res) {
             echo "Success";
         } else {
@@ -26,8 +27,7 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-
-<main><?php require_once('header.php'); ?>
+<?php require_once('header.php'); ?>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Add New Author</h1>
         <ol class="breadcrumb mb-4">

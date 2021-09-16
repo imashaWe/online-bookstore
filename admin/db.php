@@ -1,8 +1,8 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
+$servername = "online-bookstore-db.mysql.database.azure.com";
+$username = "dev@online-bookstore-db";
+$password = "Debuggers@18";
 $database = "online-bookstore";
 
 // create database connection
