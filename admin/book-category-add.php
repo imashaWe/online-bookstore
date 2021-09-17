@@ -13,8 +13,8 @@ if (isset($_POST['submit'])) {
                 $insert_id = $conn->insert_id;
                 $sql = "INSERT INTO book_sub_category (category_id,sub_category) VALUES (?,?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("is",$insert_id,$sub_category);
-                foreach ($_POST['sub_categories'] AS $sub_category) {
+                $stmt->bind_param("is", $insert_id, $sub_category);
+                foreach ($_POST['sub_categories'] as $sub_category) {
                     $stmt->execute();
                 }
                 $stmt->close();
@@ -111,20 +111,28 @@ if (isset($_POST['submit'])) {
         const subCategoryNameField = document.getElementById('subCategoryNameField');
         const subCategoriesList = document.getElementById('subCategoriesList');
         btnAdd.addEventListener("click", () => {
+            const subCategory = subCategoryNameField.value;
+            if (!subCategory || subCategory.length == 0) return;
             let item = `<li class="list-group-item d-flex justify-content-between align-items-center">
-                         ${subCategoryNameField.value}
-                        <input type="hidden" name="sub_categories[]" value="${subCategoryNameField.value}">
-                        <span class="clickable list-item-delete text-danger"><icon class="fa fa-trash"></icon></span>
+                         ${subCategory}
+                        <input type="hidden" name="sub_categories[]" value="${subCategory}">
+                        <span class="clickable list-item-delete text-danger" onclick="deleteElement(this);"><icon class="fa fa-trash"></icon></span>
                 </li>`;
             subCategoriesList.insertAdjacentHTML('beforeend', item);
-            let itemDeleteBtn = document.getElementsByClassName('list-item-delete');
-            for (let item of itemDeleteBtn) {
-                item.addEventListener('click', (e) => {
-                    e.target.parentNode.remove();
-                })
-            }
+            // let itemDeleteBtn = document.getElementsByClassName('list-item-delete');
+            // for (let item of itemDeleteBtn) {
+            //     item.addEventListener('click', (e) => {
+            //         console.log(e.target.parentNode)
+            //         ;
+            //     })
+            // }
             subCategoryNameField.value = null;
         })
     })();
+
+    function deleteElement(e) {
+        e.parentNode.remove();
+    }
+
 </script>
 <?php require_once('footer.php'); ?>
