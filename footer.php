@@ -1,5 +1,5 @@
 <footer>
-    <div class="container-fluid bg-dark fixed-bottom footer">
+    <div class="container-fluid bg-dark position-absolute footer">
         <div class="row justify-content-center pt-5">
 
             <div class="col-2">
