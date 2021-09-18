@@ -80,9 +80,9 @@ if (isset($_POST['delete_submit'])) {
                                 <td><?= $category['category'] ?></td>
                                 <td><?= $category['sub_category'] ?></td>
                                 <td class="text-end">
-                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                    <div>
                                         <a href="book-category-add.php?id=<?= $category['id'] ?>"
-                                           class="btn btn-primary">Edit</a>
+                                           class="btn btn-secondary">Edit</a>
                                         <button type="button"
                                                 class="btn btn-danger btn-user-delete"
                                                 data-bs-toggle="modal"
