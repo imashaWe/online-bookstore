@@ -1,5 +1,12 @@
 <?php
 require("db.php");
+/* pagination */
+$sql = "SELECT COUNT(id) AS count FROM book_category WHERE is_delete = 0 ";
+$count = $conn->query($sql)->fetch_array()['count'];
+$limit = 5;
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$num_pages = ceil($count / $limit);
+$start = ($page - 1) * $limit;
 
 $sql = "SELECT category,book_category.id,
         IFNULL(GROUP_CONCAT(sub_category),'N/A') AS 'sub_category' 
@@ -8,7 +15,7 @@ $sql = "SELECT category,book_category.id,
         ON book_sub_category.category_id = book_category.id AND book_sub_category.is_delete = 0
         WHERE book_category.is_delete = 0 
         GROUP BY book_category.id
-        ";
+        LIMIT {$start},{$limit}";
 $categories = $conn->query($sql);
 
 if (isset($_POST['delete_submit'])) {
@@ -59,7 +66,7 @@ if (isset($_POST['delete_submit'])) {
 
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
                             <th>Category</th>
@@ -74,7 +81,8 @@ if (isset($_POST['delete_submit'])) {
                                 <td><?= $category['sub_category'] ?></td>
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                        <a href="book-category-add.php?id=<?=$category['id']?>" class="btn btn-primary">Edit</a>
+                                        <a href="book-category-add.php?id=<?= $category['id'] ?>"
+                                           class="btn btn-primary">Edit</a>
                                         <button type="button"
                                                 class="btn btn-danger btn-user-delete"
                                                 data-bs-toggle="modal"
@@ -88,6 +96,30 @@ if (isset($_POST['delete_submit'])) {
                         <?php endwhile; ?>
                         </tbody>
                     </table>
+                </div>
+                <div class="card-footer">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination float-end">
+                            <li class="page-item <?php if ($page == 1) echo 'disabled'; ?>">
+                                <a class="page-link" href="<?= change_url_params('page', $page - 1) ?>">
+                                    Previous
+                                </a>
+                            </li>
+                            <?php for ($i = 1; $i <= $num_pages; $i++): ?>
+                                <li class="page-item <?php if ($page == $i) echo 'active'; ?>">
+                                    <a class="page-link" href="<?= change_url_params('page', $i) ?>">
+                                        <?= $i ?>
+                                    </a>
+                                </li>
+                            <?php endfor; ?>
+                            <li class="page-item <?php if ($page == $num_pages) echo 'disabled'; ?>">
+                                <a class="page-link"
+                                   href="<?= change_url_params('page', $page + 1) ?>">
+                                    Next
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
 
