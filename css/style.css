@@ -1,0 +1,173 @@
+/* import fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Montserrat&display=swap');
+/*---------------------------------------------*/
+
+/* footer */
+.footer {
+    color: white;
+}
+
+.footer h4 {
+    font-family: Montserrat;
+}
+
+.footer p {
+    color: #b2b2b2;
+    font-family: Montserrat;
+}
+
+.footer a {
+    color: #b2b2b2;
+    font-family: Poppins;
+    text-decoration: none;
+}
+
+.footer a:hover,
+.footer a:focus {
+    color: darkred;
+}
+
+/* font style */
+.theme-font-bold {
+    font-family: Poppins;
+    font-weight: 400;
+}
+
+/*Icon header */
+.wrap-icon-header {
+    flex-grow: 1;
+}
+
+.icon-header-item {
+    position: relative;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.icon-header-noti::after {
+    content: attr(data-notify);
+    font-family: Poppins;
+    font-size: 12px;
+    color: #fff;
+    line-height: 15px;
+    text-align: center;
+
+    display: block;
+    position: absolute;
+    top: -7px;
+    right: 0;
+    min-width: 15px;
+    height: 15px;
+    padding: 0 3px;
+    background-color: #717fe0;
+}
+
+/*item css*/
+.item-pic {
+    position: relative;
+}
+
+.item-btn {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+
+    border-radius: 20px;
+    background-color: #fff;
+
+    min-width: 139px;
+    height: 40px;
+
+    color: #333;
+}
+
+.item-pic:hover .item-btn {
+    bottom: 20px;
+}
+
+.item-img-hov {
+    display: block;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.item-img-hov img {
+    width: 100%;
+    -webkit-transition: transform 0.9s ease;
+    -o-transition: transform 0.9s ease;
+    -moz-transition: transform 0.9s ease;
+    transition: transform 0.9s ease;
+}
+
+.item-img-hov:hover img {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.item-trans {
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.item-btn-hov:hover {
+    border-color: #222;
+    background-color: #222;
+    color: #fff;
+}
+
+.item-btn-hov:hover i {
+    color: #fff;
+}
+
+.item-btn-font {
+    font-family: Poppins;
+    text-decoration: none;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.466667;
+}
+
+.flex-c-m {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+
+
+    justify-content: center;
+    -ms-align-items: center;
+    align-items: center;
+
+}
+
+.item-pic {
+    position: relative;
+}
+
+.item-btn {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.item-pic:hover .item-btn {
+    bottom: 20px;
+}
