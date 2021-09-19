@@ -1,7 +1,5 @@
 <?php
-require("db.php");
-
-$error;
+require "core/db.php";
 
 $sql = "SELECT * FROM system_user_role";
 $user_roles = $conn->query($sql);
@@ -92,7 +90,7 @@ if (isset($_POST['submit'])) {
                                     <input type="text"
                                            class="form-control"
                                            name="password"
-                                           value="<?=substr(md5(time()),0,8)?>"
+                                           value="<?= substr(md5(time()), 0, 8) ?>"
                                     >
                                 </div>
                                 <div class="col">

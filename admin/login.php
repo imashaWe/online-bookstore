@@ -1,5 +1,5 @@
 <?php
-require "db.php";
+require "core/db.php";
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
         if ($res->num_rows) {
             $user = $res->fetch_array();
             session_start();
-            $_SESSION['user'] = array(
+            $_SESSION['sys_user'] = array(
                     'id'=> $user['id'],
                     'role_id'=> $user['role_id'],
                     'role'=> $user['role'],

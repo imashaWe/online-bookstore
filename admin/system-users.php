@@ -1,5 +1,5 @@
 <?php
-require "db.php";
+require "core/db.php";
 
 $sql = "SELECT system_user.id,fname,lname,email,name AS role 
             FROM system_user 
