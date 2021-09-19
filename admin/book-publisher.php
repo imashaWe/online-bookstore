@@ -1,9 +1,19 @@
 <?php
 require "db.php";
+require "core/route.php";
+
+
+$sql = "SELECT COUNT(id) AS count FROM book_publisher WHERE is_delete = 0";
+$num_rows = $conn->query($sql)->fetch_array()['count'];
+$limit = 5;
+$num_pages = ceil($num_rows / $limit);
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$start = ($page - 1) * $limit;
 
 $sql = "SELECT id,name,email,phone_no
         FROM book_publisher 
-        WHERE is_delete = 0";
+        WHERE is_delete = 0
+        LIMIT {$start},{$limit}";
 $publishers = $conn->query($sql);
 
 if (isset($_POST['delete_submit'])) {
@@ -15,7 +25,6 @@ if (isset($_POST['delete_submit'])) {
         header("location:{$_SERVER['REQUEST_URI']}");
     }
 }
-
 ?>
 <?php require_once('header.php'); ?>
 <div class="modal" tabindex="-1" id="deleteModal">
@@ -55,7 +64,7 @@ if (isset($_POST['delete_submit'])) {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone Number</th>
-                        <th>Action</th>
+                        <th class="text-end">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -64,7 +73,8 @@ if (isset($_POST['delete_submit'])) {
                             <td><?= $publisher['name'] ?></td>
                             <td><?= $publisher['email'] ?></td>
                             <td><?= $publisher['phone_no'] ?></td>
-                            <td>
+                            <td  class="text-end">
+                                <a href="book-publisher-add.php?id=<?=$publisher['id']?>" class="btn btn-secondary">Edit</a>
                                 <button type="button"
                                         class="btn btn-danger btn-user-delete"
                                         data-bs-toggle="modal"
@@ -77,6 +87,23 @@ if (isset($_POST['delete_submit'])) {
                     <?php endwhile; ?>
                     </tbody>
                 </table>
+            </div>
+            <div class="card-footer">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item <?php if ($page == 1) echo 'disabled';?>">
+                            <a class="page-link" href="<?= change_url_params('page', $page - 1) ?>">Previous</a>
+                        </li>
+                        <?php for ($i = 1; $i <= $num_pages; $i++): ?>
+                            <li class="page-item <?php if ($page == $i) echo 'active';?>">
+                                <a class="page-link" href="<?= change_url_params('page', $i) ?>"><?= $i ?></a>
+                            </li>
+                        <?php endfor; ?>
+                        <li class="page-item <?php if ($page == $num_pages) echo 'disabled';?>">
+                            <a class="page-link" href="<?= change_url_params('page', $page + 1) ?>">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
 
