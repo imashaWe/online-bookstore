@@ -1,21 +1,29 @@
 <?php
 require "db.php";
 
-$sql = "SELECT id,fname,lname,email,phone
-            FROM book_author
-            WHERE is_delete = 0";
-        $authors = $conn->query($sql);
+$sql = "SELECT count(id) AS count  FROM book_author WHERE is_delete = 0";
+$num_rows = $conn->query($sql)->fetch_array()['count'];
+$limit = 5;
+$num_pages = ceil($num_rows / $limit);
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$start = ($page - 1) * $limit;
+
 
 if (isset($_POST['delete_submit'])) {
     $id = $_POST['id'];
     $sql = "UPDATE book_author SET is_delete = 1 WHERE id = {$id}";
-    echo $sql;
     $res = $conn->query($sql);
 
     if ($res) {
         header("location:{$_SERVER['REQUEST_URI']}");
     }
 }
+$sql = "SELECT * FROM book_author
+        WHERE iS_delete = 0
+        LIMIT {$start} , {$limit}";
+
+$authors = $conn->query($sql);
+
 
 ?>
 <?php require_once('header.php'); ?>
@@ -62,13 +70,15 @@ if (isset($_POST['delete_submit'])) {
                         </tr>
                         </thead>
                         <tbody>
-                        <?php while ($author = $authors -> fetch_array()): ?>
+                        <?php while ($author = $authors->fetch_array()): ?>
                             <tr>
                                 <td><?= $author['fname'] ?></td>
                                 <td><?= $author['lname'] ?></td>
                                 <td><?= $author['email'] ?></td>
                                 <td><?= $author['phone'] ?></td>
-                                <td>
+                                <td class="text-end">
+                                    <a href="book-author-add.php?id=<?= $author['id'] ?>"
+                                       class="btn btn-secondary">Edit</a>
                                     <button type="button"
                                             class="btn btn-danger btn-user-delete"
                                             data-bs-toggle="modal"
@@ -84,7 +94,23 @@ if (isset($_POST['delete_submit'])) {
                     </table>
 
                 </div>
-
+                <div class="card-footer">
+                    <nav aria-label="Page navigation example" class="float-end">
+                        <ul class="pagination">
+                            <li class="page-item <?php if ($page == 1) echo 'disabled'; ?>">
+                                <a class="page-link" href="<?= change_url_params('page', $page - 1) ?>">Previous</a>
+                            </li>
+                            <?php for ($i = 1; $i <= $num_pages; $i++): ?>
+                                <li class="page-item <?php if ($page == $i) echo 'active'; ?>">
+                                    <a class="page-link" href="<?= change_url_params('page', $i) ?>"><?= $i ?></a>
+                                </li>
+                            <?php endfor; ?>
+                            <li class="page-item <?php if ($page == $num_pages) echo 'disabled'; ?>">
+                                <a class="page-link" href="<?= change_url_params('page', $page + 1) ?>">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </main>
