@@ -58,7 +58,7 @@ $authors = $conn->query($sql);
             </div>
             <div class="card">
 
-                <div class="card-body">
+                <div class="card-body table-wrap">
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -66,7 +66,7 @@ $authors = $conn->query($sql);
                             <th>Last Name</th>
                             <th>Email</th>
                             <th>Telephone Number</th>
-                            <th>Action</th>
+                            <th class="text-end">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -95,8 +95,8 @@ $authors = $conn->query($sql);
 
                 </div>
                 <div class="card-footer">
-                    <nav aria-label="Page navigation example" class="float-end">
-                        <ul class="pagination">
+                    <nav>
+                        <ul class="pagination justify-content-center">
                             <li class="page-item <?php if ($page == 1) echo 'disabled'; ?>">
                                 <a class="page-link" href="<?= change_url_params('page', $page - 1) ?>">Previous</a>
                             </li>

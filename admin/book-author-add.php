@@ -47,10 +47,10 @@ if (isset($_POST['submit'])) {
 ?>
 <?php require_once('header.php'); ?>
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Add New Author</h1>
+    <h1 class="mt-4"><?= isset($_GET['id']) ? 'Edit' : 'Add New' ?> Author</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item">System Users</li>
-        <li class="breadcrumb-item active">Add New Author</li>
+        <li class="breadcrumb-item">Book</li>
+        <li class="breadcrumb-item active"><?= isset($_GET['id']) ? 'Edit' : 'Add New' ?> Author</li>
     </ol>
     <div class="row justify-content-center">
         <div class="col-10">
@@ -92,7 +92,15 @@ if (isset($_POST['submit'])) {
                         <?php if (isset($_GET['id'])): ?>
                             <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
                         <?php endif; ?>
-                        <button type="submit" class="btn btn-success float-end" name="submit">Save Author</button>
+                        <div class="row justify-content-end pb-2">
+                            <div class="col-1">
+                                <a href="book-author.php" class="btn btn-outline-secondary btn-lg float-end"
+                                   name="submit">Cancel</a>
+                            </div>
+                            <div class="col-1">
+                                <button type="submit" class="btn btn-success btn-lg" name="submit">Save</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

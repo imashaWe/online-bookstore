@@ -55,10 +55,10 @@ if (isset($_POST['submit'])) {
 <?php require_once('header.php'); ?>
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4"><?= isset($_POST['id']) ? 'Add New' : 'Edit' ?>&nbsp;Category</h1>
+        <h1 class="mt-4"><?= isset($_GET['id']) ? 'Edit' : 'Add New' ?>&nbsp;Category</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">Book Category</li>
-            <li class="breadcrumb-item active"><?= isset($_POST['id']) ? 'Add New' : 'Edit' ?>&nbsp;Category</li>
+            <li class="breadcrumb-item active"><?= isset($_GET['id']) ? 'Edit' : 'Add New' ?>&nbsp;Category</li>
         </ol>
 
         <div class="row justify-content-center">

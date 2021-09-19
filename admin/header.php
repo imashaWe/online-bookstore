@@ -64,6 +64,7 @@ require_once 'core/user.php';
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="book-author.php">Book Author</a>
                             <a class="nav-link" href="book-category.php">Book Category</a>
                         </nav>
                     </div>
