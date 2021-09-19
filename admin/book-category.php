@@ -1,9 +1,9 @@
 <?php
-require("db.php");
+require "core/db.php";
 /* pagination */
 $sql = "SELECT COUNT(id) AS count FROM book_category WHERE is_delete = 0 ";
 $count = $conn->query($sql)->fetch_array()['count'];
-$limit = 5;
+$limit = 10;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $num_pages = ceil($count / $limit);
 $start = ($page - 1) * $limit;
@@ -65,8 +65,8 @@ if (isset($_POST['delete_submit'])) {
             </div>
 
             <div class="card">
-                <div class="card-body">
-                    <table class="table table-hover">
+                <div class="card-body table-wrap">
+                    <table class="table table-hover table-fixed">
                         <thead>
                         <tr>
                             <th>Category</th>
@@ -98,8 +98,9 @@ if (isset($_POST['delete_submit'])) {
                     </table>
                 </div>
                 <div class="card-footer">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination float-end">
+
+                    <nav aria-label="Page">
+                        <ul class="pagination justify-content-center">
                             <li class="page-item <?php if ($page == 1) echo 'disabled'; ?>">
                                 <a class="page-link" href="<?= change_url_params('page', $page - 1) ?>">
                                     Previous
@@ -121,6 +122,7 @@ if (isset($_POST['delete_submit'])) {
                         </ul>
                     </nav>
                 </div>
+
             </div>
 
         </div>

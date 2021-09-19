@@ -1,3 +1,8 @@
+
+.table-wrap {
+    height: 55vh;
+    overflow-y: auto;
+}
 .clickable {
     cursor: pointer;
 }

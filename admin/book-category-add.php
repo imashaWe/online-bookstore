@@ -1,6 +1,8 @@
 <?php
-require("db.php");
+require "core/db.php";
+
 $category = "";
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql = "SELECT * FROM book_category WHERE id = {$id}";
@@ -8,6 +10,7 @@ if (isset($_GET['id'])) {
     $sql = "SELECT * FROM book_sub_category WHERE category_id = {$id}";
     $sub_category_rows = $conn->query($sql);
 }
+
 if (isset($_POST['submit'])) {
     $category = $_POST['category'];
     if (empty($category)) {
@@ -47,14 +50,15 @@ if (isset($_POST['submit'])) {
 
     }
 }
+
 ?>
 <?php require_once('header.php'); ?>
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4"><?=isset($_POST['id'])?'Add New':'Edit'?>&nbsp;Category</h1>
+        <h1 class="mt-4"><?= isset($_POST['id']) ? 'Add New' : 'Edit' ?>&nbsp;Category</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">Book Category</li>
-            <li class="breadcrumb-item active"><?=isset($_POST['id'])?'Add New':'Edit'?>&nbsp;Category</li>
+            <li class="breadcrumb-item active"><?= isset($_POST['id']) ? 'Add New' : 'Edit' ?>&nbsp;Category</li>
         </ol>
 
         <div class="row justify-content-center">
@@ -127,7 +131,8 @@ if (isset($_POST['submit'])) {
                             <?php endif; ?>
                             <div class="row justify-content-end pb-2">
                                 <div class="col-1">
-                                    <a href="book-category.php" class="btn btn-outline-secondary btn-lg float-end" name="submit">Cancel</a>
+                                    <a href="book-category.php" class="btn btn-outline-secondary btn-lg float-end"
+                                       name="submit">Cancel</a>
                                 </div>
                                 <div class="col-1">
                                     <button type="submit" class="btn btn-success btn-lg" name="submit">Save</button>
