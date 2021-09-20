@@ -67,6 +67,8 @@ if (isset($_POST['submit'])) {
         $error = "Please select Publisher";
     } elseif (!$category_id) {
         $error = "Please select Category";
+    } elseif (!isset($_FILES['book_img']) && !isset($_GET['id'])) {
+        $error = "Please select Image";
     } else {
         // To check whether the ISBN exists.
         $sql = "SELECT id FROM book WHERE ISBN = '{$isbn}'";
@@ -75,7 +77,8 @@ if (isset($_POST['submit'])) {
             $error = "This ISBN already exists";
         } else {
             if (isset($_POST['id'])) {
-                $sql = "UPDATE book SET 
+                $book_id = $_POST['id'];
+                $sql = "UPDATE book SET
                         name = '{$name}',
                         price = {$price},
                         isbn = '{$isbn}',
@@ -85,24 +88,45 @@ if (isset($_POST['submit'])) {
                         author_id = {$author_id},
                         publisher_id = {$publisher_id},
                         language_id = {$language_id}
-                        WHERE id = {$id}";
+                        WHERE id = {$book_id}";
+                $res = $conn->query($sql);
             } else {
-                $sql = "INSERT 
-                        INTO book(name,price,author_id,publisher_id,isbn,category_id,sub_category_id,language_id,description) 
-                        VALUES('{$name}','{$price}',{$author_id},{$publisher_id},'{$isbn}',{$category_id},{$sub_category_id},{$language_id}'{$description}')";
+                $sql = "INSERT
+                        INTO book(name,price,author_id,publisher_id,isbn,category_id,sub_category_id,language_id,description)
+                        VALUES('{$name}','{$price}',{$author_id},{$publisher_id},'{$isbn}',{$category_id},{$sub_category_id},{$language_id},'{$description}')";
+                $res = $conn->query($sql);
+                $book_id = $conn->insert_id;
             }
-            echo $sql;
-            $res = $conn->query($sql);
             if ($res) {
-                header("location:book.php");
+                if (isset($_FILES['book_img'])) $res = upload_book_image($_FILES['book_img'], $book_id, $conn);
+                if ($res) {
+                    header("location:book.php");
+                } else {
+                    $error = "Image update failed";
+                }
+
             } else {
                 $error = "Database error";
             }
         }
-
     }
 }
+function upload_book_image($file, $book_id, $conn)
+{
+    $dir = "uploads/";
 
+    if (!file_exists($dir)) mkdir ($dir, "0777");
+
+    $type = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $file_name = $dir . "book-img-" . md5($book_id) . ".{$type}";
+
+    move_uploaded_file($file['tmp_name'], $file_name);
+
+    $url = $_SERVER['SERVER_NAME'] . "admin/{$file_name}";
+    $sql = "UPDATE book SET img_url = '{$url}' WHERE id ={$book_id}";
+    return $conn->query($sql);
+
+}
 
 ?>
 <?php require_once('header.php'); ?>
@@ -130,13 +154,26 @@ if (isset($_POST['submit'])) {
                                 </div>
                             </div>
                         <?php endif; ?>
-                        <form action="" method="post">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlFile1">Select Image File to Upload:</label>
-                                        <input type="file" class="form-control-file" id="file">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            <div class="row justify-content-center">
+                                <div class="col-4">
+                                    <div class="custom-file-container" data-upload-id="bookImage">
+                                        <label>Book Image <a href="javascript:void(0)"
+                                                             class="custom-file-container__image-clear"
+                                                             title="Clear Image">&times;</a></label>
+                                        <label class="custom-file-container__custom-file">
+                                            <input type="file"
+                                                   class="custom-file-container__custom-file__custom-file-input"
+                                                   id="customFile"
+                                                   accept="image/*"
+                                                   aria-label="Choose File"
+                                                   name="book_img">
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760"/>
+                                            <span class="custom-file-container__custom-file__custom-file-control"></span>
+                                        </label>
+                                        <div class="custom-file-container__image-preview"></div>
                                     </div>
+
                                 </div>
                             </div>
 
@@ -151,7 +188,7 @@ if (isset($_POST['submit'])) {
                                         <?php while ($row = $languages->fetch_array()): ?>
                                             <option value="<?= $row['id'] ?>"
                                                 <?php if ($language_id == $row['id']) echo "selected"; ?>>
-                                                <?= $row['language']?>
+                                                <?= $row['language'] ?>
                                             </option>
                                         <?php endwhile; ?>
                                     </select>
@@ -250,14 +287,25 @@ if (isset($_POST['submit'])) {
 
     </div>
 </main>
+<!-- image selector lib -->
+<script src="https://unpkg.com/file-upload-with-preview@4.1.0/dist/file-upload-with-preview.min.js"></script>
 <script>
+    (function () {
+        var upload = new FileUploadWithPreview("bookImage", {
+            showDeleteButtonOnImages: true,
+            presetFiles: [
+                "https://images.unsplash.com/photo-1557090495-fc9312e77b28?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80",
+            ],
+        });
+    }());
+
+
     function getSubCategory(id) {
         const subCategorySelect = document.getElementById("subCategorySelect");
         if (id == 0) {
             subCategorySelect.innerHTML = '<option value=0>N/A</option>';
             return;
         }
-        ;
         fetch(`core/api.php?func=get_sub_categories&category_id=${id}`)
             .then(response => response.json())
             .then(data => {
@@ -274,4 +322,5 @@ if (isset($_POST['submit'])) {
     }
 
 </script>
+
 <?php require_once('footer.php'); ?>

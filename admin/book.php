@@ -1,5 +1,5 @@
 <?php
-require("db.php");
+require "core/db.php";
 /* pagination */
 $sql = "SELECT COUNT(id) AS count FROM book WHERE is_delete = 0 ";
 $count = $conn->query($sql)->fetch_array()['count'];
@@ -19,7 +19,6 @@ $sql = "SELECT
         INNER JOIN book_language ON book_language.id = book.language_id
         WHERE book.is_delete = '0'  
         LIMIT {$start},{$limit}";
-echo $sql;
 $books = $conn->query($sql);
 
 if (isset($_POST['delete_submit'])) {
