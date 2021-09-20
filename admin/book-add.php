@@ -297,7 +297,7 @@ function upload_book_image($file, $book_id, $conn)
             showDeleteButtonOnImages: true,
            <?php
                 if (!empty($book_img)) echo "presetFiles: [
-               {$book_img}
+               '{$book_img}'
     ],";
             ?>
         });
