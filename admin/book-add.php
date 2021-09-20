@@ -9,7 +9,7 @@ $category_id = 0;
 $sub_category_id = 0;
 $publisher_id = 0;
 $language_id = 1;
-$book_img = "";
+$book_img = "assets/img/img-add.png";
 
 $sql = "SELECT * FROM book_category WHERE is_delete = '0'";
 $categories = $conn->query($sql);
@@ -117,14 +117,14 @@ function upload_book_image($file, $book_id, $conn)
 {
     $dir = "uploads/";
 
-    if (!file_exists($dir)) mkdir ($dir, "0777");
+    if (!file_exists($dir)) mkdir($dir, "0777");
 
     $type = pathinfo($file['name'], PATHINFO_EXTENSION);
     $file_name = $dir . "book-img-" . md5($book_id) . ".{$type}";
 
     move_uploaded_file($file['tmp_name'], $file_name);
 
-    $url = $_SERVER['SERVER_NAME'] . "/admin/{$file_name}";
+    $url = "https://".$_SERVER['SERVER_NAME'] . "/admin/{$file_name}";
     $sql = "UPDATE book SET img_url = '{$url}' WHERE id ={$book_id}";
     return $conn->query($sql);
 
@@ -158,23 +158,19 @@ function upload_book_image($file, $book_id, $conn)
                         <?php endif; ?>
                         <form action="" method="post" enctype="multipart/form-data">
                             <div class="row justify-content-center">
-                                <div class="col-4">
-                                    <div class="custom-file-container" data-upload-id="bookImage">
-                                        <label>Book Image <a href="javascript:void(0)"
-                                                             class="custom-file-container__image-clear"
-                                                             title="Clear Image">&times;</a></label>
-                                        <label class="custom-file-container__custom-file">
-                                            <input type="file"
-                                                   class="custom-file-container__custom-file__custom-file-input"
-                                                   id="customFile"
-                                                   accept="image/*"
-                                                   aria-label="Choose File"
-                                                   name="book_img">
-                                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760"/>
-                                            <span class="custom-file-container__custom-file__custom-file-control"></span>
-                                        </label>
-                                        <div class="custom-file-container__image-preview"></div>
-                                    </div>
+                                <div class="col-4 text-center">
+                                    <img src="<?=$book_img?>"
+                                         alt=""
+                                         width="150"
+                                         id="bookImg"
+                                         onclick="document.getElementById('bookImgInput').click()">
+                                    <br>
+                                    <label class="form-label">Choose Book Cover Image</label>
+                                    <input
+                                            style="display:none;"
+                                            type="file"
+                                            id="bookImgInput"
+                                            name="book-img">
 
                                 </div>
                             </div>
@@ -289,21 +285,16 @@ function upload_book_image($file, $book_id, $conn)
 
     </div>
 </main>
-<!-- image selector lib -->
-<script src="https://unpkg.com/file-upload-with-preview@4.1.0/dist/file-upload-with-preview.min.js"></script>
+
 <script>
     (function () {
-        var upload = new FileUploadWithPreview("bookImage", {
-            showDeleteButtonOnImages: true,
-           <?php
-                if (!empty($book_img)) echo "presetFiles: [
-               '{$book_img}'
-    ],";
-            ?>
+        const bookImgInput = document.getElementById('bookImgInput');
+        const bookImg = document.getElementById('bookImg')
+        bookImgInput.addEventListener('change', (e) => {
+            bookImg.src = URL.createObjectURL(e.target.files[0]);
         });
+
     }());
-
-
     function getSubCategory(id) {
         const subCategorySelect = document.getElementById("subCategorySelect");
         if (id == 0) {
