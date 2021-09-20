@@ -8,18 +8,18 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $num_pages = ceil($count / $limit);
 $start = ($page - 1) * $limit;
 
-// $sql = "SELECT category,book_category.id,
-//         IFNULL(GROUP_CONCAT(sub_category),'N/A') AS 'sub_category' 
-//         FROM book_category 
-//         LEFT JOIN book_sub_category 
-//         ON book_sub_category.category_id = book_category.id AND book_sub_category.is_delete = 0
-//         WHERE book_category.is_delete = 0 
-//         GROUP BY book_category.id
-//         LIMIT {$start},{$limit}";
-// $categories = $conn->query($sql);
-
-$sql = "SELECT * FROM book WHERE is_delete = '0'
+$sql = "SELECT 
+        book.id,book.name AS name,price,isbn,
+        CONCAT(book_author.fname,' ',book_author.fname) AS author,
+        book_publisher.name AS publisher,
+        book_language.language
+        FROM book
+        INNER JOIN book_author ON book_author.id = book.author_id
+        INNER JOIN book_publisher ON book_publisher.id = book.publisher_id
+        INNER JOIN book_language ON book_language.id = book.language_id
+        WHERE book.is_delete = '0'  
         LIMIT {$start},{$limit}";
+echo $sql;
 $books = $conn->query($sql);
 
 if (isset($_POST['delete_submit'])) {
@@ -74,6 +74,9 @@ if (isset($_POST['delete_submit'])) {
                         <tr>
                             <th>Name</th>
                             <th>ISBN</th>
+                            <th>Author</th>
+                            <th>Publisher</th>
+                            <th>Language</th>
                             <th>Price</th>
                             <th class="text-end">Action</th>
                         </tr>
@@ -83,11 +86,14 @@ if (isset($_POST['delete_submit'])) {
                             <tr>
                                 <td><?= $book['name'] ?></td>
                                 <td><?= $book['isbn'] ?></td>
+                                <td><?= $book['author'] ?></td>
+                                <td><?= $book['publisher'] ?></td>
+                                <td><?= $book['language'] ?></td>
                                 <td><?= $book['price'] ?></td>
                                 <td class="text-end">
-                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                    <div>
                                         <a href="book-add.php?id=<?= $book['id'] ?>"
-                                           class="btn btn-primary">Edit</a>
+                                           class="btn btn-secondary">Edit</a>
                                         <button type="button"
                                                 class="btn btn-danger btn-user-delete"
                                                 data-bs-toggle="modal"
