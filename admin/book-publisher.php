@@ -48,7 +48,7 @@ if (isset($_POST['delete_submit'])) {
     <div class="container-fluid px-4">
         <h1 class="mt-4">Book Publishers</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item">Book</li>
+            <li class="breadcrumb-item">Basic Data</li>
             <li class="breadcrumb-item active">Book Publishers</li>
         </ol>
         <div class="d-grid  justify-content-end pb-2">

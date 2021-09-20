@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
 <div class="container-fluid px-4">
     <h1 class="mt-4"><?= isset($_GET['id']) ? 'Edit' : 'Add New' ?> Author</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item">Book</li>
+        <li class="breadcrumb-item">Basic Data</li>
         <li class="breadcrumb-item">Book Author</li>
         <li class="breadcrumb-item active"><?= isset($_GET['id']) ? 'Edit' : 'Add New' ?> Author</li>
     </ol>

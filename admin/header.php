@@ -57,20 +57,23 @@ require_once 'core/user.php';
                         Dashboard
                     </a>
 
-                    <div class="sb-sidenav-menu-heading">Interface</div>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="sb-sidenav-menu-heading">Site</div>
+                    <a class="nav-link" href="book.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Book
+                    </a>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
+                        Basic Data
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="book-author.php">Book Author</a>
-                            <a class="nav-link" href="book-publisher.php">Book Publisher</a>
-                            <a class="nav-link" href="book-category.php">Book Category</a>
+                            <a class="nav-link" href="book-author.php">Book Authors</a>
+                            <a class="nav-link" href="book-publisher.php">Book Publishers</a>
+                            <a class="nav-link" href="book-category.php">Book Categories</a>
                         </nav>
                     </div>
-
                     <div class="sb-sidenav-menu-heading">System</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-user-shield"></i></div>
