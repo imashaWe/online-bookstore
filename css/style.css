@@ -171,3 +171,9 @@
 .item-pic:hover .item-btn {
     bottom: 20px;
 }
+
+/* side cart design */
+.cart-item-list-view {
+    height: 70vh;
+    overflow-y: auto;
+}
