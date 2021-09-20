@@ -1,5 +1,18 @@
 <?php
-require("db.php");
+require "core/db.php";
+
+$name = "";
+$email = "";
+$phone_no = "";
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM book_publisher WHERE id = '{$id}'";
+    $row = $conn->query($sql)->fetch_array();
+    $name = $row['name'];
+    $email = $row['email'];
+    $phone_no = $row['phone_no'];
+}
 
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
@@ -11,21 +24,31 @@ if (isset($_POST['submit'])) {
     } elseif (empty($email)) {
         $error = "Please enter email";
     } elseif (empty($phone_no)) {
-        $error = "Please enter phone number0";
+        $error = "Please enter phone number";
     } else {
-        $sql = "SELECT id FROM book_publisher WHERE email = '{$email}'";
-        $res = $conn->query($sql);
-        if ($res->num_rows) {
-            $error = "This email already exists";
-        } else {
-            $sql = "INSERT INTO book_publisher(name,email,phone_no) 
-                VALUES('{$name}','{$email}','{$phone_no}')";
+        if (isset($_GET['id'])){
+            $sql = "UPDATE book_publisher SET name ='{$name}',email ='{$email}',phone_no = '{$phone_no}' WHERE id = '{$id}'";
             $res = $conn->query($sql);
             if ($res) {
                 header("location: book-publisher.php");
                 die();
             } else {
                 $error = "Database error";
+            }
+        }else{
+            $sql = "SELECT id FROM book_publisher WHERE email = '{$email}'";
+            $res = $conn->query($sql);
+            if ($res->num_rows) {
+                $error = "This email already exists";
+            }else{
+                $sql = "INSERT INTO book_publisher(name,email,phone_no) VALUES('{$name}','{$email}','{$phone_no}')";
+                $res = $conn->query($sql);
+                if ($res) {
+                    header("location: book-publisher.php");
+                    die();
+                } else {
+                    $error = "Database error";
+                }
             }
         }
     }
@@ -34,10 +57,10 @@ if (isset($_POST['submit'])) {
 <?php require_once('header.php'); ?>
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Add New Publisher</h1>
+            <h1 class="mt-4"><?= isset($_GET['id']) ? 'Edit' : 'Add New' ?>&nbsp;Publisher</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item">Book Publishers</li>
-                <li class="breadcrumb-item active">Add New Publisher</li>
+                <li class="breadcrumb-item active"><?= isset($_GET['id']) ? 'Edit' : 'Add New' ?>&nbsp;Publisher</li>
             </ol>
             <div class="row justify-content-center">
                 <div class="col-10">
@@ -59,26 +82,35 @@ if (isset($_POST['submit'])) {
                                 <div class="row row-cols-2 g-3">
                                     <div class="col">
                                         <label class="form-label">Name</label>
-                                        <input type="text" class="form-control" name="name">
+                                        <input type="text" class="form-control" name="name" value="<?= $name ?>">
                                     </div>
                                     <div class="col">
                                         <label class="form-label">Email</label>
-                                        <input type="email" class="form-control" name="email">
+                                        <input type="email" class="form-control" name="email" value="<?= $email ?>">
                                     </div>
                                     <div class="col">
                                         <label class="form-label">Phone Number</label>
-                                        <input type="text" class="form-control" name="phone_no">
+                                        <input type="text" class="form-control" name="phone_no" value="<?= $phone_no ?>">
                                     </div>
                                 </div>
                                 <br>
-                                <button type="submit" class="btn btn-success float-end" name="submit">Save Publisher
-                                </button>
+                                <?php if (isset($_GET['id'])): ?>
+                                    <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
+                                <?php endif; ?>
+                                <div class="row justify-content-end pb-2">
+                                    <div class="col-1">
+                                        <a href="book-publisher.php" class="btn btn-outline-secondary btn-lg float-end"
+                                           name="submit">Cancel</a>
+                                    </div>
+                                    <div class="col-1">
+                                        <button type="submit" class="btn btn-success btn-lg" name="submit">Save</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 <?php require_once('footer.php'); ?>
