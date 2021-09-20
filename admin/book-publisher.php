@@ -1,5 +1,5 @@
 <?php
-require "db.php";
+require "core/db.php";
 
 $sql = "SELECT id,name,email,phone_no
         FROM book_publisher 
@@ -48,7 +48,7 @@ if (isset($_POST['delete_submit'])) {
             <a href="book-publisher-add.php" class="btn btn-dark">Add New Publisher</a>
         </div>
         <div class="card">
-            <div class="card-body">
+            <div class="card-body table-wrap">
                 <table class="table table-striped">
                     <thead>
                     <tr>

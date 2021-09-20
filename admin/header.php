@@ -1,9 +1,6 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['user'])) {
-        header("location:login.php");
-        die();
-    }
+require_once 'core/route.php';
+require_once 'core/user.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +13,7 @@
     <title>Dashboard - SB Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
@@ -38,7 +36,9 @@
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="#!">Settings</a></li>
                 <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                <li><hr class="dropdown-divider" /></li>
+                <li>
+                    <hr class="dropdown-divider"/>
+                </li>
                 <li><a class="dropdown-item" href="logout.php">Logout</a></li>
             </ul>
         </li>
@@ -49,21 +49,45 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
+
                     <div class="sb-sidenav-menu-heading">Core</div>
                     <a class="nav-link" href="index.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard
                     </a>
-                    <div class="sb-sidenav-menu-heading">System</div>
-                    <a class="nav-link" href="system-users.php">
-                        <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                        Users
+
+                    <div class="sb-sidenav-menu-heading">Interface</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Book
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="book-author.php">Book Author</a>
+                            <a class="nav-link" href="book-publisher.php">Book Publisher</a>
+                            <a class="nav-link" href="book-category.php">Book Category</a>
+                        </nav>
+                    </div>
+
+                    <div class="sb-sidenav-menu-heading">System</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-shield"></i></div>
+                        Access
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="system-users.php">Users</a>
+                        </nav>
+                    </div>
+
+
                 </div>
             </div>
             <div class="sb-sidenav-footer">
                 <div class="small">Logged in as:</div>
-                <?=$_SESSION['user']['role']?>
+                <?= $_SESSION['sys_user']['role'] ?>
             </div>
         </nav>
     </div>
