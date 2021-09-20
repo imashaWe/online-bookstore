@@ -1,8 +1,5 @@
 <?php
-require "db.php";
-require "core/route.php";
-
-
+require "core/db.php";
 $sql = "SELECT COUNT(id) AS count FROM book_publisher WHERE is_delete = 0";
 $num_rows = $conn->query($sql)->fetch_array()['count'];
 $limit = 5;
@@ -57,7 +54,7 @@ if (isset($_POST['delete_submit'])) {
             <a href="book-publisher-add.php" class="btn btn-dark">Add New Publisher</a>
         </div>
         <div class="card">
-            <div class="card-body">
+            <div class="card-body table-wrap">
                 <table class="table table-striped">
                     <thead>
                     <tr>
