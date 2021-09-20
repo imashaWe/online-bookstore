@@ -170,7 +170,7 @@ function upload_book_image($file, $book_id, $conn)
                                             style="display:none;"
                                             type="file"
                                             id="bookImgInput"
-                                            name="book-img">
+                                            name="book_img">
 
                                 </div>
                             </div>
