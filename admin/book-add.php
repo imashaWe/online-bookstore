@@ -9,6 +9,7 @@ $category_id = 0;
 $sub_category_id = 0;
 $publisher_id = 0;
 $language_id = 1;
+$book_img = "";
 
 $sql = "SELECT * FROM book_category WHERE is_delete = '0'";
 $categories = $conn->query($sql);
@@ -36,6 +37,7 @@ if (isset($_GET['id'])) {
     $sub_category_id = $row['sub_category_id'];
     $publisher_id = $row['publisher_id'];
     $language_id = $row['language_id'];
+    $book_img = $row['img_url'];
 
 
     $sql = "SELECT * FROM book_sub_category WHERE is_delete = '0' AND category_id= {$category_id}";
@@ -122,7 +124,7 @@ function upload_book_image($file, $book_id, $conn)
 
     move_uploaded_file($file['tmp_name'], $file_name);
 
-    $url = $_SERVER['SERVER_NAME'] . "admin/{$file_name}";
+    $url = $_SERVER['SERVER_NAME'] . "/admin/{$file_name}";
     $sql = "UPDATE book SET img_url = '{$url}' WHERE id ={$book_id}";
     return $conn->query($sql);
 
@@ -293,9 +295,11 @@ function upload_book_image($file, $book_id, $conn)
     (function () {
         var upload = new FileUploadWithPreview("bookImage", {
             showDeleteButtonOnImages: true,
-            presetFiles: [
-                "https://images.unsplash.com/photo-1557090495-fc9312e77b28?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80",
-            ],
+           <?php
+                if (!empty($book_img)) echo "presetFiles: [
+               {$book_img}
+    ],";
+            ?>
         });
     }());
 
