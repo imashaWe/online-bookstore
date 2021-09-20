@@ -14,6 +14,7 @@ require_once 'core/user.php';
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/file-upload-with-preview@4.1.0/dist/file-upload-with-preview.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
@@ -56,20 +57,23 @@ require_once 'core/user.php';
                         Dashboard
                     </a>
 
-                    <div class="sb-sidenav-menu-heading">Interface</div>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="sb-sidenav-menu-heading">Site</div>
+                    <a class="nav-link" href="book.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                        Book
+                        Books
+                    </a>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
+                        Basic Data
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="book-author.php">Book Author</a>
-                            <a class="nav-link" href="book-publisher.php">Book Publisher</a>
-                            <a class="nav-link" href="book-category.php">Book Category</a>
+                            <a class="nav-link" href="book-author.php">Book Authors</a>
+                            <a class="nav-link" href="book-publisher.php">Book Publishers</a>
+                            <a class="nav-link" href="book-category.php">Book Categories</a>
                         </nav>
                     </div>
-
                     <div class="sb-sidenav-menu-heading">System</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-user-shield"></i></div>

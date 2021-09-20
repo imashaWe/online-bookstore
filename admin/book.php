@@ -1,27 +1,29 @@
 <?php
 require "core/db.php";
 /* pagination */
-$sql = "SELECT COUNT(id) AS count FROM book_category WHERE is_delete = 0 ";
+$sql = "SELECT COUNT(id) AS count FROM book WHERE is_delete = 0 ";
 $count = $conn->query($sql)->fetch_array()['count'];
-$limit = 10;
+$limit = 5;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $num_pages = ceil($count / $limit);
 $start = ($page - 1) * $limit;
 
-$sql = "SELECT category,book_category.id,
-        IFNULL(GROUP_CONCAT(sub_category),'N/A') AS 'sub_category' 
-        FROM book_category 
-        LEFT JOIN book_sub_category 
-        ON book_sub_category.category_id = book_category.id AND book_sub_category.is_delete = 0
-        WHERE book_category.is_delete = 0 
-        GROUP BY book_category.id
+$sql = "SELECT 
+        book.id,book.name AS name,price,isbn,
+        CONCAT(book_author.fname,' ',book_author.fname) AS author,
+        book_publisher.name AS publisher,
+        book_language.language
+        FROM book
+        INNER JOIN book_author ON book_author.id = book.author_id
+        INNER JOIN book_publisher ON book_publisher.id = book.publisher_id
+        INNER JOIN book_language ON book_language.id = book.language_id
+        WHERE book.is_delete = '0'  
         LIMIT {$start},{$limit}";
-$categories = $conn->query($sql);
+$books = $conn->query($sql);
 
 if (isset($_POST['delete_submit'])) {
     $id = $_POST['id'];
-    $sql = "UPDATE book_category SET is_delete = 1 WHERE id = {$id};
-            UPDATE book_sub_category SET is_delete = 1 WHERE category_id = {$id}";
+    $sql = "UPDATE book SET is_delete = 1 WHERE id = {$id}";
     $res = $conn->multi_query($sql);
     if ($res) {
         header("location:{$_SERVER['REQUEST_URI']}");
@@ -40,7 +42,7 @@ if (isset($_POST['delete_submit'])) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to delete this category?</p>
+                    <p>Are you sure you want to delete this book?</p>
                 </div>
                 <div class="modal-footer">
                     <form action="" method="post">
@@ -55,40 +57,47 @@ if (isset($_POST['delete_submit'])) {
 
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Book Categories</h1>
+            <h1 class="mt-4">Books</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item">Basic Data</li>
-                <li class="breadcrumb-item active">Book Categories</li>
+                <li class="breadcrumb-item active">Books</li>
             </ol>
 
             <div class="d-grid  justify-content-end pb-2">
-                <a href="book-category-add.php" class="btn btn-dark">Add New Category</a>
+                <a href="book-add.php" class="btn btn-dark">Add New Book</a>
             </div>
 
             <div class="card">
                 <div class="card-body table-wrap">
-                    <table class="table table-hover table-fixed">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th>Category</th>
-                            <th>Sub Categories</th>
+                            <th>Name</th>
+                            <th>ISBN</th>
+                            <th>Author</th>
+                            <th>Publisher</th>
+                            <th>Language</th>
+                            <th>Price</th>
                             <th class="text-end">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php while ($category = $categories->fetch_array()): ?>
+                        <?php while ($book = $books->fetch_array()): ?>
                             <tr>
-                                <td><?= $category['category'] ?></td>
-                                <td><?= $category['sub_category'] ?></td>
+                                <td><?= $book['name'] ?></td>
+                                <td><?= $book['isbn'] ?></td>
+                                <td><?= $book['author'] ?></td>
+                                <td><?= $book['publisher'] ?></td>
+                                <td><?= $book['language'] ?></td>
+                                <td><?= $book['price'] ?></td>
                                 <td class="text-end">
                                     <div>
-                                        <a href="book-category-add.php?id=<?= $category['id'] ?>"
+                                        <a href="book-add.php?id=<?= $book['id'] ?>"
                                            class="btn btn-secondary">Edit</a>
                                         <button type="button"
                                                 class="btn btn-danger btn-user-delete"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal"
-                                                onclick="setDelete(<?= $category['id'] ?>)">
+                                                onclick="setDelete(<?= $book['id'] ?>)">
                                             Delete
                                         </button>
                                     </div>
@@ -99,9 +108,8 @@ if (isset($_POST['delete_submit'])) {
                     </table>
                 </div>
                 <div class="card-footer">
-
-                    <nav aria-label="Page">
-                        <ul class="pagination justify-content-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination float-end">
                             <li class="page-item <?php if ($page == 1) echo 'disabled'; ?>">
                                 <a class="page-link" href="<?= change_url_params('page', $page - 1) ?>">
                                     Previous
@@ -123,7 +131,6 @@ if (isset($_POST['delete_submit'])) {
                         </ul>
                     </nav>
                 </div>
-
             </div>
 
         </div>
