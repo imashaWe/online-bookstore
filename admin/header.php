@@ -60,7 +60,7 @@ require_once 'core/user.php';
                     <div class="sb-sidenav-menu-heading">Site</div>
                     <a class="nav-link" href="book.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                        Book
+                        Books
                     </a>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
