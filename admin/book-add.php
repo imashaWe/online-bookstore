@@ -37,7 +37,7 @@ if (isset($_GET['id'])) {
     $sub_category_id = $row['sub_category_id'];
     $publisher_id = $row['publisher_id'];
     $language_id = $row['language_id'];
-    $book_img = $row['img_url'];
+    if ($row['img_url']) $book_img = $row['img_url'];
 
 
     $sql = "SELECT * FROM book_sub_category WHERE is_delete = '0' AND category_id= {$category_id}";
@@ -55,7 +55,9 @@ if (isset($_POST['submit'])) {
     $language_id = $_POST['language_id'];
     $description = trim($_POST['description']);
 
-    if (empty($name)) {
+    if (!isset($_FILES['book_img']) && !isset($_GET['id'])) {
+        $error = "Please select Image";
+    } elseif (empty($name)) {
         $error = "Please enter Name";
     } elseif (empty($price)) {
         $error = "Please enter Price";
@@ -69,8 +71,6 @@ if (isset($_POST['submit'])) {
         $error = "Please select Publisher";
     } elseif (!$category_id) {
         $error = "Please select Category";
-    } elseif (!isset($_FILES['book_img']) && !isset($_GET['id'])) {
-        $error = "Please select Image";
     } else {
         // To check whether the ISBN exists.
         $sql = "SELECT id FROM book WHERE ISBN = '{$isbn}'";
@@ -93,9 +93,10 @@ if (isset($_POST['submit'])) {
                         WHERE id = {$book_id}";
                 $res = $conn->query($sql);
             } else {
+                $slug = get_slug($name, 0, $conn);
                 $sql = "INSERT
-                        INTO book(name,price,author_id,publisher_id,isbn,category_id,sub_category_id,language_id,description)
-                        VALUES('{$name}','{$price}',{$author_id},{$publisher_id},'{$isbn}',{$category_id},{$sub_category_id},{$language_id},'{$description}')";
+                        INTO book(name,price,author_id,publisher_id,isbn,category_id,sub_category_id,language_id,description,slug)
+                        VALUES('{$name}','{$price}',{$author_id},{$publisher_id},'{$isbn}',{$category_id},{$sub_category_id},{$language_id},'{$description}','{$slug}')";
                 $res = $conn->query($sql);
                 $book_id = $conn->insert_id;
             }
@@ -113,6 +114,16 @@ if (isset($_POST['submit'])) {
         }
     }
 }
+function get_slug($name, $number, $conn)
+{
+    $name = strtolower(trim($name));
+    $slug = str_replace(" ", "-", $name);
+    if ($number) $slug .= "-{$number}";
+    $sql = "SELECT id FROM book WHERE slug = '{$slug}'";
+    if (!$conn->query($sql)->num_rows) return $slug;
+    return get_slug($slug, ++$number, $conn);
+}
+
 function upload_book_image($file, $book_id, $conn)
 {
     $dir = "uploads/";
@@ -124,7 +135,7 @@ function upload_book_image($file, $book_id, $conn)
 
     move_uploaded_file($file['tmp_name'], $file_name);
 
-    $url = "https://".$_SERVER['SERVER_NAME'] . "/admin/{$file_name}";
+    $url = "https://" . $_SERVER['SERVER_NAME'] . "/admin/{$file_name}";
     $sql = "UPDATE book SET img_url = '{$url}' WHERE id ={$book_id}";
     return $conn->query($sql);
 
@@ -159,7 +170,7 @@ function upload_book_image($file, $book_id, $conn)
                         <form action="" method="post" enctype="multipart/form-data">
                             <div class="row justify-content-center">
                                 <div class="col-4 text-center">
-                                    <img src="<?=$book_img?>"
+                                    <img src="<?= $book_img ?>"
                                          alt=""
                                          width="150"
                                          id="bookImg"
@@ -295,6 +306,7 @@ function upload_book_image($file, $book_id, $conn)
         });
 
     }());
+
     function getSubCategory(id) {
         const subCategorySelect = document.getElementById("subCategorySelect");
         if (id == 0) {
