@@ -1,6 +1,6 @@
-<?php
-    require_once 'cart-side-view.php';
-?>
+<?php require_once 'cart-side-view.php'; ?>
+</div>
+</main>
 <footer>
     <div class="container-fluid bg-dark position-absolute footer">
         <div class="row justify-content-center pt-5">
@@ -39,7 +39,8 @@
             <div class="col-2">
                 <h4>NEWSLETTER</h4>
                 <input type="text" class="form-control" placeholder="email@exsapmle.com">
-                <button type="submit" class="btn btn-warning mt-2">Subscribe</button>
+                <button type="submit" class="theme-btn theme-btn-accent-animated theme-text-subtitle mt-2">Subscribe
+                </button>
             </div>
 
         </div>
@@ -53,6 +54,7 @@
 
     </div>
 </footer>
+<script src="js/main.js"></script>
 <!-- bootstrap js-->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
