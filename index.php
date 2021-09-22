@@ -16,7 +16,7 @@
                                 <div class="btn-set-wishlist icon-circle"><i class="far fa-heart fa-lg"></i></div>
                                 <img src="https://online-bookstore.azurewebsites.net/admin/uploads/book-img-c4ca4238a0b923820dcc509a6f75849b.jpg"
                                      alt="IMG-PRODUCT">
-                                <a href="#" class="item-btn flex-c-m item-btn-font item-btn-hov item-trans">
+                                <a href="book-view.php?slug=my-book" class="item-btn flex-c-m item-btn-font item-btn-hov item-trans">
                                     Quick View
                                 </a>
                             </div>
