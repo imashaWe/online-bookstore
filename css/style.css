@@ -345,3 +345,12 @@
     align-items: center;
     justify-content: center;
 }
+/* btn set wishlist */
+.btn-set-wishlist {
+    cursor: pointer;
+    background-color: #f3f3f3;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 100;
+}
