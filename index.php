@@ -1,36 +1,48 @@
+<?php
+require "core/db.php";
+/* pagination */
+$sql = "SELECT COUNT(id) AS count FROM book WHERE is_delete = '0' ";
+$count = $conn->query($sql)->fetch_array()['count'];
+$limit = 20;
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$num_pages = ceil($count / $limit);
+$start = ($page - 1) * $limit;
+
+$sql = "SELECT id,name,img_url,slug,price,SUBSTRING(description,1,100) AS description
+        FROM `online-bookstore`.book
+        WHERE is_delete = '0'  
+        LIMIT {$start},{$limit}";
+$books = $conn->query($sql);
+?>
+
 <?php require_once "header.php" ?>
 
 <main>
     <div class="container my-5">
         <div class="row row-cols-1 row-cols-md-4 g-4">
-            <?php for ($i = 0;
-                       $i < 20;
-                       $i++): ?>
+            <?php while ($book = $books->fetch_array()):?>
                 <div class="col">
                     <div class="card">
 
                         <div class="card-body">
 
-                            <!--                    <div class="ribbon ribbon-top-left"><span>OUT OF STOCK</span></div>-->
+                            <!--<div class="ribbon ribbon-top-left"><span>OUT OF STOCK</span></div>-->
                             <div class="item-pic item-img-hov">
                                 <div class="btn-set-wishlist icon-circle"><i class="far fa-heart fa-lg"></i></div>
-                                <img src="https://online-bookstore.azurewebsites.net/admin/uploads/book-img-c4ca4238a0b923820dcc509a6f75849b.jpg"
-                                     alt="IMG-PRODUCT">
-                                <a href="book-view.php?slug=my-book" class="item-btn flex-c-m item-btn-font item-btn-hov item-trans">
+                                <img src="<?=$book['img_url']?>"
+                                     alt="<?=$book['slug']?>">
+                                <a href="book-view.php?slug=<?=$book['slug']?>" class="item-btn flex-c-m item-btn-font item-btn-hov item-trans">
                                     Quick View
                                 </a>
                             </div>
-                            <h5 class="card-title theme-text-title mt-1">Book title</h5>
-                            <small class="theme-text text-muted">This is a longer card with supporting text below as a
-                                natural
-                                lead-in
-                                to additional content. This content is a little bit longer.</small>
+                            <h5 class="card-title theme-text-title mt-1"><?=$book['name']?></h5>
+                            <small class="theme-text text-muted"><?=$book['description']?></small>
                             <div class="row justify-content-between">
                                 <div class="col">
                                     <div class="rating-bar" data-rate="4.2" data-max="5"></div>
                                 </div>
                                 <div class="col">
-                                    <h5 class="theme-text-title text-end theme-primary-color">LKR 300</h5>
+                                    <h5 class="theme-text-title text-end theme-primary-color">LKR <?=$book['price']?></h5>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">
@@ -41,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-            <?php endfor; ?>
+            <?php endwhile; ?>
         </div>
     </div>
 
