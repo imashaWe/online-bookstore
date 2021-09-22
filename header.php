@@ -72,6 +72,4 @@
         </div>
     </nav>
 </header>
-<main>
-    <div class="container my-5">
 
