@@ -195,6 +195,7 @@
     top: -3px;
     left: -3px;
 }
+
 /*.ribbon {*/
 /*    font: bold 15px sans-serif;*/
 /*    color: #333;*/
@@ -220,6 +221,7 @@
     position: absolute;
     z-index: 5;
 }
+
 .ribbon::before,
 .ribbon::after {
     position: absolute;
@@ -227,16 +229,17 @@
     display: block;
     border: 5px solid #dc3545;
 }
+
 .ribbon span {
     position: absolute;
     display: block;
     width: 225px;
     padding: 15px 0;
     background-color: #dc3545;
-    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
     color: #fff;
     font: 700 18px/1 'Lato', sans-serif;
-    text-shadow: 0 1px 1px rgba(0,0,0,.2);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
     text-transform: uppercase;
     text-align: center;
 }
@@ -246,19 +249,23 @@
     top: -10px;
     left: -10px;
 }
+
 .ribbon-top-left::before,
 .ribbon-top-left::after {
     border-top-color: transparent;
     border-left-color: transparent;
 }
+
 .ribbon-top-left::before {
     top: 0;
     right: 0;
 }
+
 .ribbon-top-left::after {
     bottom: 0;
     left: 0;
 }
+
 .ribbon-top-left span {
     right: -25px;
     top: 30px;
@@ -270,19 +277,23 @@
     top: -10px;
     right: -10px;
 }
+
 .ribbon-top-right::before,
 .ribbon-top-right::after {
     border-top-color: transparent;
     border-right-color: transparent;
 }
+
 .ribbon-top-right::before {
     top: 0;
     left: 0;
 }
+
 .ribbon-top-right::after {
     bottom: 0;
     right: 0;
 }
+
 .ribbon-top-right span {
     left: -25px;
     top: 30px;
@@ -294,19 +305,23 @@
     bottom: -10px;
     left: -10px;
 }
+
 .ribbon-bottom-left::before,
 .ribbon-bottom-left::after {
     border-bottom-color: transparent;
     border-left-color: transparent;
 }
+
 .ribbon-bottom-left::before {
     bottom: 0;
     right: 0;
 }
+
 .ribbon-bottom-left::after {
     top: 0;
     left: 0;
 }
+
 .ribbon-bottom-left span {
     right: -25px;
     bottom: 30px;
@@ -318,24 +333,29 @@
     bottom: -10px;
     right: -10px;
 }
+
 .ribbon-bottom-right::before,
 .ribbon-bottom-right::after {
     border-bottom-color: transparent;
     border-right-color: transparent;
 }
+
 .ribbon-bottom-right::before {
     bottom: 0;
     left: 0;
 }
+
 .ribbon-bottom-right::after {
     top: 0;
     right: 0;
 }
+
 .ribbon-bottom-right span {
     left: -25px;
     bottom: 30px;
     transform: rotate(-225deg);
 }
+
 /* icon circle */
 .icon-circle {
     height: 2.5rem;
@@ -344,4 +364,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* btn set wishlist */
+.btn-set-wishlist {
+    cursor: pointer;
+    background-color: #f3f3f3;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 100;
+}
+
+/*shadow */
+.shadow {
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(58 59 69/15%) !important;
 }
