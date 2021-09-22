@@ -6,34 +6,33 @@
     <div class="offcanvas-body">
         <div class="cart-item-list-view">
             <?php for ($i = 0; $i < 6; $i++): ?>
-                <div class="theme-card mb-3 shadow">
+                <div class="theme-card shadow m-2">
+
                     <div class="row g-0">
-                        <div class="col-md-4">
+                        <div class="col-4">
                             <img src="https://picsum.photos/200" class="img-fluid rounded-start" alt="...">
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">First Book</h5>
-                                <small>1 X $19</small>
-                                <div  class="rating-bar" data-rate="1.2" data-max="5"></div>
-                            </div>
+                        <div class="col pt-1 align-content-center">
+                            <h6 class="theme-text-title">First Book</h6>
+                            <small class="py-3 text-muted theme-text">1 X $19</small>
+                            <div class="rating-bar" data-rate="1.2" data-max="5"></div>
                         </div>
                     </div>
+
                 </div>
             <?php endfor; ?>
         </div>
-        <div>
-            <h3>TOTAL:$75</h3>
-            <br>
-            <div class="row justify-content-start">
-                <div class="col-4">
-                    <a href="" class="btn btn-outline-dark">VIEW CART</a>
-                </div>
-                <div class="col-3">
-                    <a href="" class="btn btn-dark rounded-3">CHECKOUT</a>
-                </div>
 
+        <h3 class="theme-text-heading">TOTAL:$75</h3>
+        <br>
+        <div class="row justify-content-evenly">
+            <div class="col">
+                <a href="" class="theme-btn theme-btn-light-animated theme-text-subtitle">VIEW CART</a>
             </div>
+            <div class="col">
+                <a href="" class="theme-btn theme-btn-dark-animated theme-text-subtitle">CHECKOUT</a>
+            </div>
+
         </div>
     </div>
 </div>

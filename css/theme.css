@@ -111,10 +111,43 @@
     color: #fff;
 }
 
+.theme-btn-dark-animated:hover {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+.theme-btn-accent, .theme-btn-accent-animated {
+
+    border-radius: 20px;
+    background-color: var(--accent);
+
+    min-width: 150px;
+    height: 40px;
+
+    color: #fff;
+}
+
 .theme-btn-accent-animated:hover {
     background-color: var(--accent);
     color: var(--primary);
 }
+
+.theme-btn-light, .theme-btn-light-animated {
+
+    border-radius: 20px;
+    background-color: #f3f3f3;
+
+    min-width: 150px;
+    height: 40px;
+
+    color: #333;
+}
+
+.theme-btn-light-animated:hover {
+    background-color: var(--accent);
+    color: #fff;
+}
+
 /* Theme card */
 .theme-card {
     position: relative;
