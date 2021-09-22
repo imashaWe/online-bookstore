@@ -6,7 +6,7 @@
     <div class="offcanvas-body">
         <div class="cart-item-list-view">
             <?php for ($i = 0; $i < 6; $i++): ?>
-                <div class="card mb-3">
+                <div class="theme-card mb-3 shadow">
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img src="https://picsum.photos/200" class="img-fluid rounded-start" alt="...">
