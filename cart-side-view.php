@@ -1,8 +1,3 @@
-<style>
-    .checked {
-        color: orange;
-    }
-</style>
 <div class="offcanvas offcanvas-end" tabindex="-1" id="cartSideView" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
         <h5 id="offcanvasRightLabel">Your Cart</h5>
@@ -20,13 +15,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">First Book</h5>
                                 <small>1 X $19</small>
-                                <div>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>
+                                <div  class="rating-bar" data-rate="1.2" data-max="5"></div>
                             </div>
                         </div>
                     </div>
