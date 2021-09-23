@@ -61,6 +61,7 @@ if (isset($_GET['slug'])) {
                     <hr>
                     <div class="row my-3">
                         <div class="col">
+                            <h6>Language : <?=$book['language']?></h6>
                             <h6>Author : <a href=""><?=$book['author']?></a></h6>
                             <h6>Publisher : <a href=""><?=$book['publisher']?></a></h6>
                             <h6>ISBN : <?=$book['isbn']?></h6>
