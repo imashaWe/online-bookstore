@@ -1,3 +1,6 @@
+<?php
+require 'core/user.php';
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,12 +25,7 @@
 </head>
 <body>
 <header>
-    <!-- As a link -->
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-        </div>
-    </nav>
+
     <nav class="navbar navbar-expand-lg py-4 navbar-dark fixed-top theme-primary-color-bg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Online BookStore</a>
@@ -72,4 +70,11 @@
         </div>
     </nav>
 </header>
+<?php if ($IS_LOGGED_IN && !$USER['status']): ?>
+    <div class="alert alert-warning alert-dismissible fade show fixed-top" role="alert">
+        Verification email has been send.Please verify your account!&nbsp;<a href="verify.php" class="link-primary">Click
+            here</a>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
 
