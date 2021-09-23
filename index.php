@@ -15,9 +15,7 @@ $sql = "SELECT id,name,img_url,slug,price,SUBSTRING(description,1,100) AS descri
         LIMIT {$start},{$limit}";
 $books = $conn->query($sql);
 ?>
-<?php
-echo var_dump($USER);
-?>
+
 <?php require_once "header.php" ?>
 
 ?>
