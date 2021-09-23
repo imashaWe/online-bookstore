@@ -1,5 +1,6 @@
 <?php
 require "core/db.php";
+require 'core/user.php';
 /* pagination */
 $sql = "SELECT COUNT(id) AS count FROM book WHERE is_delete = '0' ";
 $count = $conn->query($sql)->fetch_array()['count'];
@@ -14,9 +15,12 @@ $sql = "SELECT id,name,img_url,slug,price,SUBSTRING(description,1,100) AS descri
         LIMIT {$start},{$limit}";
 $books = $conn->query($sql);
 ?>
-
+<?php
+echo var_dump($USER);
+?>
 <?php require_once "header.php" ?>
 
+?>
 <main>
     <div class="container my-5">
         <div class="row row-cols-1 row-cols-md-4 g-4">

@@ -1,5 +1,6 @@
 <?php
 require 'core/db.php';
+require "core/user.php";
 
 $fname = "";
 $lname = "";
@@ -11,6 +12,7 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $password_confirm = $_POST['password_confirm'];
+    $is_remember = isset($_POST['is_remember']);
     if (empty($fname)) {
         $error = "Please enter your First Name";
     } elseif (empty($lname)) {
@@ -39,6 +41,7 @@ if (isset($_POST['submit'])) {
             if ($res) {
                 $code = get_verify_code($conn, $conn->insert_id);
                 send_verify_code_email($email, $code);
+                set_user($fname, $lname, $email,0,$uid, $is_remember);
             } else {
                 $error = "Database Error";
             }
@@ -136,7 +139,8 @@ function send_verify_code_email($email, $code)
                     <div class="custom-control custom-checkbox small">
                         <div class="form-check">
                             <input class="form-check-input custom-control-input" type="checkbox"
-                                   name="is_remember">
+                                   name="is_remember"
+                                   value=0>
                             <label class="form-check-label custom-control-label">Remember Me</label>
                         </div>
                     </div>
