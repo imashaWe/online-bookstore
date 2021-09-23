@@ -59,6 +59,5 @@ $books = $conn->query($sql);
     </div>
 
 </main>
-
 <?php require_once "footer.php" ?>
 
