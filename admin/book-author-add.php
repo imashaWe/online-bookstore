@@ -1,5 +1,5 @@
 <?php
-require "core/db.php";
+require "../core/db.php";
 $fname = "";
 $lname = "";
 $email = "";

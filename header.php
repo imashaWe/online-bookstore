@@ -1,6 +1,3 @@
-<?php
-require 'core/user.php';
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -70,11 +67,5 @@ require 'core/user.php';
         </div>
     </nav>
 </header>
-<?php if ($IS_LOGGED_IN && !$USER['status']): ?>
-    <div class="alert alert-warning alert-dismissible fade show fixed-top" role="alert">
-        Verification email has been send.Please verify your account!&nbsp;<a href="verify.php" class="link-primary">Click
-            here</a>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-<?php endif; ?>
+<br><br><br><br>
 

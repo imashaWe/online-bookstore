@@ -1,5 +1,5 @@
 <?php
-require "core/db.php";
+require "../core/db.php";
 
 $sql = "SELECT * FROM system_user_role";
 $user_roles = $conn->query($sql);
