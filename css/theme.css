@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Montserrat&display=swap');
+
+:root {
+    --primary: #4173be !important;
+    --accent: #FC624D !important;
+
+}
+
+/* fonts */
+.theme-text-title {
+    font-family: Poppins;
+    font-weight: 700;
+}
+
+.theme-text-subtitle {
+    font-family: Poppins;
+    font-weight: 500;
+
+}
+
+.theme-text {
+    font-family: Poppins;
+    font-weight: 400;
+
+}
+
+.theme-text-heading {
+    font-family: Poppins;
+    font-weight: 700;
+
+}
+
+/* colors */
+.theme-primary-color-bg {
+    background-color: var(--primary);
+}
+
+.theme-primary-color {
+    color: var(--primary);
+}
+
+.theme-accent-color-bg {
+    background-color: var(--accent);
+}
+
+.theme-accent-color {
+    color: var(--accent);
+}
+
+/* buttons */
+.theme-btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.theme-btn-primary, .theme-btn-primary-animated {
+
+    border-radius: 20px;
+    background-color: var(--primary);
+
+    min-width: 150px;
+    height: 40px;
+
+    color: #fff;
+}
+
+.theme-btn-primary-animated:hover {
+    background-color:  #f3f3f3;
+    color: var(--primary);
+}
+
+.theme-btn-dark, .theme-btn-dark-animated {
+
+    border-radius: 20px;
+    background-color: #222;;
+
+    min-width: 150px;
+    height: 40px;
+
+    color: #fff;
+}
+
+.theme-btn-dark-animated:hover {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+.theme-btn-accent, .theme-btn-accent-animated {
+
+    border-radius: 20px;
+    background-color: var(--accent);
+
+    min-width: 150px;
+    height: 40px;
+
+    color: #fff;
+}
+
+.theme-btn-dark-animated:hover {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+.theme-btn-accent, .theme-btn-accent-animated {
+
+    border-radius: 20px;
+    background-color: var(--accent);
+
+    min-width: 150px;
+    height: 40px;
+
+    color: #fff;
+}
+
+.theme-btn-accent-animated:hover {
+    background-color: var(--accent);
+    color: var(--primary);
+}
+
+.theme-btn-light, .theme-btn-light-animated {
+
+    border-radius: 20px;
+    background-color: #f3f3f3;
+
+    min-width: 150px;
+    height: 40px;
+
+    color: #333;
+}
+
+.theme-btn-light-animated:hover {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+/* Theme card */
+.theme-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #e3e6f0;
+    border-radius: .35rem;
+}
