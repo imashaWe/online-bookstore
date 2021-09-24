@@ -1,5 +1,5 @@
 <?php
-require "core/db.php";
+require "../core/db.php";
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -13,8 +13,8 @@ if (isset($_POST['submit'])) {
         $sql = "SELECT system_user.id,role_id,fname,lname,name AS role FROM system_user 
                 INNER JOIN system_user_role ON system_user_role.id = system_user.role_id
                 WHERE email = '{$email}' AND password ='{$password}' AND is_delete = 0";
-
         $res = $conn->query($sql);
+        echo $res->num_rows;
         if ($res->num_rows) {
             $user = $res->fetch_array();
             session_start();

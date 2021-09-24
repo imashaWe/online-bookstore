@@ -1,5 +1,5 @@
 <?php
-require "core/db.php";
+require "../core/db.php";
 $sql = "SELECT COUNT(id) AS count FROM book_publisher WHERE is_delete = 0";
 $num_rows = $conn->query($sql)->fetch_array()['count'];
 $limit = 5;
