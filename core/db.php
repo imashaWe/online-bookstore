@@ -1,7 +1,7 @@
 <?php
-$servername = "online-bookstore-db.mysql.database.azure.com";
-$username = "dev@online-bookstore-db";
-$password = "Debuggers@18";
+$servername = "online-bookstore.cruc6jn2s3ym.us-east-1.rds.amazonaws.com";
+$username = "admin";
+$password = "admin123";
 $database = "online-bookstore";
 // create database connection
 $conn = new mysqli($servername, $username, $password, $database);
