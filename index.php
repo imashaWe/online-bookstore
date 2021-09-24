@@ -17,7 +17,7 @@ $books = $conn->query($sql);
 
 <?php require_once "header.php" ?>
 <?php
-    echo $_SERVER['REQUEST_URI'];
+    echo var_dump($_SERVER);
 ?>
 <main>
     <div class="container">
