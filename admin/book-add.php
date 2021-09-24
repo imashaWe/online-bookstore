@@ -136,7 +136,7 @@ function upload_book_image($file, $book_id, $conn)
     move_uploaded_file($file['tmp_name'], $file_name);
 
     $url = "http://" . $_SERVER['HTTP_HOST'] . "/admin/{$file_name}";
-    $sql = "UPDATE book SET img_path = '{$url}' WHERE id ={$book_id}";
+    $sql = "UPDATE book SET img_url = '{$url}' WHERE id ={$book_id}";
     return $conn->query($sql);
 
 }
