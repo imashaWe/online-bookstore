@@ -22,12 +22,7 @@
 </head>
 <body>
 <header>
-    <!-- As a link -->
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-        </div>
-    </nav>
+
     <nav class="navbar navbar-expand-lg py-4 navbar-dark fixed-top theme-primary-color-bg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Online BookStore</a>
@@ -72,4 +67,5 @@
         </div>
     </nav>
 </header>
+<br><br><br><br>
 

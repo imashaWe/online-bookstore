@@ -1,6 +1,6 @@
 <?php require_once 'cart-side-view.php'; ?>
 <footer>
-    <div class="container-fluid bg-dark position-absolute footer">
+    <div class="container-fluid bg-dark position-absolute footer mt-2">
         <div class="row justify-content-center pt-5">
 
             <div class="col-2">
