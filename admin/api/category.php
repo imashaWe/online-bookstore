@@ -1,5 +1,5 @@
 <?php
-require "db.php";
+require "../../core/db.php";
 
 if (isset($_GET['func']) && function_exists($_GET['func'])) {
     echo json_encode(array(

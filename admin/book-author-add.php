@@ -85,7 +85,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="col">
                                 <label class="form-label">Telephone Number</label>
-                                <input type="number" class="form-control" name="phone" value="<?= $phone ?>">
+                                <input type="text" class="form-control" name="phone" value="<?= $phone ?>">
                             </div>
 
                         </div>

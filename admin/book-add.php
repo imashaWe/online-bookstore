@@ -323,7 +323,7 @@ function upload_book_image_to_s3($file, $book_id, $conn)
                 subCategorySelect.innerHTML = '<option value=0>N/A</option>';
                 return;
             }
-            fetch(`core/api.php?func=get_sub_categories&category_id=${id}`)
+            fetch(`api/category.php?func=get_sub_categories&category_id=${id}`)
                 .then(response => response.json())
                 .then(data => {
                     let rows = data['data'];
