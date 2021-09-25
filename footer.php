@@ -55,13 +55,16 @@
 </footer>
 
 
+
 <!-- bootstrap js-->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
 <script src="js/main.js"></script>
 <script src="js/fetch.js"></script>
+<script src="js/cart.js"></script>
 
+<!-- sweetalert js-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>

@@ -155,10 +155,10 @@ function upload_book_image_to_s3($file, $book_id, $conn)
 <?php require_once('header.php'); ?>
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4"><?= isset($_POST['id']) ? 'Add New' : 'Edit' ?> Book</h1>
+            <h1 class="mt-4"><?= isset($_GET['id']) ? 'Add New' : 'Edit' ?> Book</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">Book</li>
-                <li class="breadcrumb-item active"><?= isset($_POST['id']) ? 'Add New' : 'Edit' ?> Book</li>
+                <li class="breadcrumb-item active"><?= isset($_GET['id']) ? 'Add New' : 'Edit' ?> Book</li>
             </ol>
 
             <div class="row justify-content-center">

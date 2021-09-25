@@ -4,7 +4,7 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <div class="cart-item-list-view">
+        <div class="cart-item-list-view" id="cartSideViewItems">
             <?php for ($i = 0; $i < 6; $i++): ?>
                 <div class="theme-card shadow m-2">
 
@@ -23,7 +23,7 @@
             <?php endfor; ?>
         </div>
 
-        <h3 class="theme-text-heading">TOTAL:$75</h3>
+        <h3 class="theme-text-heading" id="cartSideView">TOTAL:$75</h3>
         <br>
         <div class="row justify-content-evenly">
             <div class="col">

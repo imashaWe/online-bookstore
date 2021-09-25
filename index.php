@@ -72,6 +72,5 @@ $books = $conn->query($sql);
     </div>
 
 </main>
-<script src="js/cart.js"></script>
 <?php require_once "footer.php" ?>
 

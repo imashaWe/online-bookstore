@@ -24,7 +24,7 @@
 <body>
 <header>
 
-    <nav class="navbar navbar-expand-lg py-4 navbar-dark fixed-top theme-primary-color-bg">
+    <nav class="navbar navbar-expand-lg py-3 navbar-dark fixed-top theme-primary-color-bg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Online BookStore</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
@@ -68,7 +68,7 @@
         </div>
     </nav>
 </header>
-<br><br><br>
+<br><br><br><br>
 <?php if ($IS_LOGGED_IN && !$USER['status']):?>
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
     <p>Verification email has been sent.<a href="verify.php" class="alert-link">verify your account.</a></p>

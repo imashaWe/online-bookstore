@@ -1,5 +1,14 @@
 (function () {
 
+    const cartSideView = document.getElementById('cartSideView');
+    const cartSideItemsView = document.getElementById('cartSideItemsView');
+
+    cartSideView.addEventListener('shown.bs.offcanvas', () => {
+        // assets/gifs/loading.gif
+        cartSideItemsView.innerHTML = '<img src="assets/gifs/loading.gif">';
+
+    });
+
 }());
 
 function addToCart(bookId) {
@@ -13,4 +22,8 @@ function addToCart(bookId) {
             timer: 1500
         });
     })
+}
+
+function getCartItems() {
+
 }
