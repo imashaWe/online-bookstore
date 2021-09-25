@@ -1,5 +1,5 @@
 (function () {
-
+    setCartCount();
     const cartSideView = document.getElementById('cartSideView');
     const cartSideViewItems = document.getElementById('cartSideViewItems');
     const cartSideViewTotal = document.getElementById('cartSideViewTotal');
@@ -38,7 +38,6 @@
 
 function addToCart(bookId) {
     postData('api/cart.php?func=add_to_cart', {'book_id': bookId}).then((r) => {
-        console.log(r);
         Swal.fire({
             position: 'top-end',
             icon: r.status ? 'success' : 'error',
@@ -46,9 +45,19 @@ function addToCart(bookId) {
             showConfirmButton: false,
             timer: 1500
         });
+        setCartCount();
     })
 }
 
-function getCartItems() {
+function setCartCount() {
+    const cartCount = document.getElementById('cartCount');
+    postData('api/cart.php?func=get_cart_count', {}).then((r) => {
+        cartCount.classList.remove('cartCount.classList');
+        cartCount.removeAttribute('data-notify');
+        if (r.count) {
+            cartCount.classList.add('icon-header-noti');
+            cartCount.setAttribute('data-notify',r.count);
+        }
 
+    })
 }

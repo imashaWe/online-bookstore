@@ -51,8 +51,9 @@
                     </li>
                 </ul>
 
-                <div class="icon-header-item icon-header-noti"
-                     data-notify="2" style="padding-right: 11px;"
+                <div class="icon-header-item"
+                     id = "cartCount"
+                     style="padding-right: 11px;"
                      data-bs-toggle="offcanvas"
                      data-bs-target="#cartSideView"
                      aria-controls="offcanvasRight">

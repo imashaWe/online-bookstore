@@ -54,3 +54,18 @@ function get_cart_items($inputs, $conn, $user)
         'data' => $data
     );
 }
+
+
+function get_cart_count($inputs, $conn, $user)
+{
+    $uid = $user['uid'];
+
+    $sql = "SELECT COUNT(book_id) AS `count` FROM user_cart 
+            WHERE uid = {$uid}";
+    $res = $conn->query($sql);
+
+    return array(
+        'status' => 1,
+        'count' => $res->fetch_array()['count']
+    );
+}
