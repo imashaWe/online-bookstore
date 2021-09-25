@@ -68,10 +68,10 @@
         </div>
     </nav>
 </header>
-<br><br><br><br>
+<br><br><br>
 <?php if ($IS_LOGGED_IN && !$USER['status']):?>
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+    <p>Verification email has been sent.<a href="verify.php" class="alert-link">verify your account.</a></p>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 <?php endif;?>

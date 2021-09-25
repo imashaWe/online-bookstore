@@ -51,14 +51,14 @@ $books = $conn->query($sql);
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <?php if ($IS_LOGGED_IN): ?>
+                                <?php if ($IS_LOGGED_IN && $USER['status']): ?>
                                     <button class="theme-btn theme-btn-dark-animated theme-font-bold"
                                             onclick="addToCart(<?= $book['id'] ?>)">
                                         <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
                                     </button>
                                 <?php else: ?>
                                     <a class="theme-btn theme-btn-dark-animated theme-font-bold"
-                                       href="login.php">
+                                       href="<?= $IS_LOGGED_IN ? 'verify.php' : 'login.php' ?>">
                                         <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
                                     </a>
                                 <?php endif; ?>
