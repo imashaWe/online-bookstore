@@ -218,7 +218,7 @@ function upload_book_image_to_s3($file, $book_id, $conn)
                                     </div>
                                     <div class="col">
                                         <label class="form-label">Price</label>
-                                        <input type="text" class="form-control" name="price" value="<?= $price ?>">
+                                        <input type="number" class="form-control" name="price" value="<?= $price ?>">
                                     </div>
                                     <div class="col">
                                         <label class="form-label">Author</label>
