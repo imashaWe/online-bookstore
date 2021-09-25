@@ -39,3 +39,18 @@ function add_to_cart($inputs, $conn, $user)
         }
     }
 }
+
+function get_cart_items($inputs, $conn, $user)
+{
+    $uid = $user['uid'];
+    $data = array();
+    $sql = "SELECT book.*,user_cart.qty FROM user_cart 
+            INNER JOIN book ON book.id = user_cart.book_id
+            WHERE user_cart.uid = {$uid}";
+    $res = $conn->query($sql);
+    while ($row = $res->fetch_array()) $data[] = $row;
+    return array(
+        'status' => 1,
+        'data' => $data
+    );
+}

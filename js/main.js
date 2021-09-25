@@ -1,5 +1,9 @@
 /* rating bar */
 (function () {
+    setUpRating();
+}())
+
+function setUpRating() {
     const ratingBarList = document.getElementsByClassName('rating-bar');
     for (let e of ratingBarList) {
         let rate = parseFloat(e.getAttribute('data-rate'));
@@ -17,8 +21,7 @@
         }
         e.innerHTML = html;
     }
-}())
-
+}
 
 /* Toast messages */
 function toastSuccess(message) {

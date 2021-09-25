@@ -5,25 +5,10 @@
     </div>
     <div class="offcanvas-body">
         <div class="cart-item-list-view" id="cartSideViewItems">
-            <?php for ($i = 0; $i < 6; $i++): ?>
-                <div class="theme-card shadow m-2">
 
-                    <div class="row g-0">
-                        <div class="col-4">
-                            <img src="https://picsum.photos/200" class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col pt-1 align-content-center">
-                            <h6 class="theme-text-title">First Book</h6>
-                            <small class="py-3 text-muted theme-text">1 X $19</small>
-                            <div class="rating-bar" data-rate="1.2" data-max="5"></div>
-                        </div>
-                    </div>
-
-                </div>
-            <?php endfor; ?>
         </div>
 
-        <h3 class="theme-text-heading" id="cartSideView">TOTAL:$75</h3>
+        <h3 class="theme-text-heading" id="cartSideViewTotal"></h3>
         <br>
         <div class="row justify-content-evenly">
             <div class="col">
