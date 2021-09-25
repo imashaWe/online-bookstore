@@ -1,5 +1,6 @@
 <?php
 require "core/db.php";
+require "core/user.php";
 /* pagination */
 $sql = "SELECT COUNT(id) AS count FROM book WHERE is_delete = '0' ";
 $count = $conn->query($sql)->fetch_array()['count'];
@@ -20,7 +21,7 @@ $books = $conn->query($sql);
 <main>
     <div class="container">
         <div class="row row-cols-1 row-cols-md-4 g-4">
-            <?php while ($book = $books->fetch_array()):?>
+            <?php while ($book = $books->fetch_array()): ?>
                 <div class="col">
                     <div class="card h-100">
 
@@ -29,26 +30,38 @@ $books = $conn->query($sql);
                             <!--<div class="ribbon ribbon-top-left"><span>OUT OF STOCK</span></div>-->
                             <div class="item-pic item-img-hov">
                                 <div class="btn-set-wishlist icon-circle"><i class="far fa-heart fa-lg"></i></div>
-                                <img src="<?=$book['img_url']?>"
-                                     alt="<?=$book['slug']?>">
-                                <a href="book-view.php?slug=<?=$book['slug']?>" class="item-btn flex-c-m item-btn-font item-btn-hov item-trans">
+                                <img src="<?= $book['img_url'] ?>"
+                                     alt="<?= $book['slug'] ?>">
+                                <a href="book-view.php?slug=<?= $book['slug'] ?>"
+                                   class="item-btn flex-c-m item-btn-font item-btn-hov item-trans">
                                     Quick View
                                 </a>
                             </div>
-                            <div style="height: 10%"><h5 class="card-title theme-text-title mt-1"><?=$book['name']?></h5></div>
-                            <div style="height: 20%"><small class="theme-text text-muted"><?=$book['description']?></small></div>
+                            <div style="height: 10%"><h5
+                                        class="card-title theme-text-title mt-1"><?= $book['name'] ?></h5></div>
+                            <div style="height: 20%"><small
+                                        class="theme-text text-muted"><?= $book['description'] ?></small></div>
                             <div class="row justify-content-between">
                                 <div class="col">
                                     <div class="rating-bar" data-rate="4.2" data-max="5"></div>
                                 </div>
                                 <div class="col">
-                                    <h5 class="theme-text-title text-end theme-primary-color">LKR <?=$book['price']?></h5>
+                                    <h5 class="theme-text-title text-end theme-primary-color">
+                                        LKR <?= $book['price'] ?></h5>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <button class="theme-btn theme-btn-dark-animated theme-font-bold">
-                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
-                                </button>
+                                <?php if ($IS_LOGGED_IN): ?>
+                                    <button class="theme-btn theme-btn-dark-animated theme-font-bold"
+                                            onclick="addToCart(<?= $book['id'] ?>)">
+                                        <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
+                                    </button>
+                                <?php else: ?>
+                                    <a class="theme-btn theme-btn-dark-animated theme-font-bold"
+                                       href="login.php">
+                                        <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
+                                    </a>
+                                <?php endif; ?>
                             </div>
                             <br>
                         </div>
@@ -59,5 +72,6 @@ $books = $conn->query($sql);
     </div>
 
 </main>
+<script src="js/cart.js"></script>
 <?php require_once "footer.php" ?>
 
