@@ -4,7 +4,7 @@
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="cart-side-view.php">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
             </ol>
         </nav>
         <div class="row">

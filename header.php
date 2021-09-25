@@ -1,3 +1,6 @@
+<?php
+    require_once 'core/user.php';
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,7 +38,7 @@
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll theme-font-bold"
                     style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
@@ -44,10 +47,10 @@
                         <a class="nav-link" href="#">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
+                        <a class="nav-link" href="login.php">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Register</a>
+                        <a class="nav-link" href="register.php">Register</a>
                     </li>
                 </ul>
 

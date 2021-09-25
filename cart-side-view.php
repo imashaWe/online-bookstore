@@ -7,17 +7,11 @@
         <div class="cart-item-list-view" id="cartSideViewItems">
 
         </div>
-
+        <hr>
         <h3 class="theme-text-heading" id="cartSideViewTotal"></h3>
         <br>
-        <div class="row justify-content-evenly">
-            <div class="col">
-                <a href="" class="theme-btn theme-btn-light-animated theme-text-subtitle">VIEW CART</a>
-            </div>
-            <div class="col">
-                <a href="" class="theme-btn theme-btn-dark-animated theme-text-subtitle">CHECKOUT</a>
-            </div>
-
+        <div class="d-flex justify-content-center">
+            <a href="checkout.php" class="theme-btn theme-btn-dark-animated theme-text-subtitle w-75">CHECKOUT</a>
         </div>
     </div>
 </div>

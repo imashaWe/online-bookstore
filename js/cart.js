@@ -56,7 +56,7 @@ function setCartCount() {
         cartCount.removeAttribute('data-notify');
         if (r.count) {
             cartCount.classList.add('icon-header-noti');
-            cartCount.setAttribute('data-notify',r.count);
+            cartCount.setAttribute('data-notify', r.count);
         }
 
     })
