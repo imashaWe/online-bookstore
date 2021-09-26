@@ -69,3 +69,19 @@ function get_cart_count($inputs, $conn, $user)
         'count' => $res->fetch_array()['count']
     );
 }
+
+function update_item_qty($inputs, $conn, $user)
+{
+    $uid = $user['uid'];
+    $book_id = $inputs->book_id;
+    $qty = $inputs->qty;
+
+    if ($qty) {
+        $sql = "UPDATE user_cart SET qty = {$qty} WHERE uid = {$uid} AND book_id = {$book_id}";
+    } else {
+        $sql = "DELETE FROM user_cart WHERE uid = {$uid} AND book_id = {$book_id}";
+    }
+    $res = $conn->query($sql);
+    return array('status' => $res);
+
+}

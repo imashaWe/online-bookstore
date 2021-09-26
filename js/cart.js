@@ -1,5 +1,6 @@
 (function () {
     setCartCount();
+    calcCartAmount();
     const cartSideView = document.getElementById('cartSideView');
     const cartSideViewItems = document.getElementById('cartSideViewItems');
     const cartSideViewTotal = document.getElementById('cartSideViewTotal');
@@ -34,6 +35,11 @@
 
     });
 
+    const btnQryGroups = document.getElementsByClassName('btn-qty-group');
+    for (let btnQryGroup of btnQryGroups) {
+
+    }
+
 }());
 
 function addToCart(bookId) {
@@ -54,10 +60,58 @@ function setCartCount() {
     postData('api/cart.php?func=get_cart_count', {}).then((r) => {
         cartCount.classList.remove('cartCount.classList');
         cartCount.removeAttribute('data-notify');
-        if (r.count) {
+        if (parseInt(r.count)) {
             cartCount.classList.add('icon-header-noti');
             cartCount.setAttribute('data-notify', r.count);
         }
 
+    })
+}
+
+function calcCartAmount() {
+    const cardTableBody = document.getElementById('cardTableBody');
+    const cardTotal = document.getElementById('cardTotal');
+    const cardSubtotal = document.getElementById('cardSubtotal');
+    let total = 0.00;
+
+    if (!cardTableBody) return;
+
+    for (let tr of cardTableBody.children) {
+        const subTotalElm = tr.getElementsByClassName('card-item-subtotal')[0];
+        const qty = parseInt(tr.getElementsByClassName('card-item-qty')[0].innerHTML);
+        const price = parseFloat(tr.getElementsByClassName('card-item-price')[0].innerHTML);
+        const subTotal = qty * price;
+        total += subTotal;
+        subTotalElm.innerHTML = subTotal.toFixed(2);
+
+    }
+
+    cardTotal.innerHTML = "LKR " + total.toFixed(2);
+    cardSubtotal.innerHTML = "LKR " + total.toFixed(2);
+
+}
+
+function decreaseQty(e, bookID) {
+    _updateQty(e, bookID, false);
+}
+
+function increaseQty(e, bookID) {
+    _updateQty(e, bookID, true);
+
+}
+
+function _updateQty(e, bookID, isIncrease) {
+    const qtyElm = e.parentElement.getElementsByClassName('card-item-qty')[0];
+    let qty = parseInt(qtyElm.innerHTML);
+    qty = isIncrease ? qty + 1 : qty - 1;
+    postData('api/cart.php?func=update_item_qty', {'book_id': bookID, 'qty': qty}).then((r) => {
+        if (r) {
+            if (qty < 1) {
+                e.parentNode.parentNode.parentNode.remove();
+                setCartCount();
+            }
+            qtyElm.innerHTML = qty.toString();
+        }
+        calcCartAmount();
     })
 }
