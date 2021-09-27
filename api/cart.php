@@ -13,6 +13,10 @@ function add_to_cart($inputs, $conn, $user)
 {
     $uid = $user['uid'];
     $book_id = $inputs->book_id;
+    $qty = 1;
+    if (isset($inputs->qty)) {
+        $qty = $inputs->qty;
+    }
     $sql = "SELECT * FROM user_cart WHERE uid = {$uid} AND book_id = {$book_id}";
     $res = $conn->query($sql);
     if ($res->num_rows) {
@@ -21,9 +25,9 @@ function add_to_cart($inputs, $conn, $user)
             'message' => 'This book already in cart'
         );
     } else {
-        $sql = "INSERT INTO user_cart(uid,book_id) VALUES ({$uid},{$book_id});
+        $sql = "INSERT INTO user_cart(uid,book_id,qty) VALUES ({$uid},{$book_id},{$qty});
                 INSERT INTO book_store (book_id,trans_code,trans_id,out_qty) 
-                VALUES ({$book_id},'ADD-TO-CART',{$uid},1)";
+                VALUES ({$book_id},'ADD-TO-CART',{$uid},{$qty})";
         $res = $conn->multi_query($sql);
         if ($res) {
             return array(

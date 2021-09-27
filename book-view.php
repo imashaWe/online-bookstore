@@ -13,13 +13,20 @@ if (isset($_GET['slug'])) {
         INNER JOIN book_publisher ON book_publisher.id = book.publisher_id
         INNER JOIN book_language ON book_language.id = book.language_id
         WHERE book.is_delete = '0'AND slug ='{$slug}' ";
-    $book = $conn->query($sql)->fetch_array();
+    $res = $conn->query($sql);
+    if (!$res->num_rows) {
+        header("location:page-404.php");
+        die();
+    }
+    $book = $res->fetch_array();
+} else {
+    header("location:page-404.php");
 }
 
 ?>
 <?php require_once "header.php" ?>
     <main>
-        <div class="container my-5">
+        <div class="container my-4">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
@@ -28,53 +35,102 @@ if (isset($_GET['slug'])) {
             </nav>
             <div class="row justify-content-center">
                 <div class="col-4">
-                    <img src="<?=$book['img_url']?>"
+                    <img src="<?= $book['img_url'] ?>"
                          alt="">
                 </div>
                 <div class="col-6 text-start">
-                    <h5 class="theme-text-heading"><?=$book['name']?></h5>
+                    <h5 class="theme-text-heading"><?= $book['name'] ?></h5>
                     <hr>
                     <div class="row my-3">
                         <div class="col">
-                            <h5 class="theme-text-title text-start theme-primary-color">LKR <?=$book['price']?></h5>
+                            <h5 class="theme-text-title text-start theme-primary-color">LKR <?= $book['price'] ?></h5>
                             <h6>Quantity:</h6>
                             <div class="btn-group" role="group" aria-label="amount">
-                                <button type="button" class="btn btn-outline-secondary">-</button>
-                                <button type="button" class="btn btn-secondary">1</button>
-                                <button type="button" class="btn btn-outline-secondary">+</button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="decrease()">-</button>
+                                <button type="button" class="btn btn-secondary" id="qtyView">1</button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="increase();">+</button>
                             </div>
 
                         </div>
                     </div>
                     <div class="row justify-content-start my-3">
-                        <div class="col-4">
-                            <button class="theme-btn theme-btn-dark-animated theme-font-bold">
-                                <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button class="theme-btn theme-btn-light-animated theme-font-bold">
-                                <i class="far fa-heart" aria-hidden="true"></i>&nbsp;Add to wishlist
-                            </button>
-                        </div>
+                        <?php if ($IS_LOGGED_IN && $USER['status']): ?>
+
+                            <div class="col-4">
+                                <button class="theme-btn theme-btn-dark-animated theme-font-bold"
+                                        onclick="addToCartNow(<?= $book['id'] ?>);">
+                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button class="theme-btn theme-btn-light-animated theme-font-bold">
+                                    <i class="far fa-heart" aria-hidden="true"></i>&nbsp;Add to wishlist
+                                </button>
+                            </div>
+                        <?php else: ?>
+                            <div class="col-4">
+                                <a class="theme-btn theme-btn-dark-animated theme-font-bold"
+                                   href="<?= $IS_LOGGED_IN ? 'verify.php' : 'login.php' ?>">
+                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a class="theme-btn theme-btn-light-animated theme-font-bold"
+                                   href="<?= $IS_LOGGED_IN ? 'verify.php' : 'login.php' ?>">
+                                    <i class="far fa-heart" aria-hidden="true"></i>&nbsp;Add to wishlist
+                                </a>
+                            </div>
+                        <?php endif; ?>
+
                     </div>
                     <hr>
                     <div class="row my-3">
                         <div class="col">
-                            <h6>Language : <?=$book['language']?></h6>
-                            <h6>Author : <a href=""><?=$book['author']?></a></h6>
-                            <h6>Publisher : <a href=""><?=$book['publisher']?></a></h6>
-                            <h6>ISBN : <?=$book['isbn']?></h6>
+                            <h6>Language : <?= $book['language'] ?></h6>
+                            <h6>Author : <a href=""><?= $book['author'] ?></a></h6>
+                            <h6>Publisher : <a href=""><?= $book['publisher'] ?></a></h6>
+                            <h6>ISBN : <?= $book['isbn'] ?></h6>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col">
-                            <p class="theme-text"><?=$book['description']?></p>
+                            <p class="theme-text"><?= $book['description'] ?></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+    <script>
+        function increase() {
+            const qtyView = document.getElementById('qtyView');
+            let qty = parseInt(qtyView.innerHTML);
+            qty++;
+            qtyView.innerHTML = qty.toString();
+        }
+
+        function decrease() {
+            const qtyView = document.getElementById('qtyView');
+            let qty = parseInt(qtyView.innerHTML);
+            if (qty == 1) return;
+            qty--;
+            qtyView.innerHTML = qty.toString();
+        }
+
+        function addToCartNow(bookID) {
+            const qty = document.getElementById('qtyView').innerHTML;
+
+            postData('api/cart.php?func=add_to_cart', {'book_id': bookID, 'qty': qty}).then((r) => {
+
+                if (r.status) {
+                    successAlert(r.message);
+                } else {
+                    errorAlert(r.message);
+                }
+
+                setCartCount();
+            });
+        }
+    </script>
 <?php require_once "footer.php" ?>
