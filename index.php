@@ -30,18 +30,23 @@ function get_sub_categories($category_id, $conn)
 <?php require_once "header.php" ?>
 
 <main>
-    <div class="container py-4">
-        <div class="row justify-content-center">
+    <div class="container py-2">
+
+        <div class="row justify-content-center pb-4">
             <div class="col-8">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username"
-                           aria-describedby="button-addon2">
-                    <button class="btn btn-dark" type="button" id="button-addon2">
-                        <i class="fas fa-search"></i>
-                    </button>
+                <div class="wrapper">
+                    <div class="search-input">
+                        <a href="" target="_blank" hidden></a>
+                        <input type="text" placeholder="Type to search..">
+                        <div class="autocom-box">
+                            <!-- here list are inserted from javascript -->
+                        </div>
+                        <div class="icon"><i class="fas fa-search"></i></div>
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-3">
                 <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
@@ -169,5 +174,6 @@ function get_sub_categories($category_id, $conn)
 
 
 </main>
+<script src="js/search.js"></script>
 <?php require_once "footer.php" ?>
 
