@@ -209,15 +209,16 @@ if ($res->num_rows) {
         if (!couponCode.length) return;
 
         postData('api/checkout.php?func=apply_coupon_code', {'coupon_code': couponCode}).then((r) => {
-            console.log(r);
-            if (r.status) {
+            if (parseInt(r.status)) {
                 const html = '<tr>' +
                     '<td>Coupon (' + r.data.coupon + ')</td>' +
                     '<td class="coupon-code-discount text-right" data-discount="' + r.data.discount + '"></td>' +
                     '</tr>';
                 document.getElementById('couponCodeTbody').insertAdjacentHTML('beforeend', html);
                 calcCartAmount();
-
+                successAlert(r.message);
+            } else {
+                errorAlert(r.message);
             }
         })
 
@@ -234,7 +235,7 @@ if ($res->num_rows) {
         postData('api/checkout.php?func=set_order',
             {'city': city, 'address_line1': addressLine1, 'address_line2': addressLine2, 'post_code': postCode}
         ).then((r) => {
-            if (r.status) {
+            if (parseInt(r.status)) {
                 const data = r.data;
                 for (const [key, value] of Object.entries(data)) {
                     document.getElementsByName(key)[0].value = value;

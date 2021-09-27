@@ -125,9 +125,9 @@ function set_order($inputs, $conn, $user)
         'message' => 'Order set success',
         'data' => array(
             'merchant_id' => config['PayHere']['merchant_id'],
-            'return_url' => $_SERVER['HTTP_HOST'],
-            'cancel_url' => $_SERVER['HTTP_HOST'],
-            'notify_url' => $_SERVER['HTTP_HOST'],
+            'return_url' => $_SERVER['HTTP_HOST'] . '/order-placed.php',
+            'cancel_url' => $_SERVER['HTTP_HOST'] . '/order-failed.php',
+            'notify_url' => $_SERVER['HTTP_HOST'] . '/checkout.php?func=notify_payment',
             'order_id' => $order_id,
             'items' => '',
             'currency' => 'LKR',

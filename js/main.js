@@ -23,12 +23,20 @@ function setUpRating() {
     }
 }
 
-/* Toast messages */
-function toastSuccess(message) {
-    const toastElm = document.getElementById('toastElm');
-    const toastElmMessage = document.getElementById('toastElmMessage');
-    toastElmMessage.innerHTML = '<i class="fas fa-check-circle"></i>&nbsp;' + message + '';
-    const toast = bootstrap.Toast.getOrCreateInstance(toastElm);
-    toast.show();
+function successAlert(message) {
+    _alert(message, false);
+}
 
+function errorAlert(message) {
+    _alert(message, true);
+}
+
+function _alert(message, isError) {
+    Swal.fire({
+        position: 'top-end',
+        icon: isError ? 'error' : 'success',
+        title: message,
+        showConfirmButton: false,
+        timer: 1500
+    });
 }
