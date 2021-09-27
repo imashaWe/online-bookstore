@@ -2,15 +2,30 @@
 require_once 'core/user.php';
 require_once 'core/db.php';
 $uid = $USER['uid'];
+$city = "";
+$address_line1 = "";
+$address_line2 = "";
+$post_code = "";
 
 $sql = "SELECT book.*,user_cart.qty FROM user_cart 
             INNER JOIN book ON book.id = user_cart.book_id
             WHERE user_cart.uid = {$uid}";
 $cart = $conn->query($sql);
+
+$sql = "SELECT * FROM site_user_address WHERE uid = {$uid}";
+$res = $conn->query($sql);
+if ($res->num_rows) {
+    $row = $res->fetch_array();
+    $city = $row['city'];
+    $address_line1 = $row['address_line1'];
+    $address_line2 = $row['address_line2'];
+    $post_code = $row['post_code'];
+}
 ?>
 <?php require_once "header.php" ?>
 <main>
     <div class="container">
+
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="cart-side-view.php">Home</a></li>
@@ -18,19 +33,20 @@ $cart = $conn->query($sql);
             </ol>
         </nav>
         <div class="row">
+
             <div class="col-sm-8">
                 <div class="card">
                     <div class="card-body">
                         <table class="table">
-                            <thead>
+                            <thead class="theme-text-title">
                             <tr>
                                 <th scope="col">PRODUCT</th>
                                 <th scope="col">PRICE</th>
                                 <th scope="col">QUANTITY</th>
-                                <th scope="col">TOTAL</th>
+                                <th scope="col" class="text-end">TOTAL</th>
                             </tr>
                             </thead>
-                            <tbody id="cardTableBody">
+                            <tbody class="theme-text" id="cartTableBody">
                             <?php while ($row = $cart->fetch_array()): ?>
                                 <tr>
                                     <td>
@@ -41,105 +57,155 @@ $cart = $conn->query($sql);
                                         >
                                         <?= $row['name'] ?>
                                     </td>
-                                    <td class="card-item-price"><?= $row['price'] ?></td>
+                                    <td class="cart-item-price"><?= $row['price'] ?></td>
                                     <td>
-                                        <div class="btn-group btn-qty-group" role="group" aria-label="amount">
+                                        <div class="btn-group" role="group" aria-label="amount">
                                             <button type="button" class="btn btn-outline-secondary"
                                                     onclick="decreaseQty(this,<?= $row['id'] ?>);">-
                                             </button>
                                             <button type="button"
-                                                    class="btn btn-secondary card-item-qty"><?= $row['qty'] ?></button>
+                                                    class="btn btn-secondary cart-item-qty"><?= $row['qty'] ?></button>
                                             <button type="button" class="btn btn-outline-secondary"
                                                     onclick="increaseQty(this,<?= $row['id'] ?>);">+
                                             </button>
                                         </div>
                                     </td>
-                                    <td class="card-item-subtotal">0.00</td>
+                                    <td class="cart-item-subtotal text-end">0.00</td>
                                 </tr>
                             <?php endwhile; ?>
 
-                            </tbody
-                        </table>
-                        <form action="" method="post">
-                            <table class="table table-borderless">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="text" class="form-control" id="coupen_code"
-                                               placeholder="Coupen Code">
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-secondary">APPLY COUPON</button>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-secondary">UPDATE CART</button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table">
-                            <tbody>
-                            <tr>
-                                <h4>CART TOTALS</h4>
-                                <td>
-                                    Subtotal:
-                                </td>
-                                <td id="cardSubtotal">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Shipping:
-                                </td>
-                                <td>
-                                    <p>Flat rate: $2.00</p>
-                                    <p>CALCULATE SHIPPING</p>
-                                    <form action="" method="post">
-                                        <div class="mb-3">
-                                            <select class="form-select" aria-label="country">
-                                                <option selected>Select a country</option>
-                                                <option value="1">USA</option>
-                                                <option value="2">UK</option>
-                                                <option value="3">Sri Lanka</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" id="town" placeholder="Town/City">
-                                        </div>
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" id="postcode"
-                                                   placeholder="Postcode/Zip">
-                                        </div>
-                                        <button type="button" class="btn btn-secondary">UPDATE TOTALS</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h5>Total:</h5>
-                                </td>
-                                <td id="cardTotal">
-                                </td>
-                            </tr>
                             </tbody>
                         </table>
-                        <form action="" method="">
-                            <div class="col-md-12 text-center">
-                                <button type="button" class="btn btn-dark">PROCEED TO CHECKOUT</button>
+
+                        <form action="" method="post">
+                            <div class="row">
+                                <div class="col-4">
+                                    <input type="text" class="form-control" placeholder="Coupen Code">
+                                </div>
+                                <div class="col-3">
+                                    <button type="button"
+                                            class="theme-btn theme-btn-light-animated theme-text-title">
+                                        APPLY COUPON
+                                    </button>
+                                </div>
                             </div>
                         </form>
 
                     </div>
                 </div>
             </div>
-        </div>
-</main>
 
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                            <tr class="theme-text">
+                                <h4 class="theme-text-heading">CART TOTALS</h4>
+                                <td>
+                                    Subtotal:
+                                </td>
+                                <td id="cartSubtotal">
+                                </td>
+                            </tr>
+                            <tr class="theme-text">
+                                <td>
+                                    Shipping:
+                                </td>
+                                <td>
+                                    <form id="frmPayHere" method="post"
+                                          action="https://sandbox.payhere.lk/pay/checkout">
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="city"
+                                                   value="<?= $city ?>"
+                                                   placeholder="Town/City">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="addressLine1"
+                                                   value="<?= $address_line1 ?>"
+                                                   placeholder="Address Line 1">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="addressLine2"
+                                                   value="<?= $address_line2 ?>"
+                                                   placeholder="Address Line 2">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="postcode"
+                                                   value="<?= $post_code ?>"
+                                                   placeholder="Postcode/Zip">
+                                        </div>
+                                        <!--PayHere inputs-->
+                                        <input type="hidden" name="merchant_id">
+                                        <input type="hidden" name="return_url">
+                                        <input type="hidden" name="cancel_url">
+                                        <input type="hidden" name="notify_url">
+                                        <!--Item Details-->
+                                        <input type="hidden" name="order_id">
+                                        <input type="hidden" name="items">
+                                        <input type="hidden" name="currency">
+                                        <input type="hidden" name="amount">
+                                        <!--Customer Details-->
+                                        <input type="hidden" name="first_name">
+                                        <input type="hidden" name="last_name">
+                                        <input type="hidden" name="email">
+                                        <input type="hidden" name="phone">
+                                        <input type="hidden" name="address">
+                                        <input type="hidden" name="city">
+                                        <input type="hidden" name="country">
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>TOTAL:</h5>
+                                </td>
+                                <td>
+                                    <h5 id="cartTotal"></h5>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="col-md-12 text-center">
+                            <button type="button"
+                                    class="theme-btn theme-btn-dark-animated theme-text-title"
+                                    onclick="setCheckout()">
+                                CHECKOUT
+                            </button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</main>
+<script>
+    function setCheckout() {
+        const city = document.getElementById('city').value;
+        const addressLine1 = document.getElementById('addressLine1').value;
+        const addressLine2 = document.getElementById('addressLine2').value;
+        const postCode = document.getElementById('postcode').value;
+        if (!(city && addressLine1 && addressLine2 && postCode)) {
+            return;
+        }
+        postData('api/checkout.php?func=set_order',
+            {'city': city, 'address_line1': addressLine1, 'address_line2': addressLine2, 'post_code': postCode}
+        ).then((r) => {
+            if (r.status) {
+                const data = r.data;
+                for (const [key, value] of Object.entries(data)) {
+                    document.getElementsByName(key)[0].value = value;
+                }
+                document.getElementById('frmPayHere').submit();
+            }
+        });
+    }
+</script>
 <?php require_once "footer.php" ?>

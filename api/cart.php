@@ -77,11 +77,16 @@ function update_item_qty($inputs, $conn, $user)
     $qty = $inputs->qty;
 
     if ($qty) {
-        $sql = "UPDATE user_cart SET qty = {$qty} WHERE uid = {$uid} AND book_id = {$book_id}";
+        $sql = "UPDATE user_cart SET qty = {$qty} WHERE uid = {$uid} AND book_id = {$book_id};
+                UPDATE book_store SET out_qty = {$qty} 
+                WHERE trans_code= 'ADD-TO-CART' AND trans_id = {$uid} AND book_id = {$book_id}";
     } else {
-        $sql = "DELETE FROM user_cart WHERE uid = {$uid} AND book_id = {$book_id}";
+        $sql = "DELETE FROM user_cart WHERE uid = {$uid} AND book_id = {$book_id};
+                INSERT INTO book_store (book_id,trans_code,trans_id,in_qty) 
+                VALUES ({$book_id},'REMOVE-FROM-CART',{$uid},{$qty})";
     }
-    $res = $conn->query($sql);
-    return array('status' => $res);
+
+    $res = $conn->multi_query($sql);
+    return array('status' => $res, 'sql' => $sql);
 
 }
