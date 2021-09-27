@@ -13,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!--custom design css-->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="admin/css/styles.css">
     <!--theme  css-->
     <link rel="stylesheet" href="css/theme.css">
     <!--fontawesome icon-->
