@@ -34,7 +34,7 @@
         });
 
     });
-    
+
 }());
 
 function addToCart(bookId) {
@@ -67,9 +67,10 @@ function calcCartAmount() {
     const cartTableBody = document.getElementById('cartTableBody');
     const cartTotal = document.getElementById('cartTotal');
     const cartSubtotal = document.getElementById('cartSubtotal');
+    const couponCodeTbody = document.getElementById('couponCodeTbody');
     let total = 0.00;
 
-    if (!cartTableBody) return;
+    if (!cartTableBody && !couponCodeTbody) return;
 
     for (let tr of cartTableBody.children) {
         const subTotalElm = tr.getElementsByClassName('cart-item-subtotal')[0];
@@ -80,9 +81,17 @@ function calcCartAmount() {
         subTotalElm.innerHTML = subTotal.toFixed(2);
 
     }
+    const subTotal = total;
+    for (let tr of couponCodeTbody.children) {
+        const discountElm = tr.getElementsByClassName('coupon-code-discount')[0];
+        const discount = parseFloat(discountElm.getAttribute('data-discount'));
+        const discountValue = subTotal * discount
+        discountElm.innerHTML = 'LKR -' + discountValue.toFixed(2);
+        total -= discountValue;
+    }
 
     cartTotal.innerHTML = "LKR " + total.toFixed(2);
-    cartSubtotal.innerHTML = "LKR " + total.toFixed(2);
+    cartSubtotal.innerHTML = "LKR " + subTotal.toFixed(2);
 
 }
 

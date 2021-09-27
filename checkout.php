@@ -12,6 +12,10 @@ $sql = "SELECT book.*,user_cart.qty FROM user_cart
             WHERE user_cart.uid = {$uid}";
 $cart = $conn->query($sql);
 
+$sql = "SELECT coupon_code.* FROM coupon_code_apply 
+        INNER JOIN coupon_code ON coupon_code.id = coupon_code_apply.coupon_id AND uid = {$uid} AND order_id = 0";
+$coupons = $conn->query($sql);
+
 $sql = "SELECT * FROM site_user_address WHERE uid = {$uid}";
 $res = $conn->query($sql);
 if ($res->num_rows) {
@@ -24,11 +28,11 @@ if ($res->num_rows) {
 ?>
 <?php require_once "header.php" ?>
 <main>
-    <div class="container">
+    <div class="container py-4">
 
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="cart-side-view.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Checkout</li>
             </ol>
         </nav>
@@ -77,20 +81,19 @@ if ($res->num_rows) {
                             </tbody>
                         </table>
 
-                        <form action="" method="post">
-                            <div class="row">
-                                <div class="col-4">
-                                    <input type="text" class="form-control" placeholder="Coupen Code">
-                                </div>
-                                <div class="col-3">
-                                    <button type="button"
-                                            class="theme-btn theme-btn-light-animated theme-text-title">
-                                        APPLY COUPON
-                                    </button>
-                                </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="text" class="form-control" placeholder="Coupon Code" id="couponCode">
                             </div>
-                        </form>
-
+                            <div class="col-3">
+                                <button type="button"
+                                        class="theme-btn theme-btn-light-animated theme-text-title"
+                                        onclick="applyCoupon();"
+                                >
+                                    APPLY COUPON
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,6 +111,19 @@ if ($res->num_rows) {
                                 <td id="cartSubtotal">
                                 </td>
                             </tr>
+                            </tbody>
+                            <tbody class="theme-text" id="couponCodeTbody">
+                            <?php while ($row = $coupons->fetch_array()): ?>
+                                <tr>
+                                    <td>Coupon (<?= $row['code'] ?>)</td>
+                                    <td class="coupon-code-discount" data-discount="<?= $row['discount'] ?>">
+                                        <?= $row['discount'] ?>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+
+                            </tbody>
+                            <tbody>
                             <tr class="theme-text">
                                 <td>
                                     Shipping:
@@ -187,6 +203,26 @@ if ($res->num_rows) {
 
 </main>
 <script>
+    function applyCoupon() {
+        const couponCode = document.getElementById('couponCode').value;
+
+        if (!couponCode.length) return;
+
+        postData('api/checkout.php?func=apply_coupon_code', {'coupon_code': couponCode}).then((r) => {
+            console.log(r);
+            if (r.status) {
+                const html = '<tr>' +
+                    '<td>Coupon (' + r.data.coupon + ')</td>' +
+                    '<td class="coupon-code-discount text-right" data-discount="' + r.data.discount + '"></td>' +
+                    '</tr>';
+                document.getElementById('couponCodeTbody').insertAdjacentHTML('beforeend', html);
+                calcCartAmount();
+
+            }
+        })
+
+    }
+
     function setCheckout() {
         const city = document.getElementById('city').value;
         const addressLine1 = document.getElementById('addressLine1').value;

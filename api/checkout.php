@@ -13,6 +13,47 @@ if (isset($_GET['func']) && function_exists($_GET['func'])) {
 
 }
 
+function apply_coupon_code($inputs, $conn, $user)
+{
+    $uid = $user['uid'];
+    $coupon_code = $inputs->coupon_code;
+    $today = date("Y-m-d");
+
+    $sql = "SELECT * FROM `coupon_code` 
+            WHERE `from` <= '{$today}' AND `to` >= '{$today}' AND `code` = '{$coupon_code}'";
+    $res = $conn->query($sql);
+    if (!$res->num_rows) {
+        return array('status' => 0, 'message' => 'This coupon code invalid or expire.');
+    }
+
+    $row = $res->fetch_array();
+    $coupon_id = $row['id'];
+    $discount = $row['discount'];
+
+    $sql = "SELECT * FROM coupon_code_apply WHERE coupon_id = {$coupon_id} AND uid = {$uid}";
+    $res = $conn->query($sql);
+    if ($res->num_rows) {
+        return array('status' => 0, 'message' => 'This coupon code already use');
+    }
+
+    $sql = "INSERT INTO coupon_code_apply(coupon_id,uid) VALUES({$coupon_id},{$uid})";
+    $res = $conn->query($sql);
+    if ($res) {
+        return array(
+            'status' => 1,
+            'message' => 'This is coupon code is valid',
+            'data' => array('discount' => $discount, 'coupon' => $coupon_code)
+        );
+    } else {
+        return array(
+            'status' => 0,
+            'message' => 'Database error',
+        );
+    }
+
+
+}
+
 function set_order($inputs, $conn, $user)
 {
     $uid = $user['uid'];
@@ -31,6 +72,11 @@ function set_order($inputs, $conn, $user)
             INNER JOIN book ON book.id = user_cart.book_id
             WHERE user_cart.uid = {$uid};";
     $cart_res = $conn->query($sql);
+
+
+    $sql = "SELECT coupon_code.* FROM coupon_code_apply 
+        INNER JOIN coupon_code ON coupon_code.id = coupon_code_apply.coupon_id AND uid = {$uid} AND order_id = 0";
+    $coupons = $conn->query($sql);
 
     $sql = " INSERT INTO `order`(uid,city,address_line1,address_line2,post_code) 
             VALUES({$uid},'{$city}','{$address_line1}','{$address_line2}',{$post_code});";
@@ -62,6 +108,13 @@ function set_order($inputs, $conn, $user)
 
     }
     $sql .= "INSERT INTO payment(trans_code,trans_id,out_amount) VALUES('PURCHASE',{$order_id},{$total});";
+    while ($row = $coupons->fetch_array()) {
+        $coupon_id = $row['id'];
+        $discount = $total * $row['discount'];
+        $sql .= "INSERT INTO payment(trans_code,trans_id,in_amount) VALUES('COUPON-CODE',{$order_id},{$discount});
+                 UPDATE coupon_code_apply SET order_id = {$order_id} WHERE coupon_id = {$coupon_id} AND uid = {$uid};";
+        $total -= $discount;
+    }
     $res = $conn->multi_query($sql);
     if (!$res) {
         return array('status' => 0, 'message' => 'Database Error');
