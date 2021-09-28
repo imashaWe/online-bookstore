@@ -517,3 +517,8 @@
     color: #644bff;
     cursor: pointer;
 }
+/* tables */
+.table-wrap {
+    height: 55vh;
+    overflow-y: auto;
+}

@@ -65,6 +65,7 @@ require_once 'core/user.php';
                 </div>
                 <div class="icon-header-item"
                      id="wishlistCountElm"
+                     onclick="window.location.replace('wishlist.php')"
                      style="padding-right: 11px;padding-left: 22px">
                     <i class="zmdi zmdi-favorite-outline" style="color: white"></i>
                 </div>
