@@ -5,7 +5,7 @@ if (isset($_GET['slug'])) {
     $slug = $_GET['slug'];
     $sql = "SELECT 
         book.id,book.name AS name,price,isbn,img_url,description,
-        CONCAT(book_author.fname,' ',book_author.fname) AS author,book_author.id AS author_id,
+        CONCAT(book_author.fname,' ',book_author.lname) AS author,book_author.id AS author_id,
         book_publisher.name AS publisher,book_publisher.id AS publisher_id,
         book_language.language,
         IFNULL((SELECT (SUM(in_qty) -SUM(out_qty)) FROM book_stock WHERE book_id = book.id),0) AS qty
