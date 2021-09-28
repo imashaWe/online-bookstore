@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
     $category_id = $_POST['category_id'];
     $sub_category_id = $_POST['sub_category_id'];
     $language_id = $_POST['language_id'];
-    $description = trim($_POST['description']);
+    $description = addslashes(trim($_POST['description']));
 
     if (!isset($_FILES['book_img']) && !isset($_GET['id'])) {
         $error = "Please select Image";

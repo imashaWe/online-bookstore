@@ -18,7 +18,7 @@ function search($inputs, $conn)
 
     $sql = "SELECT name as k FROM book WHERE is_delete = 0 AND UPPER(name) LIKE '%{$q}%'
             UNION SELECT isbn as k FROM book WHERE is_delete = 0 AND UPPER(isbn) LIKE '%{$q}%'
-            UNION SELECT  CONCAT(book_author.fname,' ',book_author.fname) AS k  FROM book_author 
+            UNION SELECT  CONCAT(book_author.fname,' ',book_author.lname) AS k  FROM book_author 
             WHERE is_delete = 0 AND (UPPER(fname) LIKE '%{$q}%' OR UPPER(lname) LIKE '%{$q}%')
             UNION SELECT category AS k FROM book_category WHERE is_delete = 0 AND UPPER(category) LIKE '%{$q}%'
             UNION SELECT sub_category as k FROM book_sub_category WHERE is_delete = 0 AND UPPER(sub_category) LIKE '%{$q}%'
