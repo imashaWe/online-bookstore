@@ -26,7 +26,6 @@ function set_user($fanme, $lname, $email, $status, $uid, $is_remember)
     if ($is_remember) {
         setcookie('site_user', json_encode($user), time() + (86400 * 30), "/");
     } else {
-        session_start();
         $_SESSION['site_user'] = $user;
     }
 

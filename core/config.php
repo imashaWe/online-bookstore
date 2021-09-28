@@ -15,5 +15,8 @@ $_CONFIG = array(
     'AWS' => array(
         'key' => "AKIAWHMVJDKL543GRXKL",
         'secret' => "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",
+    ),
+    'PayHere' => array(
+        'merchant_id' => "1218718",
     )
 );

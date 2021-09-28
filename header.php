@@ -1,3 +1,6 @@
+<?php
+require_once 'core/user.php';
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!--custom design css-->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/side-nav.css">
     <!--theme  css-->
     <link rel="stylesheet" href="css/theme.css">
     <!--fontawesome icon-->
@@ -19,11 +23,13 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 
+
+
 </head>
 <body>
 <header>
 
-    <nav class="navbar navbar-expand-lg py-4 navbar-dark fixed-top theme-primary-color-bg">
+    <nav class="navbar navbar-expand-lg py-3 navbar-dark fixed-top theme-primary-color-bg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Online BookStore</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
@@ -34,7 +40,7 @@
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll theme-font-bold"
                     style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
@@ -43,21 +49,24 @@
                         <a class="nav-link" href="#">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
+                        <a class="nav-link" href="login.php">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Register</a>
+                        <a class="nav-link" href="register.php">Register</a>
                     </li>
                 </ul>
 
-                <div class="icon-header-item icon-header-noti"
-                     data-notify="2" style="padding-right: 11px;"
+                <div class="icon-header-item"
+                     id="cartCount"
+                     style="padding-right: 11px;"
                      data-bs-toggle="offcanvas"
                      data-bs-target="#cartSideView"
                      aria-controls="offcanvasRight">
                     <i class="zmdi zmdi-shopping-cart" style="color: white"></i>
                 </div>
-                <div class="icon-header-item icon-header-noti" data-notify="2"
+                <div class="icon-header-item"
+                     id="wishlistCountElm"
+                     onclick="window.location.replace('wishlist.php')"
                      style="padding-right: 11px;padding-left: 22px">
                     <i class="zmdi zmdi-favorite-outline" style="color: white"></i>
                 </div>
@@ -68,4 +77,10 @@
     </nav>
 </header>
 <br><br><br><br>
+<?php if ($IS_LOGGED_IN && !$USER['status']): ?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <p>Verification email has been sent.<a href="verify.php" class="alert-link">verify your account.</a></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
 

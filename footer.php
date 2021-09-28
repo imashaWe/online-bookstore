@@ -1,3 +1,4 @@
+
 <?php require_once 'cart-side-view.php'; ?>
 <footer>
     <div class="container-fluid bg-dark position-absolute footer mt-2">
@@ -52,10 +53,24 @@
 
     </div>
 </footer>
-<script src="js/main.js"></script>
+
+
+
 <!-- bootstrap js-->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+<script src="js/main.js"></script>
+<script src="js/fetch.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
+
+<!-- sweetalert js-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!--Toast js-->
+<script src="js/vanilla-toast.min.js"></script>
+
 
 </body>
 </html>

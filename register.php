@@ -38,10 +38,12 @@ if (isset($_POST['submit'])) {
                     site_user(fname,lname,email,password,status,last_login) 
                     VALUES ('{$fname}','{$lname}','{$email}','{$password}',0,'{$last_login}')";
             $res = $conn->query($sql);
+            $uid = $conn->insert_id;
             if ($res) {
-                $code = get_verify_code($conn, $conn->insert_id);
+                $code = get_verify_code($conn, $uid);
                 send_verify_code_email($email, $code);
                 set_user($fname, $lname, $email,0,$uid, $is_remember);
+                header("location:index.php");
             } else {
                 $error = "Database Error";
             }
