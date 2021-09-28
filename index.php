@@ -2,7 +2,8 @@
 require "core/db.php";
 require "core/user.php";
 require "core/route.php";
-/* pagination */
+
+/* To pagination */
 $sql = "SELECT COUNT(id) AS count FROM book WHERE is_delete = '0' ";
 $count = $conn->query($sql)->fetch_array()['count'];
 $limit = 20;
@@ -10,9 +11,52 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $num_pages = ceil($count / $limit);
 $start = ($page - 1) * $limit;
 
-$sql = "SELECT id,name,img_url,slug,price,SUBSTRING(description,1,100) AS description
-        FROM `online-bookstore`.book
-        WHERE is_delete = '0'  
+/* To apply filtering */
+$filters = array(
+    array('key' => 'cat', 'field' => 'category_id'),
+    array('key' => 'sub_cat', 'field' => 'sub_category_id'),
+    array('key' => 'author', 'field' => 'author_id'),
+    array('key' => 'publisher', 'field' => 'publisher_id'),
+);
+$where = "WHERE book.is_delete = 0";
+foreach ($filters as $filter) {
+    if (isset($_GET[$filter['key']])) {
+        $field = $filter['field'];
+        $value = $_GET[$filter['key']];
+        $where .= " AND {$field} = {$value}";
+    }
+}
+/* To apply search */
+$joins = "";
+if (isset($_GET['q'])) {
+    $q = $_GET['q'];
+    $joins = "INNER JOIN book_author ON book_author.id = book.author_id
+              INNER JOIN book_publisher ON book_publisher.id = book.publisher_id
+              INNER JOIN book_category ON book_category.id = book.category_id
+              LEFT JOIN book_sub_category ON book_sub_category.id = book.sub_category_id";
+    $where .= " AND (
+                book.name LIKE '%{$q}%'
+                OR
+                book.isbn LIKE '%{$q}%'
+                OR
+                (book_author.is_delete = 0 AND
+                (UPPER(book_author.fname) LIKE '%{$q}%' OR UPPER(book_author.lname) LIKE '%{$q}%' 
+                  OR UPPER(CONCAT(book_author.fname,' ',book_author.fname)) LIKE '%{$q}%'
+                ))
+                OR
+                (book_publisher.is_delete = 0 AND UPPER(book_publisher.name) LIKE '%{$q}%')
+                OR
+                (book_category.is_delete = 0 AND UPPER(book_category.category) LIKE '%{$q}%')
+                OR
+                (book_sub_category.is_delete = 0 AND UPPER(book_sub_category.sub_category) LIKE '%{$q}%')
+    )";
+}
+
+$sql = "SELECT book.id,book.name,book.img_url,slug,book.price,SUBSTRING(description,1,100) AS description,
+        IFNULL((SELECT (SUM(in_qty) -SUM(out_qty)) FROM book_store WHERE book_id = book.id),0) AS qty
+        FROM `online-bookstore`.book 
+            " . $joins . "
+            " . $where . "
         LIMIT {$start},{$limit}";
 $books = $conn->query($sql);
 
@@ -124,8 +168,9 @@ function get_sub_categories($category_id, $conn)
                             <div class="card h-100">
 
                                 <div class="card-body">
-
-                                    <!--<div class="ribbon ribbon-top-left"><span>OUT OF STOCK</span></div>-->
+                                    <?php if ($book['qty'] <= 0): ?>
+                                        <div class="ribbon ribbon-top-left"><span>OUT OF STOCK</span></div>
+                                    <?php endif; ?>
                                     <div class="item-pic item-img-hov">
                                         <div class="btn-set-wishlist icon-circle"><i class="far fa-heart fa-lg"></i>
                                         </div>
@@ -152,6 +197,7 @@ function get_sub_categories($category_id, $conn)
                                     <div class="d-flex justify-content-center">
                                         <?php if ($IS_LOGGED_IN && $USER['status']): ?>
                                             <button class="theme-btn theme-btn-dark-animated theme-font-bold"
+                                                <?php if ($book['qty'] <= 0) echo "disabled"; ?>
                                                     onclick="addToCart(<?= $book['id'] ?>)">
                                                 <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
                                             </button>

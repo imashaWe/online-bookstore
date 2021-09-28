@@ -153,6 +153,12 @@
     color: #fff;
 }
 
+button:disabled,
+button[disabled] {
+    opacity: .2;
+    cursor: not-allowed;
+}
+
 /* Theme card */
 .theme-card {
     position: relative;

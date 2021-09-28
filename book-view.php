@@ -5,9 +5,10 @@ if (isset($_GET['slug'])) {
     $slug = $_GET['slug'];
     $sql = "SELECT 
         book.id,book.name AS name,price,isbn,img_url,description,
-        CONCAT(book_author.fname,' ',book_author.fname) AS author,
+        CONCAT(book_author.fname,' ',book_author.fname) AS author,book_author.id AS author_id,
         book_publisher.name AS publisher,book_publisher.id AS publisher_id,
-        book_language.language
+        book_language.language,
+        IFNULL((SELECT (SUM(in_qty) -SUM(out_qty)) FROM book_store WHERE book_id = book.id),0) AS qty
         FROM `online-bookstore`.book
         INNER JOIN book_author ON book_author.id = book.author_id
         INNER JOIN book_publisher ON book_publisher.id = book.publisher_id
@@ -36,10 +37,17 @@ if (isset($_GET['slug'])) {
             <div class="row justify-content-center">
                 <div class="col-4">
                     <img src="<?= $book['img_url'] ?>"
-                         alt="">
+                         class="img-thumbnail">
                 </div>
                 <div class="col-6 text-start">
-                    <h5 class="theme-text-heading"><?= $book['name'] ?></h5>
+                    <h5 class="theme-text-heading">
+                        <?= $book['name'] ?>
+                        <?php if ($book['qty'] > 0): ?>
+                            <span class="badge bg-success">IN STOCK</span>
+                        <?php else: ?>
+                            <span class="badge bg-danger">OUT OF STOCK</span>
+                        <?php endif; ?>
+                    </h5>
                     <hr>
                     <div class="row my-3">
                         <div class="col">
@@ -58,6 +66,7 @@ if (isset($_GET['slug'])) {
 
                             <div class="col-4">
                                 <button class="theme-btn theme-btn-dark-animated theme-font-bold"
+                                    <?php if ($book['qty'] <= 0) echo "disabled"; ?>
                                         onclick="addToCartNow(<?= $book['id'] ?>);">
                                     <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
                                 </button>
@@ -87,8 +96,12 @@ if (isset($_GET['slug'])) {
                     <div class="row my-3">
                         <div class="col">
                             <h6>Language : <?= $book['language'] ?></h6>
-                            <h6>Author : <a href=""><?= $book['author'] ?></a></h6>
-                            <h6>Publisher : <a href=""><?= $book['publisher'] ?></a></h6>
+                            <h6>
+                                Author :<a href="index.php?author=<?= $book['author_id'] ?>"><?= $book['author'] ?></a>
+                            </h6>
+                            <h6>
+                                Publisher : <a href="index.php?publisher=<?= $book['publisher_id'] ?>"><?= $book['publisher'] ?></a>
+                            </h6>
                             <h6>ISBN : <?= $book['isbn'] ?></h6>
                         </div>
                     </div>
