@@ -26,7 +26,7 @@ function add_to_cart($inputs, $conn, $user)
         );
     } else {
         $sql = "INSERT INTO user_cart(uid,book_id,qty) VALUES ({$uid},{$book_id},{$qty});
-                INSERT INTO book_store (book_id,trans_code,trans_id,out_qty) 
+                INSERT INTO book_stock (book_id,trans_code,trans_id,out_qty) 
                 VALUES ({$book_id},'ADD-TO-CART',{$uid},{$qty})";
         $res = $conn->multi_query($sql);
         if ($res) {
@@ -82,11 +82,11 @@ function update_item_qty($inputs, $conn, $user)
 
     if ($qty) {
         $sql = "UPDATE user_cart SET qty = {$qty} WHERE uid = {$uid} AND book_id = {$book_id};
-                UPDATE book_store SET out_qty = {$qty} 
+                UPDATE book_stock SET out_qty = {$qty} 
                 WHERE trans_code= 'ADD-TO-CART' AND trans_id = {$uid} AND book_id = {$book_id}";
     } else {
         $sql = "DELETE FROM user_cart WHERE uid = {$uid} AND book_id = {$book_id};
-                INSERT INTO book_store (book_id,trans_code,trans_id,in_qty) 
+                INSERT INTO book_stock (book_id,trans_code,trans_id,in_qty) 
                 VALUES ({$book_id},'REMOVE-FROM-CART',{$uid},{$qty})";
     }
 

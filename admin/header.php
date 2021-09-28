@@ -62,7 +62,7 @@ require_once 'lib/user.php';
                         Books
                     </a>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fas fa-info-circle"></i></div>
                         Basic Data
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
@@ -73,6 +73,11 @@ require_once 'lib/user.php';
                             <a class="nav-link" href="book-category.php">Book Categories</a>
                         </nav>
                     </div>
+
+                    <a class="nav-link" href="book-stock.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
+                        Book Stock
+                    </a>
                     <div class="sb-sidenav-menu-heading">System</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-user-shield"></i></div>

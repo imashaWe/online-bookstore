@@ -8,7 +8,7 @@ if (isset($_GET['slug'])) {
         CONCAT(book_author.fname,' ',book_author.fname) AS author,book_author.id AS author_id,
         book_publisher.name AS publisher,book_publisher.id AS publisher_id,
         book_language.language,
-        IFNULL((SELECT (SUM(in_qty) -SUM(out_qty)) FROM book_store WHERE book_id = book.id),0) AS qty
+        IFNULL((SELECT (SUM(in_qty) -SUM(out_qty)) FROM book_stock WHERE book_id = book.id),0) AS qty
         FROM `online-bookstore`.book
         INNER JOIN book_author ON book_author.id = book.author_id
         INNER JOIN book_publisher ON book_publisher.id = book.publisher_id

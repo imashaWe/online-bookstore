@@ -100,9 +100,9 @@ function set_order($inputs, $conn, $user)
         $total += $qty * $price;
 
         $sql .= "INSERT INTO order_item VALUES({$order_id},{$book_id},{$qty},{$price});
-                INSERT INTO book_store (book_id,trans_code,trans_id,in_qty) 
+                INSERT INTO book_stock (book_id,trans_code,trans_id,in_qty) 
                 VALUES ({$book_id},'REMOVE-FROM-CART',{$uid},{$qty});
-                INSERT INTO book_store (book_id,trans_code,trans_id,out_qty) 
+                INSERT INTO book_stock (book_id,trans_code,trans_id,out_qty) 
                 VALUES ({$book_id},'PURCHASE',{$order_id},{$qty});
                 DELETE FROM user_cart WHERE uid = {$uid} AND book_id = {$book_id};";
 
@@ -167,7 +167,7 @@ function notify_payment($inputs, $conn, $user)
         while ($row = $res->fetch_array()) {
             $book_id = $row['book_id'];
             $qty = $row['qty'];
-            $sql .= "INSERT INTO book_store (book_id,trans_code,trans_id,in_qty) 
+            $sql .= "INSERT INTO book_stock (book_id,trans_code,trans_id,in_qty) 
                      VALUES ({$book_id},'PURCHASE-CANCEL',{$order_id},{$qty});";
         }
     } else {
