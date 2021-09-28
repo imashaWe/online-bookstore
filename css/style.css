@@ -1,6 +1,7 @@
 /* import fonts*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Montserrat&display=swap');
 /*---------------------------------------------*/
+/* body */
 
 /* footer */
 .footer {
@@ -379,4 +380,145 @@
 /*shadow */
 .shadow {
     box-shadow: 0 0.15rem 1.75rem 0 rgb(58 59 69/15%) !important;
+}
+
+/* main card */
+.main-card {
+    margin-top: 25vh;
+    margin-bottom: 25vh;
+}
+
+/* loading-gif */
+.loading-gif {
+    margin: 0;
+    left: 30%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+
+    -ms-transform: translateX(-50%);
+}
+
+/* sidebar design */
+.sb-sidenav-light {
+    background-color: #fff;
+    color: #212529;
+}
+
+.sb-sidenav-white .sb-sidenav-menu .sb-sidenav-menu-heading {
+    color: #fff;
+}
+
+.sb-sidenav-white .sb-sidenav-menu .nav-link {
+    color: #212529;
+}
+
+.sb-sidenav-white .sb-sidenav-menu .nav-link .sb-nav-link-icon {
+    color: #fff;
+}
+
+.sb-sidenav-white .sb-sidenav-menu .nav-link .sb-sidenav-collapse-arrow {
+    color: #212529;
+}
+
+.sb-sidenav-white .sb-sidenav-menu .nav-link:hover {
+    color: #0d6efd;
+}
+
+.sb-sidenav-white .sb-sidenav-menu .nav-link.active {
+    color: #0d6efd;
+}
+
+.sb-sidenav-white .sb-sidenav-menu .nav-link.active .sb-nav-link-icon {
+    color: #0d6efd;
+}
+
+.sb-sidenav-white .sb-sidenav-footer {
+    background-color: #fff;
+}
+
+/* search box */
+
+
+::selection {
+    color: #fff;
+    background: #664AFF;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.wrapper .search-input {
+    background: #fff;
+    width: 100%;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
+}
+
+.search-input input {
+    height: 55px;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0 60px 0 20px;
+    font-size: 18px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-input.active input {
+    border-radius: 5px 5px 0 0;
+}
+
+.search-input .autocom-box {
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.search-input.active .autocom-box {
+    padding: 10px 8px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.autocom-box li {
+    list-style: none;
+    padding: 8px 12px;
+    display: none;
+    width: 100%;
+    cursor: default;
+    border-radius: 3px;
+}
+
+.search-input.active .autocom-box li {
+    display: block;
+}
+
+.autocom-box li:hover {
+    background: #efefef;
+}
+
+.search-input .icon {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 55px;
+    width: 55px;
+    text-align: center;
+    line-height: 55px;
+    font-size: 20px;
+    color: #644bff;
+    cursor: pointer;
+}
+/* tables */
+.table-wrap {
+    height: 55vh;
+    overflow-y: auto;
 }

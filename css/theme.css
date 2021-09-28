@@ -47,6 +47,11 @@
     color: var(--accent);
 }
 
+.theme-bg-gradient-primary {
+    background-color: var(--primary);
+    background-size: cover;
+}
+
 /* buttons */
 .theme-btn {
     display: inline-block;
@@ -80,7 +85,7 @@
 }
 
 .theme-btn-primary-animated:hover {
-    background-color:  #f3f3f3;
+    background-color: #f3f3f3;
     color: var(--primary);
 }
 
@@ -146,6 +151,12 @@
 .theme-btn-light-animated:hover {
     background-color: var(--accent);
     color: #fff;
+}
+
+button:disabled,
+button[disabled] {
+    opacity: .2;
+    cursor: not-allowed;
 }
 
 /* Theme card */

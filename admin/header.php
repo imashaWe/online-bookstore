@@ -1,6 +1,6 @@
 <?php
-require_once 'core/route.php';
-require_once 'core/user.php';
+require_once '../core/route.php';
+require_once 'lib/user.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
