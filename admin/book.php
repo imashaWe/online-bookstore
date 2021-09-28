@@ -10,7 +10,7 @@ $start = ($page - 1) * $limit;
 
 $sql = "SELECT 
         book.id,book.name AS name,price,isbn,
-        CONCAT(book_author.fname,' ',book_author.fname) AS author,
+        CONCAT(book_author.fname,' ',book_author.lname) AS author,
         book_publisher.name AS publisher,
         book_language.language
         FROM book
