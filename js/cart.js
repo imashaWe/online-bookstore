@@ -13,6 +13,10 @@
         postData('api/cart.php?func=get_cart_items', {}).then((r) => {
             let total = 0.00;
             let html = ''
+            if (!r['data'].length) {
+                html = "<h3>No Items</h3>";
+                disableButtons("setCheckoutBtn");
+            }
             for (let item of r['data']) {
                 total += parseInt(item.qty) * parseFloat(item.price);
                 html += '<div class="theme-card shadow m-2">' +

@@ -40,3 +40,28 @@ function _alert(message, isError) {
         timer: 1500
     });
 }
+
+function enableButtons(id = null) {
+    if (id) {
+        const btn = document.getElementById(id);
+        if (btn) {
+            btn.disabled = false;
+        }
+        return;
+    }
+
+    const allBtns = document.getElementsByName('button');
+    allBtns.forEach((e) => e.disabled = false);
+}
+
+function disableButtons(id = null) {
+    if (id) {
+        const btn = document.getElementById(id);
+        if (btn) {
+            btn.disabled = true;
+        }
+        return;
+    }
+    const allBtns = document.getElementsByName('button');
+    allBtns.forEach((e) => e.disabled = true);
+}

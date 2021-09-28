@@ -11,7 +11,9 @@
         <h3 class="theme-text-heading" id="cartSideViewTotal"></h3>
         <br>
         <div class="d-flex justify-content-center">
-            <a href="checkout.php" class="theme-btn theme-btn-dark-animated theme-text-subtitle w-75">CHECKOUT</a>
+            <a href="checkout.php"
+               class="theme-btn theme-btn-dark-animated theme-text-subtitle w-75" id="setCheckoutBtn">
+                CHECKOUT</a>
         </div>
     </div>
 </div>
