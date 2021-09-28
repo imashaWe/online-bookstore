@@ -1,12 +1,13 @@
 <?php
 require '../core/db.php';
 if (isset($_POST['submit'])) {
-    $book_ids = $_POST['book_ids'];
-    $qtys = $_POST['qtys'];
-    $count = count($book_ids);
-    if (!$count) {
+
+    if (!isset($_POST['book_ids'])) {
         $error = "No items";
     } else {
+        $book_ids = $_POST['book_ids'];
+        $qtys = $_POST['qtys'];
+        $count = count($book_ids);
 
         $sql = "";
 
@@ -71,11 +72,9 @@ if (isset($_POST['submit'])) {
                         <div class="row my-4">
                             <div class="col">
                                 <form action="" method="post">
-
-
-                                    <ul class="list-group" id="bookList">
-
-                                    </ul>
+                                    <table class="table">
+                                        <tbody id="bookList"></tbody>
+                                    </table>
                                     <div class="row justify-content-end pb-2">
                                         <div class="col-1">
                                             <a href="book-stock.php" class="btn btn-outline-secondary btn-lg float-end"
@@ -164,19 +163,22 @@ if (isset($_POST['submit'])) {
         const bookName = element.textContent;
         const bookId = element.getAttribute('data-id');
         if (bookId) {
-            let item = `<li class="list-group-item d-flex justify-content-between align-items-center">
-                         ${bookName}
-                        <input type="hidden" name="book_ids[]" value="${bookId}">
-                        <input type="number" name="qtys[]" value="10" class="form-control w-25">
-                        <span class="clickable list-item-delete text-danger" onclick="deleteElement(this);"><icon class="fa fa-trash"></icon></span>
-                </li>`;
+            let item = `<tr>
+                             <td>${bookName}</td>
+                             <td class="w-25" "> <input type="number" name="qtys[]" value="10" class="form-control"></td>
+                             <td class="w-25 text-end">
+                                    <button class="btn btn-danger" onclick="deleteElement(this);">Remove</button>
+                                    <input type="hidden" name="book_ids[]" value="${bookId}">
+                              </td>
+
+                        </tr>`;
             bookList.insertAdjacentHTML('beforeend', item);
         }
         searchWrapper.classList.remove("active");
     }
 
     function deleteElement(e) {
-        e.parentNode.remove();
+        e.parentNode.parentNode.remove();
     }
 </script>
 <?php require_once('footer.php'); ?>
