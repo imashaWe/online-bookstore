@@ -72,7 +72,8 @@ if (isset($_GET['slug'])) {
                                 </button>
                             </div>
                             <div class="col-6">
-                                <button class="theme-btn theme-btn-light-animated theme-font-bold">
+                                <button class="theme-btn theme-btn-light-animated theme-font-bold"
+                                        onclick="addToWishlist(<?= $book['id'] ?>)">
                                     <i class="far fa-heart" aria-hidden="true"></i>&nbsp;Add to wishlist
                                 </button>
                             </div>
@@ -100,7 +101,8 @@ if (isset($_GET['slug'])) {
                                 Author :<a href="index.php?author=<?= $book['author_id'] ?>"><?= $book['author'] ?></a>
                             </h6>
                             <h6>
-                                Publisher : <a href="index.php?publisher=<?= $book['publisher_id'] ?>"><?= $book['publisher'] ?></a>
+                                Publisher : <a
+                                        href="index.php?publisher=<?= $book['publisher_id'] ?>"><?= $book['publisher'] ?></a>
                             </h6>
                             <h6>ISBN : <?= $book['isbn'] ?></h6>
                         </div>

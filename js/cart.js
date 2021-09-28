@@ -57,7 +57,7 @@ function addToCart(bookId) {
 function setCartCount() {
     const cartCount = document.getElementById('cartCount');
     postData('api/cart.php?func=get_cart_count', {}).then((r) => {
-        cartCount.classList.remove('cartCount.classList');
+        cartCount.classList.remove('icon-header-noti');
         cartCount.removeAttribute('data-notify');
         if (parseInt(r.count)) {
             cartCount.classList.add('icon-header-noti');

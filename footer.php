@@ -63,6 +63,7 @@
 <script src="js/main.js"></script>
 <script src="js/fetch.js"></script>
 <script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
 
 <!-- sweetalert js-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
