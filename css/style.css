@@ -374,7 +374,7 @@
     position: absolute;
     top: 5px;
     right: 5px;
-    z-index: 100;
+    z-index: 10;
 }
 
 /*shadow */
@@ -487,7 +487,12 @@
     opacity: 1;
     pointer-events: auto;
 }
-
+.autocom-box {
+    position: absolute;
+    z-index: 100;
+    background-color: white;
+    width: 100%;
+}
 .autocom-box li {
     list-style: none;
     padding: 8px 12px;

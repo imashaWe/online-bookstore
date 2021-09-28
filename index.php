@@ -82,7 +82,7 @@ function get_sub_categories($category_id, $conn)
                     <div class="search-input">
                         <a href="" target="_blank" hidden></a>
                         <input type="text" placeholder="Type to search..">
-                        <div class="autocom-box">
+                        <div class="autocom-box shadow">
                             <!-- here list are inserted from javascript -->
                         </div>
                         <div class="icon"><i class="fas fa-search"></i></div>
@@ -172,8 +172,8 @@ function get_sub_categories($category_id, $conn)
                                         <div class="ribbon ribbon-top-left"><span>OUT OF STOCK</span></div>
                                     <?php endif; ?>
                                     <div class="item-pic item-img-hov">
-                                        <div class="btn-set-wishlist icon-circle" data-id="<?=$book['id']?>">
-<!--                                            <i class="far fa-heart fa-lg"></i>-->
+                                        <div class="btn-set-wishlist icon-circle" data-id="<?= $book['id'] ?>">
+                                            <!--                                            <i class="far fa-heart fa-lg"></i>-->
                                         </div>
                                         <img src="<?= $book['img_url'] ?>"
                                              alt="<?= $book['slug'] ?>">
