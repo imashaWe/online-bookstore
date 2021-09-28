@@ -32,13 +32,32 @@ function errorAlert(message) {
 }
 
 function _alert(message, isError) {
-    Swal.fire({
-        position: 'top-end',
-        icon: isError ? 'error' : 'success',
-        title: message,
-        showConfirmButton: false,
-        timer: 1500
-    });
+    if (isError) {
+        vt.error(message, {
+            title: 'Error',
+            position: "top-right",
+            callback: function () {
+
+            }
+        })
+    } else {
+        vt.success(message, {
+            title: 'Success',
+            position: "top-right",
+            callback: function () {
+
+            }
+        })
+    }
+
+
+    // Swal.fire({
+    //     position: 'top-end',
+    //     icon: isError ? 'error' : 'success',
+    //     title: message,
+    //     showConfirmButton: false,
+    //     timer: 1500
+    // });
 }
 
 function enableButtons(id = null) {

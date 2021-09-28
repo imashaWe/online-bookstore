@@ -68,5 +68,9 @@
 <!-- sweetalert js-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<!--Toast js-->
+<script src="js/vanilla-toast.min.js"></script>
+
+
 </body>
 </html>
