@@ -46,5 +46,12 @@ function set_verify_user()
 
 }
 
+function login_access_protect() {
+    if (!IS_LOGGED_IN) {
+        header("location:login.php");
+        die();
+    }
+}
+
 
 

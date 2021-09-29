@@ -1,6 +1,9 @@
 <?php
 require_once 'core/user.php';
 require_once 'core/db.php';
+
+login_access_protect();
+
 $uid = $USER['uid'];
 $city = "";
 $address_line1 = "";

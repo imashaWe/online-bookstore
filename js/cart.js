@@ -13,6 +13,10 @@
         postData('api/cart.php?func=get_cart_items', {}).then((r) => {
             let total = 0.00;
             let html = ''
+            if (!parseInt(r.status)) {
+                cartSideViewItems.innerHTML = `<h5 class="text-center">${r.message}</h5>`;
+                return;
+            }
             if (!r['data'].length) {
                 html = "<h3>No Items</h3>";
                 disableButtons("setCheckoutBtn");
