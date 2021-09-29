@@ -1,18 +1,18 @@
 <?php
 session_start();
-$USER = null;
 if (isset($_COOKIE['site_user'])) {
     $user = json_decode($_COOKIE['site_user']);
     $_SESSION['site_user'] = array(
         'uid' => $user->uid,
         'fname' => $user->fname,
         'lname' => $user->lname,
-        'email' =>$user->email,
+        'email' => $user->email,
         'status' => $user->status
     );
 }
 if (isset($_SESSION['site_user'])) $USER = $_SESSION['site_user'];
-$IS_LOGGED_IN = $USER != null;
+
+define('IS_LOGGED_IN', isset($USER));
 
 function set_user($fanme, $lname, $email, $status, $uid, $is_remember)
 {
@@ -44,6 +44,13 @@ function set_verify_user()
         setcookie('site_user', json_encode($user), time() + (86400 * 30), "/");
     }
 
+}
+
+function login_access_protect() {
+    if (!IS_LOGGED_IN) {
+        header("location:login.php");
+        die();
+    }
 }
 
 

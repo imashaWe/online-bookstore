@@ -62,7 +62,7 @@ if (isset($_GET['slug'])) {
                         </div>
                     </div>
                     <div class="row justify-content-start my-3">
-                        <?php if ($IS_LOGGED_IN && $USER['status']): ?>
+                        <?php if (IS_LOGGED_IN && $USER['status']): ?>
 
                             <div class="col-4">
                                 <button class="theme-btn theme-btn-dark-animated theme-font-bold"
@@ -80,13 +80,13 @@ if (isset($_GET['slug'])) {
                         <?php else: ?>
                             <div class="col-4">
                                 <a class="theme-btn theme-btn-dark-animated theme-font-bold"
-                                   href="<?= $IS_LOGGED_IN ? 'verify.php' : 'login.php' ?>">
+                                   href="<?= IS_LOGGED_IN ? 'verify.php' : 'login.php' ?>">
                                     <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
                                 </a>
                             </div>
                             <div class="col-6">
                                 <a class="theme-btn theme-btn-light-animated theme-font-bold"
-                                   href="<?= $IS_LOGGED_IN ? 'verify.php' : 'login.php' ?>">
+                                   href="<?= IS_LOGGED_IN ? 'verify.php' : 'login.php' ?>">
                                     <i class="far fa-heart" aria-hidden="true"></i>&nbsp;Add to wishlist
                                 </a>
                             </div>

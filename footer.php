@@ -1,5 +1,10 @@
-
+<?php
+    require_once "core/db.php";
+    $sql = "SELECT * FROM book_category WHERE is_delete = 0 LIMIT 5";
+    $categories = $conn->query($sql);
+?>
 <?php require_once 'cart-side-view.php'; ?>
+
 <footer>
     <div class="container-fluid bg-dark position-absolute footer mt-2">
         <div class="row justify-content-center pt-5">
@@ -7,10 +12,18 @@
             <div class="col-2">
                 <h4>CATEGORY</h4>
                 <ul class="list-unstyled">
-                    <li><a href="#">Education</a></li>
-                    <li><a href="#">Education</a></li>
-                    <li><a href="#">Education</a></li>
-                    <li><a href="#">Education</a></li>
+                    <?php while ($row = $categories->fetch_array()):?>
+                        <li>
+                            <a href="<?= change_url_params_array(array(
+                                array('key' => 'cat', 'value' => $row['id']),
+                                array('key' => 'sub_cat'),
+                            ));
+                            ?>">
+                            <?=$row['category']?>
+                            </a>
+                        </li>
+                    <?php endwhile;?>
+
                 </ul>
             </div>
 
@@ -26,7 +39,7 @@
 
             <div class="col-2">
                 <h4>GET IN TOUCH</h4>
-                <p>N0 10,<br>Daluagama,<br>Kalaniya</p>
+                <p>N0 10,<br>Daluagama,<br>Kelaniya</p>
                 <p>call us on (+94) 76 716 6879</p>
                 <div class="d-flex gap-3">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>

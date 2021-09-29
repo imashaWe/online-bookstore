@@ -6,7 +6,7 @@ require "core/route.php";
 /* To pagination */
 $sql = "SELECT COUNT(id) AS count FROM book WHERE is_delete = '0' ";
 $count = $conn->query($sql)->fetch_array()['count'];
-$limit = 20;
+$limit = 9;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $num_pages = ceil($count / $limit);
 $start = ($page - 1) * $limit;
@@ -74,7 +74,7 @@ function get_sub_categories($category_id, $conn)
 <?php require_once "header.php" ?>
 
 <main>
-    <div class="container py-2">
+    <div class="container mt-5">
 
         <div class="row justify-content-center pb-4">
             <div class="col-8">
@@ -196,7 +196,7 @@ function get_sub_categories($category_id, $conn)
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <?php if ($IS_LOGGED_IN && $USER['status']): ?>
+                                        <?php if (IS_LOGGED_IN && $USER['status']): ?>
                                             <button class="theme-btn theme-btn-dark-animated theme-font-bold"
                                                 <?php if ($book['qty'] <= 0) echo "disabled"; ?>
                                                     onclick="addToCart(<?= $book['id'] ?>)">
@@ -204,7 +204,8 @@ function get_sub_categories($category_id, $conn)
                                             </button>
                                         <?php else: ?>
                                             <a class="theme-btn theme-btn-dark-animated theme-font-bold"
-                                               href="<?= $IS_LOGGED_IN ? 'verify.php' : 'login.php' ?>">
+                                                <?php if ($book['qty'] <= 0) echo "disabled"; ?>
+                                               href="<?= IS_LOGGED_IN ? 'verify.php' : 'login.php' ?>">
                                                 <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
                                             </a>
                                         <?php endif; ?>
@@ -215,11 +216,31 @@ function get_sub_categories($category_id, $conn)
                         </div>
                     <?php endwhile; ?>
                 </div>
+
+            </div>
+
+        </div>
+        <div class="row mt-2">
+            <div class="col-9 offset-3">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item <?php if ($page == 1) echo 'disabled';?>">
+                            <a class="page-link" href="<?= change_url_params('page', $page - 1) ?>">Previous</a>
+                        </li>
+                        <?php for ($i = 1; $i <= $num_pages; $i++): ?>
+                            <li class="page-item <?php if ($page == $i) echo 'active';?>">
+                                <a class="page-link" href="<?= change_url_params('page', $i) ?>"><?= $i ?></a>
+                            </li>
+                        <?php endfor; ?>
+                        <li class="page-item <?php if ($page == $num_pages) echo 'disabled';?>">
+                            <a class="page-link" href="<?= change_url_params('page', $page + 1) ?>">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
+
     </div>
-
-
 </main>
 <script src="js/search.js"></script>
 
