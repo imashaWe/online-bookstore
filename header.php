@@ -8,7 +8,8 @@ require_once 'core/user.php';
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>online bookstore</title>
+    <title>Book Berries</title>
+    <link rel="shortcut icon" type="image/jpg" href="assets/images/favicon.png"/>
     <!-- bootstrap ccs -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!--custom design css-->
@@ -29,9 +30,12 @@ require_once 'core/user.php';
 <body>
 <header>
 
-    <nav class="navbar navbar-expand-lg py-3 navbar-dark fixed-top theme-primary-color-bg">
+    <nav class="navbar navbar-expand-lg py-1 navbar-dark fixed-top theme-primary-color-bg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Online BookStore</a>
+            <a class="navbar-brand" href="#">
+                <img src="assets/images/navlogo.png" alt="" width="200" height="50">
+            </a>
+<!--            <a class="navbar-brand" href="#">Online BookStore</a>-->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                     aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

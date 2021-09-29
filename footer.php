@@ -26,7 +26,7 @@
 
             <div class="col-2">
                 <h4>GET IN TOUCH</h4>
-                <p>N0 10,<br>Daluagama,<br>Kalaniya</p>
+                <p>N0 10,<br>Daluagama,<br>Kelaniya</p>
                 <p>call us on (+94) 76 716 6879</p>
                 <div class="d-flex gap-3">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
