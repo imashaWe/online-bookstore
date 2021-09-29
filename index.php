@@ -6,7 +6,7 @@ require "core/route.php";
 /* To pagination */
 $sql = "SELECT COUNT(id) AS count FROM book WHERE is_delete = '0' ";
 $count = $conn->query($sql)->fetch_array()['count'];
-$limit = 20;
+$limit = 9;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $num_pages = ceil($count / $limit);
 $start = ($page - 1) * $limit;
@@ -220,7 +220,7 @@ function get_sub_categories($category_id, $conn)
             </div>
 
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-9 offset-3">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
