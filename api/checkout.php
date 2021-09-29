@@ -6,12 +6,22 @@ require '../core/config.php';
 define('config', $_CONFIG);
 
 if (isset($_GET['func']) && function_exists($_GET['func'])) {
-    $inputs = json_decode(file_get_contents('php://input'));
-    echo json_encode($_GET['func']($inputs, $conn, $USER));
+    if (IS_LOGGED_IN) {
+
+        $inputs = json_decode(file_get_contents('php://input'));
+        echo json_encode($_GET['func']($inputs, $conn, $USER));
+
+    } else {
+
+        echo json_encode(array('status' => 0, 'message' => 'Please login to get access to this feature'));
+
+    }
 } else {
-    echo json_encode(array("status" => 0));
+
+    echo json_encode(array("status" => 0, 'message' => 'Invalid url'));
 
 }
+
 
 function apply_coupon_code($inputs, $conn, $user)
 {

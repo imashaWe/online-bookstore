@@ -29,10 +29,10 @@ function initWishlist() {
 
         const wishlistCountElm = document.getElementById('wishlistCountElm');
         const wishlistElms = document.getElementsByClassName('btn-set-wishlist');
-
+        let wishlistIds = [];
         if (r.status) {
             const count = r.data.length;
-            const wishlistIds = r.data;
+            wishlistIds = r.data;
 
             wishlistCountElm.classList.remove('icon-header-noti');
             wishlistCountElm.removeAttribute('data-notify');
@@ -43,18 +43,19 @@ function initWishlist() {
 
             }
 
-            for (let wishlistElm of wishlistElms) {
-                const bookId = wishlistElm.getAttribute('data-id');
-
-                if (wishlistIds.indexOf(bookId) != -1) {
-                    wishlistElm.innerHTML = '<i class="fas fa-heart fa-lg theme-accent-color"></i>';
-                    wishlistElm.setAttribute("onclick", "removeFromWishlist(" + bookId + ")");
-                } else {
-                    wishlistElm.innerHTML = '<i class="far fa-heart fa-lg"></i>';
-                    wishlistElm.setAttribute("onclick", "addToWishlist(" + bookId + ")");
-                }
-            }
-
         }
+
+        for (let wishlistElm of wishlistElms) {
+            const bookId = wishlistElm.getAttribute('data-id');
+
+            if (wishlistIds.indexOf(bookId) != -1) {
+                wishlistElm.innerHTML = '<i class="fas fa-heart fa-lg theme-accent-color"></i>';
+                wishlistElm.setAttribute("onclick", "removeFromWishlist(" + bookId + ")");
+            } else {
+                wishlistElm.innerHTML = '<i class="far fa-heart fa-lg"></i>';
+                wishlistElm.setAttribute("onclick", "addToWishlist(" + bookId + ")");
+            }
+        }
+
     });
 }

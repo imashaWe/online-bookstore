@@ -196,7 +196,7 @@ function get_sub_categories($category_id, $conn)
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <?php if ($IS_LOGGED_IN && $USER['status']): ?>
+                                        <?php if (IS_LOGGED_IN && $USER['status']): ?>
                                             <button class="theme-btn theme-btn-dark-animated theme-font-bold"
                                                 <?php if ($book['qty'] <= 0) echo "disabled"; ?>
                                                     onclick="addToCart(<?= $book['id'] ?>)">
@@ -204,7 +204,8 @@ function get_sub_categories($category_id, $conn)
                                             </button>
                                         <?php else: ?>
                                             <a class="theme-btn theme-btn-dark-animated theme-font-bold"
-                                               href="<?= $IS_LOGGED_IN ? 'verify.php' : 'login.php' ?>">
+                                                <?php if ($book['qty'] <= 0) echo "disabled"; ?>
+                                               href="<?= IS_LOGGED_IN ? 'verify.php' : 'login.php' ?>">
                                                 <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
                                             </a>
                                         <?php endif; ?>
