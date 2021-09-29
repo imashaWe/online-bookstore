@@ -1,6 +1,7 @@
 <?php
 require 'core/db.php';
 require "core/user.php";
+require "lib/email.php";
 
 $fname = "";
 $lname = "";
@@ -41,8 +42,8 @@ if (isset($_POST['submit'])) {
             $uid = $conn->insert_id;
             if ($res) {
                 $code = get_verify_code($conn, $uid);
-                send_verify_code_email($email, $code);
-                set_user($fname, $lname, $email,0,$uid, $is_remember);
+                send_verify_code_email($email, "{$fname} {$lname}", $code);
+                set_user($fname, $lname, $email, 0, $uid, $is_remember);
                 header("location:index.php");
             } else {
                 $error = "Database Error";
@@ -66,9 +67,12 @@ function get_verify_code($conn, $uid)
     return $code;
 }
 
-function send_verify_code_email($email, $code)
+function send_verify_code_email($email, $name, $code)
 {
-    // Todo:Implement send verify code email
+    $template = file_get_contents('email-templates/user-verify.html');
+    $template = str_replace("{CUSTOMER_NAME}", $name, $template);
+    $template = str_replace("{CODE}", $code, $template);
+    send_mail($email, "Verify your Email Address", $template, "Your verify code {$code}");
 }
 
 ?>
