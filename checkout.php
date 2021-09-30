@@ -39,56 +39,57 @@ if ($res->num_rows) {
                 <li class="breadcrumb-item active" aria-current="page">Checkout</li>
             </ol>
         </nav>
-        <div class="row">
+        <div class="row gy-2">
 
             <div class="col-sm-8">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table">
-                            <thead class="theme-text-title">
-                            <tr>
-                                <th scope="col">PRODUCT</th>
-                                <th scope="col">PRICE</th>
-                                <th scope="col">QUANTITY</th>
-                                <th scope="col" class="text-end">TOTAL</th>
-                            </tr>
-                            </thead>
-                            <tbody class="theme-text" id="cartTableBody">
-                            <?php while ($row = $cart->fetch_array()): ?>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="theme-text-title">
                                 <tr>
-                                    <td>
-                                        <img src="<?= $row['img_url'] ?>"
-                                             class="img-fluid"
-                                             alt="Book Image"
-                                             style="height: 10vh;"
-                                        >
-                                        <?= $row['name'] ?>
-                                    </td>
-                                    <td class="cart-item-price"><?= $row['price'] ?></td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="amount">
-                                            <button type="button" class="btn btn-outline-secondary"
-                                                    onclick="decreaseQty(this,<?= $row['id'] ?>);">-
-                                            </button>
-                                            <button type="button"
-                                                    class="btn btn-secondary cart-item-qty"><?= $row['qty'] ?></button>
-                                            <button type="button" class="btn btn-outline-secondary"
-                                                    onclick="increaseQty(this,<?= $row['id'] ?>);">+
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <td class="cart-item-subtotal text-end">0.00</td>
+                                    <th scope="col">PRODUCT</th>
+                                    <th scope="col">PRICE</th>
+                                    <th scope="col">QUANTITY</th>
+                                    <th scope="col" class="text-end">TOTAL</th>
                                 </tr>
-                            <?php endwhile; ?>
+                                </thead>
+                                <tbody class="theme-text" id="cartTableBody">
+                                <?php while ($row = $cart->fetch_array()): ?>
+                                    <tr>
+                                        <td>
+                                            <img src="<?= $row['img_url'] ?>"
+                                                 class="img-fluid"
+                                                 alt="Book Image"
+                                                 style="height: 10vh;"
+                                            >
+                                            <?= $row['name'] ?>
+                                        </td>
+                                        <td class="cart-item-price"><?= $row['price'] ?></td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="amount">
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                        onclick="decreaseQty(this,<?= $row['id'] ?>);">-
+                                                </button>
+                                                <button type="button"
+                                                        class="btn btn-secondary cart-item-qty"><?= $row['qty'] ?></button>
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                        onclick="increaseQty(this,<?= $row['id'] ?>);">+
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td class="cart-item-subtotal text-end">0.00</td>
+                                    </tr>
+                                <?php endwhile; ?>
 
-                            </tbody>
-                        </table>
-
-                        <div class="row">
-                            <div class="col-4">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-sm-4">
                                 <input type="text" class="form-control" placeholder="Coupon Code" id="couponCode">
                             </div>
-                            <div class="col-3">
+                            <div class="col-sm-3">
                                 <button type="button"
                                         class="theme-btn theme-btn-light-animated theme-text-title"
                                         onclick="applyCoupon();"

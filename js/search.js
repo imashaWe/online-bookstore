@@ -62,7 +62,8 @@ function showSuggestions(list) {
 
 function openLink(element) {
     const selectData = element.textContent;
-    const url = updateQueryStringParameter('q', selectData);
+    let url = updateQueryStringParameter('q', selectData);
+    url = updateQueryStringParameter('page', 1);
     window.location.replace(url);
 }
 

@@ -18,8 +18,8 @@
 <br>
 <div class="container">
 
-    <div class="row">
-        <div class="col-6">
+    <div class="row gy-2">
+        <div class="col-md-6">
 
             <div class="card">
                 <div class="card-body">
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                     <h3 class="theme-text-heading text-center">Contact Details</h3>
@@ -54,7 +54,7 @@
                                 <h4><i class="fas fa-map-marker-alt"></i> Address:</h4>
                             </td>
                             <td class="theme-text">
-                                N0 10, <br> Daluagama, <br>Kalaniya</p>
+                                N0 10, <br> Daluagama, <br>Kelaniya</p>
                             </td>
                         </tr>
                         <tr >
