@@ -35,7 +35,7 @@ if (isset($_GET['slug'])) {
                 </ol>
             </nav>
             <div class="row justify-content-center">
-                <div class="col-md-4">
+                <div class="col-md-4 text-center">
                     <img src="<?= $book['img_url'] ?>"
                          class="img-thumbnail">
                 </div>
@@ -61,30 +61,30 @@ if (isset($_GET['slug'])) {
 
                         </div>
                     </div>
-                    <div class="row justify-content-start my-3">
+                    <div class="row justify-content-start my-3 gy-2">
                         <?php if (IS_LOGGED_IN && $USER['status']): ?>
 
-                            <div class="col-4">
+                            <div class="col-md-4">
                                 <button class="theme-btn theme-btn-dark-animated theme-font-bold"
                                     <?php if ($book['qty'] <= 0) echo "disabled"; ?>
                                         onclick="addToCartNow(<?= $book['id'] ?>);">
                                     <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
                                 </button>
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <button class="theme-btn theme-btn-light-animated theme-font-bold"
                                         onclick="addToWishlist(<?= $book['id'] ?>)">
                                     <i class="far fa-heart" aria-hidden="true"></i>&nbsp;Add to wishlist
                                 </button>
                             </div>
                         <?php else: ?>
-                            <div class="col-4">
+                            <div class="col-md-4">
                                 <a class="theme-btn theme-btn-dark-animated theme-font-bold"
                                    href="<?= IS_LOGGED_IN ? 'verify.php' : 'login.php' ?>">
                                     <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
                                 </a>
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <a class="theme-btn theme-btn-light-animated theme-font-bold"
                                    href="<?= IS_LOGGED_IN ? 'verify.php' : 'login.php' ?>">
                                     <i class="far fa-heart" aria-hidden="true"></i>&nbsp;Add to wishlist
