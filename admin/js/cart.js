@@ -1,15 +1,19 @@
 window.addEventListener('DOMContentLoaded', event => {
 
-    const ctx = document.getElementById("myAreaChart");
+    const ctxArea = document.getElementById("myAreaChart");
+    const ctxBar = document.getElementById("myBarChart");
 
     fetch('api/report.php?func=get_day_wise_orders', {})
         .then((r) => r = r.json())
         .then((r) => {
             const labels = r.data.map((e) => e.date);
-            const data = r.data.map((e) => parseInt(e.num_orders));
-            console.log(labels);
-            console.log(data);
-            const myLineChart = new Chart(ctx, {
+            const data = r.data.map((e) => parseInt(e.count));
+
+            const max = data.reduce(function (a, b) {
+                return Math.max(a, b);
+            }, 0);
+
+            const myLineChart = new Chart(ctxArea, {
                 type: 'line',
                 data: {
                     labels: labels,
@@ -44,7 +48,7 @@ window.addEventListener('DOMContentLoaded', event => {
                         yAxes: [{
                             ticks: {
                                 min: 0,
-                                max: 50,
+                                max: Math.ceil(max + (max * .1)),
                                 maxTicksLimit: 7
                             },
                             gridLines: {
@@ -58,6 +62,56 @@ window.addEventListener('DOMContentLoaded', event => {
                 }
             });
 
-        })
+        });
+
+    fetch('api/report.php?func=get_month_wise_orders', {}).then(r => r.json()).then((r) => {
+
+        const labels = r.data.map((e) => e.month);
+        const data = r.data.map((e) => parseInt(e.count));
+        const max = data.reduce(function (a, b) {
+            return Math.max(a, b);
+        }, 0);
+        const myLineChart = new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Revenue",
+                    backgroundColor: "rgba(2,117,216,1)",
+                    borderColor: "rgba(2,117,216,1)",
+                    data: data,
+                }],
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'month'
+                        },
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 6
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: Math.ceil(max + (max * .1)),
+                            maxTicksLimit: 5
+                        },
+                        gridLines: {
+                            display: true
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
+
+    })
 
 });
