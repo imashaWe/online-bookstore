@@ -8,11 +8,11 @@
         </div>
     </div>
     <div class="container">
-        <div class="row my-5">
-            <div class="col-6">
+        <div class="row my-5 justify-content-md-center">
+            <div class="col-md-6">
                 <img src="assets/svgs/book-read-1.svg" class="img-fluid h-75">
             </div>
-            <div class="col-6">
+            <div class="col-md-6">
                 <p class="theme-text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam at consequatur
                     facere officiis rem
                     unde! Aliquam aut deserunt dicta, error et eveniet expedita iusto laborum maxime, modi nesciunt non
@@ -25,8 +25,8 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-6">
+        <div class="row justify-content-md-center">
+            <div class="col-md-6">
                 <p class="theme-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium error
                     impedit ipsa
                     nobis nulla pariatur quia repudiandae sequi voluptatibus. Cupiditate, distinctio eligendi
@@ -34,7 +34,7 @@
                     odit optio quam quidem quos reprehenderit rerum sed soluta tempore temporibus tenetur
                     veritatis voluptas voluptatum.</p>
             </div>
-            <div class="col-6">
+            <div class="col-md-6">
                 <img src="assets/svgs/book-read-2.svg" class="img-fluid h-75">
             </div>
         </div>

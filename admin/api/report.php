@@ -9,39 +9,58 @@ if (isset($_GET['func']) && function_exists($_GET['func'])) {
     echo json_encode(array("status" => 0, "Invalid url"));
 }
 
-//function get_day_wise_orders($inputs, $conn)
-//{
-//    $to = date("Y-m-d");
-//    $from = date("Y-m-d", strtotime('-7 day', strtotime($to)));
-//
-//
-//    $sql = "SELECT COUNT(id) AS num_orders,DATE(created_at) AS `date` FROM `order`
-//            WHERE `created_at` BETWEEN '{$from}' AND '{$to}'
-//            GROUP BY DAY(created_at)";
-//    $res = $conn->query($sql);
-//
-//    $data = array();
-//    while ($row = $res->fetch_array()) $data[] = $row;
-//
-//    return array('status' => 1, 'data' => $data);
-//}
-
 function get_day_wise_orders($inputs, $conn)
 {
     $limit = 7;
-    $to = date("Y-m-d");
-    $from = date("Y-m-d", strtotime('-7 day', strtotime($to)));
+    $today = date("Y-m-d");
+    $data = array();
 
-    for ($i=0;$i < $limit;$i++) {
+    for ($i = 0; $i <= $limit; $i++) {
+        $days = $limit - $i;
+        $date = date("Y-m-d", strtotime("-{$days} day", strtotime($today)));
+        $sql = "SELECT COUNT(id) AS count,DATE(created_at) AS `date` FROM `order`
+                WHERE DATE(created_at) = '{$date}'";
+        $res = $conn->query($sql);
+        $row = $res->fetch_array();
+        $data[] = array('count' => $row['count'], 'date' => date("F j", strtotime($date)));
 
     }
-    $sql = "SELECT COUNT(id) AS num_orders,DATE(created_at) AS `date` FROM `order`
-            WHERE `created_at` BETWEEN '{$from}' AND '{$to}'
-            GROUP BY DAY(created_at)";
-    $res = $conn->query($sql);
 
+
+    return array('status' => 1, 'data' => $data);
+}
+
+function get_month_wise_orders($inputs, $conn)
+{
+
+    $months = array(
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec'
+    );
+
+    $this_month = date("m");
     $data = array();
-    while ($row = $res->fetch_array()) $data[] = $row;
+
+    for ($i = 1; $i <= $this_month; $i++) {
+
+        $sql = "SELECT COUNT(id) AS count,DATE(created_at) AS `date` FROM `order`
+                WHERE MONTH (created_at) = '{$i}'";
+        $res = $conn->query($sql);
+        $row = $res->fetch_array();
+        $data[] = array('count' => $row['count'], 'month' => $months[$i - 1]);
+
+    }
+
 
     return array('status' => 1, 'data' => $data);
 }
