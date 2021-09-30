@@ -132,6 +132,7 @@ function get_sub_categories($category_id, $conn)
                                                 ?>
                                                 <a class="<?= $link_class ?>"
                                                    href="<?= change_url_params_array(array(
+                                                       array('key' => 'page'),
                                                        array('key' => 'cat', 'value' => $row['id']),
                                                        array('key' => 'sub_cat', 'value' => $sub_row['id']),
                                                    ));
@@ -148,6 +149,7 @@ function get_sub_categories($category_id, $conn)
                                        href="<?= change_url_params_array(array(
                                            array('key' => 'cat', 'value' => $row['id']),
                                            array('key' => 'sub_cat'),
+                                           array('key' => 'page'),
                                        ));
                                        ?>">
                                         <?= $row['category'] ?>
