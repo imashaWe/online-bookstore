@@ -77,7 +77,7 @@ function get_sub_categories($category_id, $conn)
     <div class="container mt-5">
 
         <div class="row justify-content-center pb-4">
-            <div class="col-8">
+            <div class="col-sm-8">
                 <div class="wrapper">
                     <div class="search-input">
                         <a href="" target="_blank" hidden></a>
@@ -91,8 +91,8 @@ function get_sub_categories($category_id, $conn)
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-3">
+        <div class="row justify-content-center">
+            <div class="col-3 d-none d-sm-block">
                 <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
@@ -163,7 +163,7 @@ function get_sub_categories($category_id, $conn)
                 </nav>
             </div>
 
-            <div class="col-9">
+            <div class="col-sm-9">
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     <?php while ($book = $books->fetch_array()): ?>
                         <div class="col">
@@ -223,7 +223,8 @@ function get_sub_categories($category_id, $conn)
 
         </div>
         <div class="row mt-2">
-            <div class="col-9 offset-3">
+            <div class="col-sm-9 offset-sm-3">
+                <hr>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
                         <li class="page-item <?php if ($page == 1) echo 'disabled'; ?>">

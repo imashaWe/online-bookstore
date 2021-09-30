@@ -54,7 +54,7 @@
                                 <h4><i class="fas fa-map-marker-alt"></i> Address:</h4>
                             </td>
                             <td class="theme-text">
-                                N0 10, <br> Daluagama, <br>Kalaniya</p>
+                                N0 10, <br> Daluagama, <br>Kelaniya</p>
                             </td>
                         </tr>
                         <tr >

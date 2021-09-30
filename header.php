@@ -58,9 +58,29 @@ if (!IS_LOGGED_IN) {
                         </li>
                     <?php endforeach; ?>
 
+                    <li class="nav-item d-block d-sm-none">
+                        <a class="nav-link <?php if (check_route_active($r['path'])) echo "active" ?>"
+                           aria-current="page" href="checkout.php">
+                            Card
+                        </a>
+                    </li>
+
+                    <li class="nav-item d-block d-sm-none">
+                        <a class="nav-link <?php if (check_route_active($r['path'])) echo "active" ?>"
+                           aria-current="page" href="wishlist.php">
+                            Wishlist
+                        </a>
+                    </li>
+                    <li class="nav-item d-block d-sm-none">
+                        <a class="nav-link <?php if (check_route_active($r['path'])) echo "active" ?>"
+                           aria-current="page" href="user-profile.php">
+                            Account Settings
+                        </a>
+                    </li>
+
                 </ul>
 
-                <div class="icon-header-item"
+                <div class="icon-header-item d-none d-sm-block"
                      id="cartCount"
                      style="padding-right: 11px;"
                      data-bs-toggle="offcanvas"
@@ -69,7 +89,7 @@ if (!IS_LOGGED_IN) {
                     <i class="zmdi zmdi-shopping-cart" style="color: white"></i>
                 </div>
 
-                <div class="icon-header-item mx-4"
+                <div class="icon-header-item mx-4 d-none d-sm-block"
                      id="wishlistCountElm"
                      onclick="window.location.replace('wishlist.php')"
                      style="padding-right: 11px;padding-left: 22px">
@@ -78,7 +98,7 @@ if (!IS_LOGGED_IN) {
 
                 <?php if (IS_LOGGED_IN && $USER['status']): ?>
                     <!-- user settings-->
-                    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4 ">
+                    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4 d-none d-sm-block">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"
                                id="navbarDropdown" href="#"
