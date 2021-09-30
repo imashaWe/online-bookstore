@@ -28,38 +28,41 @@ $wishlist = $conn->query($sql);
                         <div class="card-body">
 
                             <div class="col-md-12 text-center">
-                                <table class="table table-wrap">
-                                    <tbody class="theme-text">
-                                    <?php while ($row = $wishlist->fetch_array()): ?>
-                                        <tr>
-                                            <td>
-                                                <img src="<?= $row['img_url'] ?>" class="img-thumbnail" style="height: 20vh">
-                                            </td>
-                                            <td>
-                                                <?= $row['name'] ?>
-                                            </td>
-                                            <td>
-                                                <?= $row['price'] ?>
-                                            </td>
+                                <div class="table-responsive">
+                                    <table class="table table-wrap">
+                                        <tbody class="theme-text">
+                                        <?php while ($row = $wishlist->fetch_array()): ?>
+                                            <tr>
+                                                <td>
+                                                    <img src="<?= $row['img_url'] ?>" class="img-profile"
+                                                         style="height: 20vh">
+                                                </td>
+                                                <td>
+                                                    <?= $row['name'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $row['price'] ?>
+                                                </td>
 
-                                            <td>
-                                                <a type="button"
-                                                   href="book-view.php?slug=<?=$row['slug']?>"
-                                                   class="theme-btn theme-btn-dark-animated">
-                                                    See Details
-                                                </a>
-                                                <button type="button"
-                                                        class="theme-btn theme-btn-light"
-                                                        onclick="remove(<?= $row['id'] ?>)">
-                                                    Remove
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    <?php endwhile; ?>
+                                                <td>
+                                                    <a type="button"
+                                                       href="book-view.php?slug=<?= $row['slug'] ?>"
+                                                       class="theme-btn theme-btn-dark-animated">
+                                                        See Details
+                                                    </a>
+                                                    <button type="button"
+                                                            class="theme-btn theme-btn-light"
+                                                            onclick="remove(<?= $row['id'] ?>)">
+                                                        Remove
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        <?php endwhile; ?>
 
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -73,7 +76,7 @@ $wishlist = $conn->query($sql);
             postData('api/wishlist.php?func=remove_from_wishlist', {'book_id': bookID}).then((r) => {
                 if (r.status) {
                     successAlert(r.message);
-                   location.reload();
+                    location.reload();
                 } else {
                     errorAlert(r.message);
                 }

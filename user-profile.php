@@ -170,7 +170,7 @@ if (isset($_POST['submit_address_details'])) {
                         <?php endif; ?>
                         <form method="post" action="">
                             <div class="row">
-                                <div class="col">
+                                <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label" for="first_name">
                                             <strong>First Name</strong>
@@ -182,7 +182,7 @@ if (isset($_POST['submit_address_details'])) {
                                                name="fname">
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label" for="last_name">
                                             <strong>Last Name</strong>
@@ -258,7 +258,7 @@ if (isset($_POST['submit_address_details'])) {
                         <?php endif; ?>
                         <form method="post" action="">
                             <div class="row">
-                                <div class="col">
+                                <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label" for="city">
                                             <strong>Address Line 1</strong>
@@ -269,7 +269,7 @@ if (isset($_POST['submit_address_details'])) {
                                                name="address_line1">
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label" for="country">
                                             <strong>Address Line 2</strong>
@@ -282,7 +282,7 @@ if (isset($_POST['submit_address_details'])) {
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col">
+                                <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label" for="city">
                                             <strong>Town/City</strong>
@@ -293,7 +293,7 @@ if (isset($_POST['submit_address_details'])) {
                                                name="city">
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label" for="country">
                                             <strong>Postcode/Zip</strong>
