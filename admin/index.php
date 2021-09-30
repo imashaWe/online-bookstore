@@ -1,13 +1,24 @@
 <?php
 require_once '../core/db.php';
+
 $sql = "SELECT COUNT(id) AS book_count FROM book WHERE is_delete = 0";
 $book_count = $conn->query($sql)->fetch_array()['book_count'];
+
 $sql = "SELECT COUNT(id) AS category_count FROM book_category WHERE is_delete = 0";
 $category_count = $conn->query($sql)->fetch_array()['category_count'];
+
 $sql = "SELECT COUNT(id) AS user_count FROM site_user";
 $user_count = $conn->query($sql)->fetch_array()['user_count'];
+
 $sql = "SELECT COUNT(id) AS order_count FROM `order` ";
 $order_count = $conn->query($sql)->fetch_array()['order_count'];
+
+$sql = "SELECT `order`.* ,
+        (SELECT SUM(out_amount) FROM `payment` WHERE trans_code='PURCHASE' AND trans_id = `order`.id) AS price 
+        FROM `order`
+        ORDER BY `created_at` DESC
+        LIMIT 10";
+$last_orders = $conn->query($sql);
 
 
 ?>
@@ -90,10 +101,29 @@ require_once('header.php');
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
-                    DataTable Example
+                    Recent Orders
                 </div>
                 <div class="card-body">
-
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>City</th>
+                            <th>DATE/TIME</th>
+                            <th class="text-end">AMOUNT</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php while ($row = $last_orders->fetch_array()): ?>
+                            <tr>
+                                <td><?= $row['id'] ?></td>
+                                <td><?= $row['city'] ?></td>
+                                <td><?= $row['created_at'] ?></td>
+                                <td class="text-end"><?= $row['price'] ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                        </tbody>
+                    </table>
 
                 </div>
             </div>
