@@ -224,15 +224,15 @@ function get_sub_categories($category_id, $conn)
             <div class="col-9 offset-3">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item <?php if ($page == 1) echo 'disabled';?>">
+                        <li class="page-item <?php if ($page == 1) echo 'disabled'; ?>">
                             <a class="page-link" href="<?= change_url_params('page', $page - 1) ?>">Previous</a>
                         </li>
                         <?php for ($i = 1; $i <= $num_pages; $i++): ?>
-                            <li class="page-item <?php if ($page == $i) echo 'active';?>">
+                            <li class="page-item <?php if ($page == $i) echo 'active'; ?>">
                                 <a class="page-link" href="<?= change_url_params('page', $i) ?>"><?= $i ?></a>
                             </li>
                         <?php endfor; ?>
-                        <li class="page-item <?php if ($page == $num_pages) echo 'disabled';?>">
+                        <li class="page-item <?php if ($page == $num_pages) echo 'disabled'; ?>">
                             <a class="page-link" href="<?= change_url_params('page', $page + 1) ?>">Next</a>
                         </li>
                     </ul>
