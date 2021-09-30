@@ -4,7 +4,7 @@ require '../core/user.php';
 
 if (isset($_GET['func']) && function_exists($_GET['func'])) {
     $inputs = json_decode(file_get_contents('php://input'));
-    echo json_encode($_GET['func']($inputs, $conn, $USER));
+    echo json_encode($_GET['func']($inputs, $conn));
 } else {
     echo json_encode(array("status" => 0));
 }
