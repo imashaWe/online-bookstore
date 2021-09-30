@@ -57,7 +57,7 @@ function get_month_wise_orders($inputs, $conn)
                 WHERE MONTH (created_at) = '{$i}'";
         $res = $conn->query($sql);
         $row = $res->fetch_array();
-        $data[] = array('count' => $row['count'], 'month' => $months[$i-1]);
+        $data[] = array('count' => $row['count'], 'month' => $months[$i - 1]);
 
     }
 

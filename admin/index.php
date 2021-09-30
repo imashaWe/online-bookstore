@@ -25,7 +25,8 @@ require_once('header.php');
                     <div class="card bg-primary text-white mb-4">
                         <div class="card-header"><h5>TOTAL BOOKS</h5></div>
                         <div class="card-body">
-                            <i class="fas fa-book-open fa-3x"></i><h2 class="float-end"><?= $book_count ?></h2>
+                            <i class="fas fa-book-open fa-3x"></i>
+                            <h2 class="float-end"><?= $book_count ?></h2>
                         </div>
 
                     </div>
@@ -35,7 +36,8 @@ require_once('header.php');
                     <div class="card bg-danger text-white mb-4">
                         <div class="card-header"><h5>TOTAL CATEGORIES</h5></div>
                         <div class="card-body">
-                            <i class="fas fa-list-alt fa-3x"></i><h2 class="float-end"><?= $category_count ?></h2>
+                            <i class="fas fa-list-alt fa-3x"></i>
+                            <h2 class="float-end"><?= $category_count ?></h2>
                         </div>
 
                     </div>
@@ -44,7 +46,8 @@ require_once('header.php');
                     <div class="card bg-success text-white mb-4">
                         <div class="card-header"><h5>TOTAL USERS</h5></div>
                         <div class="card-body">
-                            <i class="fas fa-user fa-3x"></i><h2 class="float-end"><?= $user_count ?></h2>
+                            <i class="fas fa-user fa-3x"></i>
+                            <h2 class="float-end"><?= $user_count ?></h2>
                         </div>
 
                     </div>
@@ -53,7 +56,8 @@ require_once('header.php');
                     <div class="card bg-warning text-white mb-4">
                         <div class="card-header"><h5>TOTAL ORDERS</h5></div>
                         <div class="card-body">
-                            <i class="fas fa-shopping-cart fa-3x"></i><h2 class="float-end"><?= $order_count ?></h2>
+                            <i class="fas fa-shopping-cart fa-3x"></i>
+                            <h2 class="float-end"><?= $order_count ?></h2>
                         </div>
 
                     </div>
@@ -64,7 +68,7 @@ require_once('header.php');
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-chart-area me-1"></i>
-                           Daily Orders
+                            Daily Orders
                         </div>
                         <div class="card-body">
                             <canvas id="myAreaChart" width="100%" height="40"></canvas>
