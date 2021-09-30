@@ -35,11 +35,11 @@ if (isset($_GET['slug'])) {
                 </ol>
             </nav>
             <div class="row justify-content-center">
-                <div class="col-4">
+                <div class="col-md-4">
                     <img src="<?= $book['img_url'] ?>"
                          class="img-thumbnail">
                 </div>
-                <div class="col-6 text-start">
+                <div class="col-md-6 text-start">
                     <h5 class="theme-text-heading">
                         <?= $book['name'] ?>
                         <?php if ($book['qty'] > 0): ?>
