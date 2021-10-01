@@ -22,7 +22,7 @@ $books = $conn->query($sql);
         <div class="container-fluid px-4">
             <h1 class="mt-4">Book Stock</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Book Author</li>
+                <li class="breadcrumb-item active">Book Stock</li>
             </ol>
             <div class="d-grid  justify-content-end pb-2">
                 <a href="book-stock-add.php" class="btn btn-dark">Add Stock</a>

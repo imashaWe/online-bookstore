@@ -22,7 +22,7 @@ function get_day_wise_orders($inputs, $conn)
                 WHERE DATE(created_at) = '{$date}'";
         $res = $conn->query($sql);
         $row = $res->fetch_array();
-        $data[] = array('count' => $row['count'], 'date' => date("F j", strtotime($date)));
+        $data[] = array('count' => $row['count'], 'date' => date("M j", strtotime($date)));
 
     }
 

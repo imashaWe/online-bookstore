@@ -62,7 +62,7 @@ if (!IS_LOGGED_IN) {
                     <li class="nav-item d-block d-sm-none">
                         <a class="nav-link <?php if (check_route_active($r['path'])) echo "active" ?>"
                            aria-current="page" href="checkout.php">
-                            Card
+                            Cart
                         </a>
                     </li>
 
@@ -109,7 +109,7 @@ if (!IS_LOGGED_IN) {
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="user-profile.php">Settings</a></li>
-                                <li><a class="dropdown-item" href="#!">My Orders</a></li>
+<!--                                <li><a class="dropdown-item" href="#!">My Orders</a></li>-->
                                 <li>
                                     <hr class="dropdown-divider"/>
                                 </li>

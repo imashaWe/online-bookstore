@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
 
                 <form action="" method="post">
                     <div class="row justify-content-center">
-                        <div class="col-8">
+                        <div class="col-md-8">
                             <?php if (isset($error)): ?>
                                 <div class="alert alert-danger d-flex align-items-center" role="alert">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"

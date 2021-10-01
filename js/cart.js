@@ -37,7 +37,7 @@
                     '</div>';
             }
             cartSideViewItems.innerHTML = html;
-            cartSideViewTotal.innerHTML = 'TOTAl ' + total.toFixed(2);
+            cartSideViewTotal.innerHTML = 'TOTAL ' + total.toFixed(2);
             setUpRating();
         });
 
