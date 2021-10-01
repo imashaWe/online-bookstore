@@ -30,7 +30,7 @@ function apply_coupon_code($inputs, $conn, $user)
     $today = date("Y-m-d");
 
     $sql = "SELECT * FROM `coupon_code` 
-            WHERE `from` <= '{$today}' AND `to` >= '{$today}' AND `code` = '{$coupon_code}'";
+            WHERE `from` <= '{$today}' AND `to` >= '{$today}' AND `code` = '{$coupon_code}' AND is_delete = 0";
     $res = $conn->query($sql);
     if (!$res->num_rows) {
         return array('status' => 0, 'message' => 'This coupon code invalid or expire.');
@@ -135,9 +135,9 @@ function set_order($inputs, $conn, $user)
         'message' => 'Order set success',
         'data' => array(
             'merchant_id' => config['PayHere']['merchant_id'],
-            'return_url' => $_SERVER['HTTP_HOST'] . '/order-placed.php',
-            'cancel_url' => $_SERVER['HTTP_HOST'] . '/order-failed.php',
-            'notify_url' => $_SERVER['HTTP_HOST'] . '/checkout.php?func=notify_payment',
+            'return_url' => 'http://' . $_SERVER['HTTP_HOST'] . '/order-placed.php',
+            'cancel_url' => 'http://' . $_SERVER['HTTP_HOST'] . '/order-failed.php',
+            'notify_url' => 'http://' . $_SERVER['HTTP_HOST'] . '/checkout.php?func=notify_payment',
             'order_id' => $order_id,
             'items' => '',
             'currency' => 'LKR',

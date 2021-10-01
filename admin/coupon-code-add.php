@@ -1,7 +1,7 @@
 <?php
 require "../core/db.php";
 $code = "";
-$discount = "";
+$discount = 0;
 $from = "";
 $to = "";
 if (isset($_GET['id'])) {
@@ -20,25 +20,27 @@ if (isset($_POST['submit'])) {
     $to = $_POST['to'];
     if (empty($code)) {
         $error = "Please enter a coupon code";
-    } elseif (empty($discount)) {
+    } elseif (empty($discount) && $discount < 100 && $discount > 0) {
         $error = "Please enter  a valid discount";
     } elseif (empty($from)) {
         $error = "Please enter  a starting date";
     } elseif (empty($to)) {
         $error = "Please enter  a ending date";
     } else {
+        $discount = $discount / 100;
         if (isset($_POST['id'])) {
             $sql = "UPDATE coupon_code 
-                    SET code = '{$code}', discount = '{$discount}', from = '{$from}', to = '{$to}' 
+                    SET `code` = '{$code}', discount = {$discount}, `from` = '{$from}', `to` = '{$to}' 
                     WHERE id = {$id}";
         } else {
-            $sql = "INSERT INTO coupon_code(code, discount, from, to) 
-                    VALUES ('{$code}','{$discount}','{$from}','{$to}')";
+            $sql = "INSERT INTO coupon_code(`code`, discount, `from`, `to`) 
+                    VALUES ('{$code}',{$discount},'{$from}','{$to}')";
         }
         $res = $conn->query($sql);
         if ($res) {
             header("location:coupon-code.php");
         } else {
+            echo $sql;
             $error = "Database Error";
         }
 
@@ -49,7 +51,7 @@ if (isset($_POST['submit'])) {
 <div class="container-fluid px-4">
     <h1 class="mt-4"><?= isset($_GET['id']) ? 'Edit' : 'Add New' ?> Coupon Code</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item">Basic Data</li>
+        <li class="breadcrumb-item">Promotion</li>
         <li class="breadcrumb-item">Coupon Code</li>
         <li class="breadcrumb-item active"><?= isset($_GET['id']) ? 'Edit' : 'Add New' ?> Code</li>
     </ol>
@@ -77,15 +79,20 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="col">
                                 <label class="form-label">Discount</label>
-                                <input type="text" class="form-control" name="discount" value="<?= $discount ?>">
+                                <!--                                <input type="text" class="form-control" name="discount" >-->
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="discount"
+                                           value="<?= $discount * 100 ?>">
+                                    <span class="input-group-text" id="basic-addon2">%</span>
+                                </div>
                             </div>
                             <div class="col">
                                 <label class="form-label">From</label>
-                                <input type="text" class="form-control" name="from" value="<?= $from ?>">
+                                <input type="date" class="form-control" name="from" value="<?= $from ?>">
                             </div>
                             <div class="col">
                                 <label class="form-label">To</label>
-                                <input type="text" class="form-control" name="to" value="<?= $to ?>">
+                                <input type="date" class="form-control" name="to" value="<?= $to ?>">
                             </div>
 
                         </div>

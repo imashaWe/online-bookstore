@@ -84,7 +84,15 @@ require_once 'lib/user.php';
                         <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
                         Book Stock
                     </a>
+
+                    <div class="sb-sidenav-menu-heading">Promotion</div>
+                    <a class="nav-link" href="coupon-code.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-comment-dollar"></i></div>
+                        Coupon Code
+                    </a>
+
                     <div class="sb-sidenav-menu-heading">System</div>
+
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1"
                        aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-user-shield"></i></div>

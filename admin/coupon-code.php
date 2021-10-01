@@ -51,7 +51,7 @@ $coupons = $conn->query($sql);
         <div class="container-fluid px-4">
             <h1 class="mt-4">Coupon Code</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item">Basic Data</li>
+                <li class="breadcrumb-item">Promotion</li>
                 <li class="breadcrumb-item active">Coupon Code</li>
             </ol>
             <div class="d-grid  justify-content-end pb-2">
@@ -74,7 +74,7 @@ $coupons = $conn->query($sql);
                         <?php while ($coupon = $coupons->fetch_array()): ?>
                             <tr>
                                 <td><?= $coupon['code'] ?></td>
-                                <td><?= $coupon['discount'] ?></td>
+                                <td><?= $coupon['discount'] * 100 ?>%</td>
                                 <td><?= $coupon['from'] ?></td>
                                 <td><?= $coupon['to'] ?></td>
                                 <td class="text-end">
