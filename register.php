@@ -98,13 +98,13 @@ function send_verify_code_email($email, $name, $code)
                 </div>
             <?php endif; ?>
             <div class="row pt-4">
-                <div class="col">
+                <div class="col-md-6">
                     <input class="form-control form-control-user" type="text"
                            placeholder="First Name"
                            value="<?= $fname ?>"
                            name="fname">
                 </div>
-                <div class="col">
+                <div class="col-md-6">
                     <input class="form-control form-control-user" type="text"
                            placeholder="Last Name"
                            value="<?= $lname ?>"
