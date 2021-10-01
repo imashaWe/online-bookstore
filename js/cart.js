@@ -23,6 +23,7 @@
             }
             for (let item of r['data']) {
                 total += parseInt(item.qty) * parseFloat(item.price);
+                const rate = Math.floor(Math.random() * (1000 - 100) + 100) / 100;
                 html += '<div class="theme-card shadow m-2">' +
                     '<div class="row g-0">' +
                     '<div class="col-2">' +
@@ -31,7 +32,7 @@
                     '<div class="col pt-1 align-content-center ps-1">' +
                     '<h6 class="theme-text-title">' + item.name + '</h6>' +
                     '<small className="py-3 text-muted theme-text">' + item.qty + ' X ' + item.price + '</small>' +
-                    '<div class="rating-bar" data-rate="1.2" data-max="5"></div>' +
+                    '<div class="rating-bar" data-rate=' + rate + ' data-max="5"></div>' +
                     '</div>' +
                     '</div>' +
                     '</div>';

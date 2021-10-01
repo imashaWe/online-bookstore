@@ -190,7 +190,8 @@ function get_sub_categories($category_id, $conn)
                                                 class="theme-text text-muted"><?= $book['description'] ?></small></div>
                                     <div class="row justify-content-between">
                                         <div class="col">
-                                            <div class="rating-bar" data-rate="4.2" data-max="5"></div>
+                                            <div class="rating-bar" data-rate="<?= rand(0 * 10, 5 * 10) / 10 ?>"
+                                                 data-max="5"></div>
                                         </div>
                                         <div class="col">
                                             <h5 class="theme-text-title text-end theme-primary-color">

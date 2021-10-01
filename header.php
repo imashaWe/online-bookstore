@@ -108,7 +108,7 @@ if (!IS_LOGGED_IN) {
                                 <i class="fas fa-user fa-fw text-light fa-lg"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="user-profile.php">Settings</a></li>
+                                <li><a class="dropdown-item" href="user-profile.php">My Account</a></li>
 <!--                                <li><a class="dropdown-item" href="#!">My Orders</a></li>-->
                                 <li>
                                     <hr class="dropdown-divider"/>
