@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
     $category_id = $_POST['category_id'];
     $sub_category_id = $_POST['sub_category_id'];
     $language_id = $_POST['language_id'];
-    $description = addslashes(trim($_POST['description']));
+    $description = trim($_POST['description']);
 
     if (!isset($_FILES['book_img']) && !isset($_GET['id'])) {
         $error = "Please select Image";
@@ -76,6 +76,10 @@ if (isset($_POST['submit'])) {
         // To check whether the ISBN exists.
         $sql = "SELECT id FROM book WHERE ISBN = '{$isbn}'";
         $res = $conn->query($sql);
+
+        $name = addslashes($name);
+        $description = addslashes($description);
+
         if ($res->num_rows && !isset($_POST['id'])) {
             $error = "This ISBN already exists";
         } else {
