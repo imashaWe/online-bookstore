@@ -137,7 +137,7 @@ function set_order($inputs, $conn, $user)
             'merchant_id' => config['PayHere']['merchant_id'],
             'return_url' => 'http://' . $_SERVER['HTTP_HOST'] . '/order-placed.php',
             'cancel_url' => 'http://' . $_SERVER['HTTP_HOST'] . '/order-failed.php',
-            'notify_url' => 'http://' . $_SERVER['HTTP_HOST'] . '/checkout.php?func=notify_payment',
+            'notify_url' => 'http://' . $_SERVER['HTTP_HOST'] . '/payment.php?func=notify_payment',
             'order_id' => $order_id,
             'items' => '',
             'currency' => 'LKR',
