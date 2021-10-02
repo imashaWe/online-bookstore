@@ -97,7 +97,7 @@ function send_verify_code_email($email, $name, $code)
                     </div>
                 </div>
             <?php endif; ?>
-            <div class="row pt-4 gy-2">
+            <div class="row pt-4 gy-4">
                 <div class="col-md-6">
                     <input class="form-control form-control-user" type="text"
                            placeholder="First Name"
