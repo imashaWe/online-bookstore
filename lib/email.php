@@ -46,7 +46,7 @@ function send_mail($to, $subject, $body, $body_text)
         // echo 'Message has been sent';
     } catch (Exception $e) {
         return 0;
-        // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 }
 
