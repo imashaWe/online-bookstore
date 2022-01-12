@@ -7,10 +7,10 @@ $_CONFIG = array(
 //        'database' => "bookberries-db",
 //    ),
     'database' => array(
-        'servername' => "bookberries.c34umqm2zqgp.ap-south-1.rds.amazonaws.com",
+        'servername' => "bookberries-db.c34umqm2zqgp.ap-south-1.rds.amazonaws.com",
         'username' => "admin",
         'password' => "admin123",
-        'database' => "bookberries",
+        'database' => "bookberries-db",
     ),
     'AWS' => array(
         'key' => "AKIAWHMVJDKL543GRXKL",
