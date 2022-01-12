@@ -4,13 +4,13 @@ $_CONFIG = array(
 //        'servername' => "localhost",
 //        'username' => "root",
 //        'password' => "",
-//        'database' => "online-bookstore",
+//        'database' => "bookberries-db",
 //    ),
     'database' => array(
-        'servername' => "online-bookstore.cruc6jn2s3ym.us-east-1.rds.amazonaws.com",
+        'servername' => "bookberries.c34umqm2zqgp.ap-south-1.rds.amazonaws.com",
         'username' => "admin",
         'password' => "admin123",
-        'database' => "online-bookstore",
+        'database' => "bookberries",
     ),
     'AWS' => array(
         'key' => "AKIAWHMVJDKL543GRXKL",
