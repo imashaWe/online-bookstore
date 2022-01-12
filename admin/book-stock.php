@@ -10,7 +10,7 @@ $start = ($page - 1) * $limit;
 
 $sql = "SELECT book.isbn,book.name,
         IFNULL((SELECT (SUM(in_qty) -SUM(out_qty)) FROM book_stock WHERE book_id = book.id),0) AS qty
-        FROM `online-bookstore`.book 
+        FROM book 
         WHERE is_delete = 0
         LIMIT {$start},{$limit}";
 $books = $conn->query($sql);
