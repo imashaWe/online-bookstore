@@ -54,7 +54,7 @@ if (isset($_GET['q'])) {
 
 $sql = "SELECT book.id,book.name,book.img_url,slug,book.price,SUBSTRING(description,1,100) AS description,
         IFNULL((SELECT (SUM(in_qty) -SUM(out_qty)) FROM book_stock WHERE book_id = book.id),0) AS qty
-        FROM `online-bookstore`.book 
+        FROM book 
             " . $joins . "
             " . $where . "
         LIMIT {$start},{$limit}";
