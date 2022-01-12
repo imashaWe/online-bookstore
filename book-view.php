@@ -9,7 +9,7 @@ if (isset($_GET['slug'])) {
         book_publisher.name AS publisher,book_publisher.id AS publisher_id,
         book_language.language,
         IFNULL((SELECT (SUM(in_qty) -SUM(out_qty)) FROM book_stock WHERE book_id = book.id),0) AS qty
-        FROM `online-bookstore`.book
+        FROM book
         INNER JOIN book_author ON book_author.id = book.author_id
         INNER JOIN book_publisher ON book_publisher.id = book.publisher_id
         INNER JOIN book_language ON book_language.id = book.language_id
