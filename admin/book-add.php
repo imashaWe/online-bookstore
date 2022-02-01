@@ -106,7 +106,7 @@ if (isset($_POST['submit'])) {
                 $book_id = $conn->insert_id;
             }
             if ($res) {
-                if (isset($_FILES['book_img'])) $res = upload_book_image_to_s3($_FILES['book_img'], $book_id, $conn);
+                if (isset($_FILES['book_img'])) $res = upload_book_image($_FILES['book_img'], $book_id, $conn);
                 if ($res) {
                     header("location:book.php");
                 } else {
